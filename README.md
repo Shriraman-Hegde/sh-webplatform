@@ -13,11 +13,14 @@ Plan: [`docs/plans/2026-11-26-2144-feature-webkit-lit-storybook-cdn-plan.md`](do
 
 ```bash
 pnpm install
-pnpm --filter @sh-webplatform/webkit test
-pnpm --filter @sh-webplatform/webkit build
+pnpm --filter @sh-webplatform/webkit test          # open-wc Web Test Runner
+pnpm --filter @sh-webplatform/webkit build         # open-wc building-rollup
+pnpm --filter @sh-webplatform/webkit start         # @web/dev-server demo/
 pnpm --filter @sh-webplatform/webkit storybook
 pnpm --filter sample-consumer dev
 ```
+
+webkit follows [open-wc](https://github.com/open-wc/open-wc) (Lit + Web Test Runner + `@open-wc/building-rollup`).
 
 ## Themes
 
