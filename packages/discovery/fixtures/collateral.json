@@ -1,0 +1,20 @@
+{
+  "module": "collateral",
+  "routePrefix": "/collateral",
+  "roles": ["collateral.read"],
+  "entities": [
+    {
+      "type": "collateral",
+      "routeTemplate": "/collateral/{id}",
+      "label": "Collateral"
+    }
+  ],
+  "components": [
+    {
+      "tag": "col-summary",
+      "version": "0.1.0",
+      "kind": "summary",
+      "label": "Collateral summary"
+    }
+  ]
+}

@@ -23,10 +23,13 @@ jobs:
       - run: pnpm --filter @sh-webplatform/webkit build-storybook
       - run: pnpm --filter sample-consumer test
       - run: pnpm --filter sample-consumer build
+      - run: pnpm --filter @sh-webplatform/discovery test
+      - run: pnpm --filter @sh-webplatform/discovery build
       - uses: actions/upload-artifact@v4
         with:
           name: storybook-static
           path: packages/webkit/storybook-static
+
 
   pages:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'

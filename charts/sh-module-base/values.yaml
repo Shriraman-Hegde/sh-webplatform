@@ -1,0 +1,22 @@
+# Consumer charts set these under their own values and include templates via
+# {{ include "sh-module-base.discoveryConfigMap" . }}
+
+module:
+  name: ""
+  routePrefix: ""
+  roles: []
+  entities: []
+  # - type: collateral
+  #   routeTemplate: /collateral/{id}
+  #   label: Collateral
+  components: []
+  # - tag: col-summary
+  #   version: 0.1.0
+  #   kind: summary
+  #   label: Collateral summary
+
+discovery:
+  enabled: true
+  labelKey: sh-webplatform.io/discovery
+  labelValue: module
+  dataKey: descriptor.json

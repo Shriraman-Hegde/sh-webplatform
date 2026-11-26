@@ -1,0 +1,32 @@
+{
+  "name": "@sh-webplatform/discovery",
+  "version": "0.1.0",
+  "description": "UI component and entity discovery service for sh-webplatform modules",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "sh-discovery": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "fixtures"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "start": "node ./dist/cli.js",
+    "dev": "tsc -p tsconfig.json && node ./dist/cli.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

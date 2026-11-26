@@ -9,3 +9,7 @@ coverage
 .vite
 packages/*/dist
 packages/webkit/storybook-static
+charts/**/charts
+charts/**/tmpcharts
+*.tgz
+

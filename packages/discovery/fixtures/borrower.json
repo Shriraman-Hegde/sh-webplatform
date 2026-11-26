@@ -1,0 +1,20 @@
+{
+  "module": "borrower",
+  "routePrefix": "/borrowers",
+  "roles": ["borrower.read"],
+  "entities": [
+    {
+      "type": "borrower",
+      "routeTemplate": "/borrowers/{id}",
+      "label": "Borrower"
+    }
+  ],
+  "components": [
+    {
+      "tag": "bor-summary",
+      "version": "0.1.0",
+      "kind": "summary",
+      "label": "Borrower summary"
+    }
+  ]
+}

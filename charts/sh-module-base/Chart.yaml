@@ -1,0 +1,6 @@
+apiVersion: v2
+name: sh-module-base
+description: Library chart that standardizes module deploy + discovery ConfigMap descriptors
+type: library
+version: 0.1.0
+appVersion: "0.1.0"

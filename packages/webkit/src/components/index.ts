@@ -6,5 +6,4 @@ export * from "./layout/wk-card/index.js";
 export * from "./layout/wk-page-shell/index.js";
 export * from "./layout/wk-data-table/index.js";
 export * from "./layout/wk-status-banner/index.js";
-export * from "./composite/wk-entity-ref/index.js";
 export * from "./composite/wk-workbench/index.js";

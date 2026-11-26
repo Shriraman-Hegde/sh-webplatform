@@ -1,0 +1,20 @@
+{
+  "module": "facility",
+  "routePrefix": "/facilities",
+  "roles": ["facility.read"],
+  "entities": [
+    {
+      "type": "facility",
+      "routeTemplate": "/facilities/{id}",
+      "label": "Facility"
+    }
+  ],
+  "components": [
+    {
+      "tag": "fac-summary",
+      "version": "0.1.0",
+      "kind": "summary",
+      "label": "Facility summary"
+    }
+  ]
+}

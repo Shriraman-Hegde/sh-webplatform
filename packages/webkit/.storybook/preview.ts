@@ -1,11 +1,6 @@
 import type { Preview } from "@storybook/web-components";
-import { DEMO_ENTITY_ROUTES } from "../src/registry/demo-routes.js";
-import { configureRegistry } from "../src/registry/index.js";
 import { applyTheme, type WebkitTheme } from "../src/theme/index.js";
 import "../src/themes/themes.css";
-
-configureRegistry([...DEMO_ENTITY_ROUTES]);
-
 
 const preview: Preview = {
   globalTypes: {
