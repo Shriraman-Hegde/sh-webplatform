@@ -1,0 +1,13 @@
+{
+  "name": "sh-webplatform",
+  "private": true,
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "build": "pnpm -r run build",
+    "test": "pnpm -r run test",
+    "build-storybook": "pnpm --filter @sh-webplatform/webkit build-storybook"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
