@@ -10,15 +10,15 @@ const preview: Preview = {
         title: "Theme",
         icon: "paintbrush",
         items: [
-          { value: "finance", title: "finance" },
-          { value: "manufacturing", title: "manufacturing" },
+          { value: "default", title: "default" },
+          { value: "warm", title: "warm" },
         ],
         dynamicTitle: true,
       },
     },
   },
   initialGlobals: {
-    theme: "finance",
+    theme: "default",
   },
   decorators: [
     (story, context) => {

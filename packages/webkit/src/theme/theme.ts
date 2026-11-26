@@ -1,10 +1,13 @@
-export type WebkitTheme = "finance" | "manufacturing";
+/** Theme ids are kebab-case look names, not product/industry labels. */
+export type WebkitTheme = "default" | "warm";
 
-const DEFAULT_THEME: WebkitTheme = "finance";
+const DEFAULT_THEME: WebkitTheme = "default";
+
+const THEMES = new Set<WebkitTheme>(["default", "warm"]);
 
 export function normalizeTheme(value: string | null | undefined): WebkitTheme {
-  if (value === "manufacturing" || value === "finance") {
-    return value;
+  if (value && THEMES.has(value as WebkitTheme)) {
+    return value as WebkitTheme;
   }
   return DEFAULT_THEME;
 }

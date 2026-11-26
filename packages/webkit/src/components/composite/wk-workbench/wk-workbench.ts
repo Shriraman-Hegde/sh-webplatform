@@ -26,7 +26,7 @@ export class WkWorkbench extends LitElement {
 
   constructor() {
     super();
-    this.theme = "finance";
+    this.theme = "default";
     this.bannerTone = "empty";
     this.titleValue = "Sample request";
     this.dept = "stores";
@@ -90,8 +90,8 @@ export class WkWorkbench extends LitElement {
           @change=${(e: Event) =>
             this.setTheme((e.target as HTMLSelectElement).value as WebkitTheme)}
         >
-          <option value="finance">finance</option>
-          <option value="manufacturing">manufacturing</option>
+          <option value="default">default</option>
+          <option value="warm">warm</option>
         </select>
 
         <wk-status-banner

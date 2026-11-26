@@ -159,7 +159,7 @@ restructured, no scope change: Outstanding Questions deferred items → Planning
 - KTD2. **Package name `@sh-webplatform/webkit`** — matches repo identity; scoped npm publish. Governs U1, U5.
 - KTD3. **Rollup + Babel + minify for library artifacts; Storybook Vite builder for workshop** — publishable ESM for npm plus a **required** minified CDN entry. Externalize `lit` as a `peerDependency` on the npm ESM build; **bundle `lit` into the CDN entry** for single-script use. Components use Lit `static properties` (no experimental decorators) so Storybook Vite and Rollup/Babel share one reliable reactive API. Babel transpiles TypeScript for Rollup. Governs U1, U5, U6.
 - KTD4. **Same version identity via npm + jsDelivr (or unpkg) CDN URLs** — publish once to npm; CDN consumers load `https://cdn.jsdelivr.net/npm/@sh-webplatform/webkit@<version>/…` for the CDN entry. Custom origin CDN can replace jsDelivr later without changing the version contract (R5). Governs U5, U6.
-- KTD5. **Themes `finance` and `manufacturing`** — two CSS custom-property themes applied via `data-theme` on `:root` / host; theme switcher sets the attribute. Governs U2, U3, U6.
+- KTD5. **Themes `default` and `warm`** — two CSS custom-property themes applied via `data-theme` on `:root` / host; theme ids are look names (not industry labels); theme switcher sets the attribute. Governs U2, U3, U6.
 - KTD6. **Synthetic demo = “Workbench” page** — page shell + card + form (text field, select, checkbox, primary/secondary button) + simple data table + empty/loading/error banners. Components only as needed for this page (R2). Governs U3, U4.
 - KTD7. **Storybook static site on GitHub Pages** for the published Storybook URL (R6); separate from the npm/CDN package URL. For this repo (`Shriraman-Hegde/sh-webplatform`), set Storybook builder `base` to `/sh-webplatform/` so project Pages assets resolve. Governs U5.
 - KTD8. **Sample consumer proves workspace, pack/npm, and CDN paths** — Vite app for workspace + `pnpm pack`/npm install; a separate static `cdn-proof.html` (import map + theme switcher + Workbench) for CDN proof without Vite bundling webkit. Governs U6.
@@ -203,14 +203,14 @@ Greenfield monorepo. `packages/webkit` exports Lit custom elements and theme CSS
 
 ### U2. Theme tokens and switcher contract
 
-**Goal:** `finance` and `manufacturing` themes via CSS custom properties; documented `data-theme` switch.
+**Goal:** `default` and `warm` themes via CSS custom properties; documented `data-theme` switch.
 
 **Scope:** Token CSS files, theme application helper/docs, Storybook theme toolbar wiring. No full Workbench yet.
 
 **Files:** `packages/webkit/src/themes/*`, `packages/webkit/src/theme.ts` (or equivalent), Storybook preview theme decorator.
 
 **Test scenarios:**
-- Happy path: setting `data-theme="finance"` vs `manufacturing` changes token-backed colors in a Storybook story.
+- Happy path: setting `data-theme="default"` vs `warm` changes token-backed colors in a Storybook story.
 - Edge: missing/unknown theme falls back to a documented default without crashing.
 
 **Verify:** Storybook story shows both themes; unit test for fallback if present.

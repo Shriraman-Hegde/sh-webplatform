@@ -11,34 +11,8 @@
   --wk-focus: 0 0 0 3px color-mix(in srgb, var(--wk-accent) 45%, transparent);
 }
 
-:root[data-theme="finance"],
-:host([data-theme="finance"]) {
-  --wk-bg: #f4f7fb;
-  --wk-surface: #ffffff;
-  --wk-ink: #132238;
-  --wk-muted: #5b6b7c;
-  --wk-border: #d5dee8;
-  --wk-accent: #0b6e99;
-  --wk-accent-ink: #ffffff;
-  --wk-danger: #b42318;
-  --wk-success: #067647;
-  --wk-banner-bg: #e8f3f8;
-}
-
-:root[data-theme="manufacturing"],
-:host([data-theme="manufacturing"]) {
-  --wk-bg: #f6f4ef;
-  --wk-surface: #fffdf8;
-  --wk-ink: #1c1914;
-  --wk-muted: #6b6458;
-  --wk-border: #ddd4c4;
-  --wk-accent: #b45309;
-  --wk-accent-ink: #ffffff;
-  --wk-danger: #b42318;
-  --wk-success: #3f6212;
-  --wk-banner-bg: #f3e7d3;
-}
-
+:root[data-theme="default"],
+:host([data-theme="default"]),
 :root:not([data-theme]),
 :host(:not([data-theme])) {
   --wk-bg: #f4f7fb;
@@ -51,4 +25,18 @@
   --wk-danger: #b42318;
   --wk-success: #067647;
   --wk-banner-bg: #e8f3f8;
+}
+
+:root[data-theme="warm"],
+:host([data-theme="warm"]) {
+  --wk-bg: #f6f4ef;
+  --wk-surface: #fffdf8;
+  --wk-ink: #1c1914;
+  --wk-muted: #6b6458;
+  --wk-border: #ddd4c4;
+  --wk-accent: #b45309;
+  --wk-accent-ink: #ffffff;
+  --wk-danger: #b42318;
+  --wk-success: #3f6212;
+  --wk-banner-bg: #f3e7d3;
 }

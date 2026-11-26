@@ -8,6 +8,9 @@
 - Files inside a component folder:
   - `wk-<name>.ts` — implementation
   - `index.ts` — public barrel for that component
+- Themes: kebab-case **look** ids on `data-theme` — never product/industry labels.
+  - Current: `default` | `warm`
+  - Apply with `applyTheme("default" | "warm")` or `document.documentElement.dataset.theme`
 
 ## Trees
 

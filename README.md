@@ -21,7 +21,7 @@ pnpm --filter sample-consumer dev
 
 ## Themes
 
-Set `data-theme` to `finance` or `manufacturing` on `:root` (or use `applyTheme()`).
+Set `data-theme` to `default` or `warm` on `:root` (or use `applyTheme()`). Theme ids are look names (kebab-case), not product/industry labels.
 
 ## Ownership
 

@@ -3,7 +3,7 @@ import "@sh-webplatform/webkit";
 import { applyTheme, type WebkitTheme } from "@sh-webplatform/webkit";
 import { html, render } from "lit";
 
-applyTheme("finance");
+applyTheme("default");
 
 const mount = document.getElementById("app");
 if (!mount) {
@@ -15,7 +15,7 @@ function paint(theme: WebkitTheme) {
   render(html`<wk-workbench></wk-workbench>`, mount);
 }
 
-paint("finance");
+paint("default");
 
 declare global {
   interface Window {
