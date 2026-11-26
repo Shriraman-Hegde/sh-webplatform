@@ -11,6 +11,7 @@
 - Themes: kebab-case **look** ids on `data-theme` — never product/industry labels.
   - Current: `default` | `warm`
   - Apply with `applyTheme("default" | "warm")` or `document.documentElement.dataset.theme`
+- Entity refs: `<wk-entity-ref entity="…" entity-id="…">` resolves via `configureRegistry([{ entity, routeTemplate }])` (`{id}` in template). Unresolved/restricted refs render as disabled text.
 
 ## Trees
 

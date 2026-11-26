@@ -23,6 +23,18 @@ pnpm --filter sample-consumer dev
 
 Set `data-theme` to `default` or `warm` on `:root` (or use `applyTheme()`). Theme ids are look names (kebab-case), not product/industry labels.
 
+## Entity refs
+
+```ts
+import { configureRegistry } from "@sh-webplatform/webkit";
+
+configureRegistry([
+  { entity: "collateral", routeTemplate: "/collateral/{id}", label: "Collateral" },
+]);
+```
+
+Then `<wk-entity-ref entity="collateral" entity-id="COL-77"></wk-entity-ref>` renders a deep link. Unknown entities degrade to disabled text. A discovery service can replace the static registry later without changing the component API.
+
 ## Ownership
 
 Small core publishes releases until a platform team exists. Department apps consume the package; they do not fork component source.

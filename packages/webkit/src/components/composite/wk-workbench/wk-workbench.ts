@@ -1,5 +1,8 @@
 import { LitElement, css, html } from "lit";
+import { DEMO_ENTITY_ROUTES } from "../../../registry/demo-routes.js";
+import { configureRegistry } from "../../../registry/index.js";
 import { applyTheme, getTheme, type WebkitTheme } from "../../../theme/index.js";
+import "../wk-entity-ref/index.js";
 import "../../form/wk-button/index.js";
 import "../../form/wk-checkbox/index.js";
 import "../../form/wk-select/index.js";
@@ -8,6 +11,9 @@ import "../../layout/wk-card/index.js";
 import "../../layout/wk-data-table/index.js";
 import "../../layout/wk-page-shell/index.js";
 import "../../layout/wk-status-banner/index.js";
+
+configureRegistry([...DEMO_ENTITY_ROUTES]);
+
 
 export class WkWorkbench extends LitElement {
   static properties = {
@@ -56,6 +62,17 @@ export class WkWorkbench extends LitElement {
       flex-wrap: wrap;
       gap: var(--wk-space-2);
       margin-top: var(--wk-space-4);
+    }
+    .refs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--wk-space-3);
+      margin-top: var(--wk-space-4);
+      font-size: 0.95rem;
+    }
+    .refs span.kind {
+      color: var(--wk-muted);
+      margin-right: 0.35rem;
     }
     select.theme {
       font: inherit;
@@ -175,6 +192,29 @@ export class WkWorkbench extends LitElement {
                 { id: "BOR-42", type: "Borrower", owner: "Onboarding" },
               ]}
             ></wk-data-table>
+            <div class="refs" aria-label="Entity references">
+              <div>
+                <span class="kind">Collateral</span>
+                <wk-entity-ref
+                  entity="collateral"
+                  entity-id="COL-77"
+                ></wk-entity-ref>
+              </div>
+              <div>
+                <span class="kind">Facility</span>
+                <wk-entity-ref
+                  entity="facility"
+                  entity-id="FAC-1001"
+                ></wk-entity-ref>
+              </div>
+              <div>
+                <span class="kind">Borrower</span>
+                <wk-entity-ref
+                  entity="borrower"
+                  entity-id="BOR-42"
+                ></wk-entity-ref>
+              </div>
+            </div>
           </wk-card>
         </div>
       </wk-page-shell>
