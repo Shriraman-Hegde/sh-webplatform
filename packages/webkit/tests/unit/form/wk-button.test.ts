@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import "./wk-button.js";
-import type { WkButton } from "./wk-button.js";
+import "../../../src/components/form/wk-button/index.js";
+import type { WkButton } from "../../../src/components/form/wk-button/index.js";
 
 describe("wk-button", () => {
   it("renders a native button with a default slot", async () => {

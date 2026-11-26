@@ -1,5 +1,5 @@
 import "lit";
 import "./index.js";
-import { applyTheme } from "./theme.js";
+import { applyTheme } from "./theme/index.js";
 
 applyTheme("finance");

@@ -1,5 +1,5 @@
 import type { Preview } from "@storybook/web-components";
-import { applyTheme, type WebkitTheme } from "../src/theme";
+import { applyTheme, type WebkitTheme } from "../src/theme/index.js";
 import "../src/themes/themes.css";
 
 const preview: Preview = {

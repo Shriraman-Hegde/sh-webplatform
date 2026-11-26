@@ -1,13 +1,13 @@
 import { LitElement, css, html } from "lit";
-import { applyTheme, getTheme, type WebkitTheme } from "../theme.js";
-import "../components/wk-button.js";
-import "../components/wk-card.js";
-import "../components/wk-checkbox.js";
-import "../components/wk-data-table.js";
-import "../components/wk-page-shell.js";
-import "../components/wk-select.js";
-import "../components/wk-status-banner.js";
-import "../components/wk-text-field.js";
+import { applyTheme, getTheme, type WebkitTheme } from "../../../theme/index.js";
+import "../../form/wk-button/index.js";
+import "../../form/wk-checkbox/index.js";
+import "../../form/wk-select/index.js";
+import "../../form/wk-text-field/index.js";
+import "../../layout/wk-card/index.js";
+import "../../layout/wk-data-table/index.js";
+import "../../layout/wk-page-shell/index.js";
+import "../../layout/wk-status-banner/index.js";
 
 export class WkWorkbench extends LitElement {
   static properties = {

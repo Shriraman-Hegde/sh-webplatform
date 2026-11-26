@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { applyTheme, normalizeTheme } from "./theme.js";
+import { applyTheme, normalizeTheme } from "../../../src/theme/index.js";
 
 describe("theme", () => {
   it("normalizes unknown themes to finance", () => {
