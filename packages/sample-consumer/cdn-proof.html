@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" data-theme="default">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>webkit CDN proof</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      .bar {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        font-family: system-ui, sans-serif;
+        border-bottom: 1px solid #ccc;
+      }
+    </style>
+    <!--
+      After publishing @sh-webplatform/webkit@VERSION to npm, replace VERSION below
+      and serve this file over http(s). Until publish, prefer the Vite sample app.
+    -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@sh-webplatform/webkit@0.1.0/dist/themes.css"
+    />
+    <script type="importmap">
+      {
+        "imports": {
+          "@sh-webplatform/webkit": "https://cdn.jsdelivr.net/npm/@sh-webplatform/webkit@0.1.0/dist/webkit.cdn.min.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="bar">
+      <label>
+        Theme
+        <select id="theme">
+          <option value="default">default</option>
+          <option value="warm">warm</option>
+        </select>
+      </label>
+      <span>CDN proof harness (import map)</span>
+    </div>
+    <wk-workbench></wk-workbench>
+    <script type="module">
+      // IIFE CDN build registers custom elements and exposes theme helpers via side effects.
+      // For a published ESM CDN workflow, point import map at webkit.esm.js and lit separately.
+      await import("https://cdn.jsdelivr.net/npm/@sh-webplatform/webkit@0.1.0/dist/webkit.cdn.min.js");
+      const select = document.getElementById("theme");
+      select.addEventListener("change", () => {
+        document.documentElement.setAttribute("data-theme", select.value);
+      });
+    </script>
+  </body>
+</html>

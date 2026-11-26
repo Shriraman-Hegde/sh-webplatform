@@ -1,0 +1,42 @@
+:root,
+:host {
+  color-scheme: light;
+  --wk-font-sans: "Source Sans 3", "Segoe UI", sans-serif;
+  --wk-radius: 10px;
+  --wk-space-1: 0.25rem;
+  --wk-space-2: 0.5rem;
+  --wk-space-3: 0.75rem;
+  --wk-space-4: 1rem;
+  --wk-space-6: 1.5rem;
+  --wk-focus: 0 0 0 3px color-mix(in srgb, var(--wk-accent) 45%, transparent);
+}
+
+:root[data-theme="default"],
+:host([data-theme="default"]),
+:root:not([data-theme]),
+:host(:not([data-theme])) {
+  --wk-bg: #f4f7fb;
+  --wk-surface: #ffffff;
+  --wk-ink: #132238;
+  --wk-muted: #5b6b7c;
+  --wk-border: #d5dee8;
+  --wk-accent: #0b6e99;
+  --wk-accent-ink: #ffffff;
+  --wk-danger: #b42318;
+  --wk-success: #067647;
+  --wk-banner-bg: #e8f3f8;
+}
+
+:root[data-theme="warm"],
+:host([data-theme="warm"]) {
+  --wk-bg: #f6f4ef;
+  --wk-surface: #fffdf8;
+  --wk-ink: #1c1914;
+  --wk-muted: #6b6458;
+  --wk-border: #ddd4c4;
+  --wk-accent: #b45309;
+  --wk-accent-ink: #ffffff;
+  --wk-danger: #b42318;
+  --wk-success: #3f6212;
+  --wk-banner-bg: #f3e7d3;
+}
