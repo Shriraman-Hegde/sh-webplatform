@@ -2,6 +2,8 @@
 
 Follows [open-wc](https://github.com/open-wc/open-wc) practices for Lit web components.
 
+**Scope:** component library only (no MFE, discovery, or Helm in this package).
+
 ## Toolchain (open-wc)
 
 | Concern | Tool |
