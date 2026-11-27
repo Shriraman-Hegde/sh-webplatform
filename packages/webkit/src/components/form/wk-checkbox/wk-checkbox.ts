@@ -1,6 +1,8 @@
-import { LitElement, css, html } from "lit";
+import { css, html } from "lit";
+import { WkElement } from "../../../base/index.js";
+import { defineElement } from "../../../registry/index.js";
 
-export class WkCheckbox extends LitElement {
+export class WkCheckbox extends WkElement {
   static properties = {
     label: { type: String },
     name: { type: String },
@@ -21,7 +23,7 @@ export class WkCheckbox extends LitElement {
     this.disabled = false;
   }
 
-  static styles = css`
+  static styles = [WkElement.styles, css`
     :host {
       display: block;
       font-family: var(--wk-font-sans);
@@ -42,7 +44,7 @@ export class WkCheckbox extends LitElement {
       outline: none;
       box-shadow: var(--wk-focus);
     }
-  `;
+  `];
 
   private onChange(e: Event) {
     this.checked = (e.target as HTMLInputElement).checked;
@@ -71,7 +73,7 @@ export class WkCheckbox extends LitElement {
   }
 }
 
-customElements.define("wk-checkbox", WkCheckbox);
+defineElement("wk-checkbox", WkCheckbox);
 
 declare global {
   interface HTMLElementTagNameMap {

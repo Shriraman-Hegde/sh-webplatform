@@ -1,6 +1,9 @@
 import type { Preview } from "@storybook/web-components";
-import { applyTheme, type WebkitTheme } from "../src/theme/index.js";
+import { bootstrapWebkit } from "../src/bootstrap.js";
+import type { WebkitTheme } from "../src/theme/index.js";
 import "../src/themes/themes.css";
+
+bootstrapWebkit({ theme: "default" });
 
 const preview: Preview = {
   globalTypes: {
@@ -22,7 +25,7 @@ const preview: Preview = {
   },
   decorators: [
     (story, context) => {
-      applyTheme(context.globals.theme as WebkitTheme);
+      bootstrapWebkit({ theme: context.globals.theme as WebkitTheme });
       return story();
     },
   ],

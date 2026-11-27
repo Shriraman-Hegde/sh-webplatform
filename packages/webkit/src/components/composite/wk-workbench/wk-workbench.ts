@@ -1,4 +1,6 @@
-import { LitElement, css, html } from "lit";
+import { css, html } from "lit";
+import { WkElement } from "../../../base/index.js";
+import { defineElement } from "../../../registry/index.js";
 import { applyTheme, getTheme, type WebkitTheme } from "../../../theme/index.js";
 import "../../form/wk-button/index.js";
 import "../../form/wk-checkbox/index.js";
@@ -9,7 +11,7 @@ import "../../layout/wk-data-table/index.js";
 import "../../layout/wk-page-shell/index.js";
 import "../../layout/wk-status-banner/index.js";
 
-export class WkWorkbench extends LitElement {
+export class WkWorkbench extends WkElement {
   static properties = {
     theme: { state: true },
     bannerTone: { state: true },
@@ -33,7 +35,7 @@ export class WkWorkbench extends LitElement {
     this.urgent = false;
   }
 
-  static styles = css`
+  static styles = [WkElement.styles, css`
     :host {
       display: block;
     }
@@ -65,7 +67,7 @@ export class WkWorkbench extends LitElement {
       color: var(--wk-ink);
       padding: 0.45rem 0.7rem;
     }
-  `;
+  `];
 
   connectedCallback() {
     super.connectedCallback();
@@ -182,7 +184,7 @@ export class WkWorkbench extends LitElement {
   }
 }
 
-customElements.define("wk-workbench", WkWorkbench);
+defineElement("wk-workbench", WkWorkbench);
 
 declare global {
   interface HTMLElementTagNameMap {

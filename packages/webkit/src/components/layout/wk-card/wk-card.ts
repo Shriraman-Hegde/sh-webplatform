@@ -1,6 +1,8 @@
-import { LitElement, css, html } from "lit";
+import { css, html } from "lit";
+import { WkElement } from "../../../base/index.js";
+import { defineElement } from "../../../registry/index.js";
 
-export class WkCard extends LitElement {
+export class WkCard extends WkElement {
   static properties = {
     heading: { type: String },
   };
@@ -12,7 +14,7 @@ export class WkCard extends LitElement {
     this.heading = "";
   }
 
-  static styles = css`
+  static styles = [WkElement.styles, css`
     :host {
       display: block;
       font-family: var(--wk-font-sans);
@@ -28,7 +30,7 @@ export class WkCard extends LitElement {
       font-size: 1.15rem;
       font-weight: 700;
     }
-  `;
+  `];
 
   render() {
     return html`
@@ -38,7 +40,7 @@ export class WkCard extends LitElement {
   }
 }
 
-customElements.define("wk-card", WkCard);
+defineElement("wk-card", WkCard);
 
 declare global {
   interface HTMLElementTagNameMap {

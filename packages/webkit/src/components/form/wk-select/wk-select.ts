@@ -1,8 +1,10 @@
-import { LitElement, css, html } from "lit";
+import { css, html } from "lit";
+import { WkElement } from "../../../base/index.js";
+import { defineElement } from "../../../registry/index.js";
 
 export type WkSelectOption = { value: string; label: string };
 
-export class WkSelect extends LitElement {
+export class WkSelect extends WkElement {
   static properties = {
     label: { type: String },
     name: { type: String },
@@ -26,7 +28,7 @@ export class WkSelect extends LitElement {
     this.options = [];
   }
 
-  static styles = css`
+  static styles = [WkElement.styles, css`
     :host {
       display: block;
       font-family: var(--wk-font-sans);
@@ -51,7 +53,7 @@ export class WkSelect extends LitElement {
       box-shadow: var(--wk-focus);
       border-color: var(--wk-accent);
     }
-  `;
+  `];
 
   private onChange(e: Event) {
     const next = (e.target as HTMLSelectElement).value;
@@ -87,7 +89,7 @@ export class WkSelect extends LitElement {
   }
 }
 
-customElements.define("wk-select", WkSelect);
+defineElement("wk-select", WkSelect);
 
 declare global {
   interface HTMLElementTagNameMap {
