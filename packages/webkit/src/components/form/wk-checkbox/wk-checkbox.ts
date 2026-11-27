@@ -1,4 +1,6 @@
-import { css, html } from "lit";
+import { html } from "lit";
+import { cssText } from "../../../styles/css.js";
+import wkStyles from "../../../styles/components/wk-checkbox.css";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
 
@@ -23,28 +25,7 @@ export class WkCheckbox extends WkElement {
     this.disabled = false;
   }
 
-  static styles = [WkElement.styles, css`
-    :host {
-      display: block;
-      font-family: var(--wk-font-sans);
-      color: var(--wk-ink);
-    }
-    label {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--wk-space-2);
-      font-size: 0.95rem;
-    }
-    input {
-      width: 1.05rem;
-      height: 1.05rem;
-      accent-color: var(--wk-accent);
-    }
-    input:focus-visible {
-      outline: none;
-      box-shadow: var(--wk-focus);
-    }
-  `];
+  static styles = [WkElement.styles, cssText(wkStyles)];
 
   private onChange(e: Event) {
     this.checked = (e.target as HTMLInputElement).checked;

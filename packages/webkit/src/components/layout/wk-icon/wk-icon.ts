@@ -1,4 +1,6 @@
-import { css, html } from "lit";
+import { html } from "lit";
+import { cssText } from "../../../styles/css.js";
+import wkStyles from "../../../styles/components/wk-icon.css";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
 
@@ -26,42 +28,7 @@ export class WkIcon extends WkElement {
 
   static styles = [
     WkElement.styles,
-    css`
-      :host {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        line-height: 0;
-        color: inherit;
-        flex-shrink: 0;
-      }
-      .glyph {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 1.25rem;
-        height: 1.25rem;
-      }
-      .glyph > svg,
-      .glyph ::slotted(svg) {
-        width: 100%;
-        height: 100%;
-        display: block;
-      }
-      :host([size="sm"]) .glyph {
-        width: 1rem;
-        height: 1rem;
-      }
-      :host([size="md"]) .glyph,
-      :host(:not([size])) .glyph {
-        width: 1.25rem;
-        height: 1.25rem;
-      }
-      :host([size="lg"]) .glyph {
-        width: 1.6rem;
-        height: 1.6rem;
-      }
-    `,
+    cssText(wkStyles),
   ];
 
   render() {

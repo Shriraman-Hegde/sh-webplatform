@@ -1,4 +1,6 @@
-import { css, html } from "lit";
+import { html } from "lit";
+import { cssText } from "../../../styles/css.js";
+import wkStyles from "../../../styles/components/wk-divider.css";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
 
@@ -16,32 +18,7 @@ export class WkDivider extends WkElement {
 
   static styles = [
     WkElement.styles,
-    css`
-      :host {
-        display: block;
-      }
-      .row {
-        display: grid;
-        grid-template-columns: 1fr auto 1fr;
-        align-items: center;
-        gap: var(--wk-space-3);
-        color: var(--wk-muted);
-        font-size: 0.8rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-      }
-      hr {
-        border: 0;
-        border-top: 1px solid var(--wk-border);
-        margin: 0;
-      }
-      .plain {
-        border: 0;
-        border-top: 1px solid var(--wk-border);
-        margin: var(--wk-space-2) 0;
-      }
-    `,
+    cssText(wkStyles),
   ];
 
   render() {

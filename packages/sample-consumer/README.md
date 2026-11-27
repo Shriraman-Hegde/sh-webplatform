@@ -23,4 +23,4 @@ pnpm --filter sample-consumer build
 
 1. Publish `@sh-webplatform/webkit@0.1.0` (or update the version in `cdn-proof.html`).
 2. Serve `cdn-proof.html` over HTTP.
-3. Confirm Workbench renders and the theme select updates `data-theme`.
+3. Confirm Workbench renders, the look select updates `data-theme` (`default`, `warm`, `slate`, `forest`), and the mode select updates `data-mode` (`day`, `night`).

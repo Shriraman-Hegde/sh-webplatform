@@ -8,7 +8,7 @@ Package: `@sh-webplatform/webkit`
 | --- | --- | --- |
 | ESM (npm) | `dist/webkit.esm.js` | `lit` external (peerDependency) |
 | CDN IIFE | `dist/webkit.cdn.min.js` | `lit` bundled |
-| Themes | `dist/themes.css` | `default` / `warm` via `data-theme` |
+| Themes | `dist/themes.css` | Looks `default` / `warm` / `slate` / `forest` on `data-theme`; surfaces `day` / `night` on `data-mode` |
 
 Version identity is the npm version. CDN example:
 

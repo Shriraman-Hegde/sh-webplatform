@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="default">
+<html lang="en" data-theme="default" data-mode="day">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -40,6 +40,15 @@
         <select id="theme">
           <option value="default">default</option>
           <option value="warm">warm</option>
+          <option value="slate">slate</option>
+          <option value="forest">forest</option>
+        </select>
+      </label>
+      <label>
+        Mode
+        <select id="mode">
+          <option value="day">day</option>
+          <option value="night">night</option>
         </select>
       </label>
       <span>CDN proof harness (import map)</span>
@@ -49,9 +58,15 @@
       // IIFE CDN build registers custom elements and exposes theme helpers via side effects.
       // For a published ESM CDN workflow, point import map at webkit.esm.js and lit separately.
       await import("https://cdn.jsdelivr.net/npm/@sh-webplatform/webkit@0.1.0/dist/webkit.cdn.min.js");
-      const select = document.getElementById("theme");
-      select.addEventListener("change", () => {
-        document.documentElement.setAttribute("data-theme", select.value);
+      const theme = document.getElementById("theme");
+      const mode = document.getElementById("mode");
+      theme.addEventListener("change", () => {
+        document.documentElement.setAttribute("data-theme", theme.value);
+      });
+      mode.addEventListener("change", () => {
+        document.documentElement.setAttribute("data-mode", mode.value);
+        document.documentElement.style.colorScheme =
+          mode.value === "night" ? "dark" : "light";
       });
     </script>
   </body>

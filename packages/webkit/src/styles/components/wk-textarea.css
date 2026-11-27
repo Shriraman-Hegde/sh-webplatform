@@ -1,0 +1,122 @@
+:host {
+  display: block;
+}
+:host([size="sm"]) {
+  --wk-ta-pad: var(--wk-space-2);
+  --wk-ta-font: var(--wk-text-sm);
+  --wk-ta-min: 4.5rem;
+}
+:host([size="md"]),
+:host(:not([size])) {
+  --wk-ta-pad: var(--wk-space-3);
+  --wk-ta-font: var(--wk-text-md);
+  --wk-ta-min: 5rem;
+}
+:host([size="lg"]) {
+  --wk-ta-pad: var(--wk-space-4);
+  --wk-ta-font: var(--wk-text-lg);
+  --wk-ta-min: 7rem;
+}
+label,
+.wrap {
+  display: grid;
+  gap: var(--wk-space-2);
+  font-size: var(--wk-text-sm);
+  font-weight: 600;
+}
+.label {
+  font-size: var(--wk-text-sm);
+  font-weight: 600;
+}
+textarea {
+  font: var(--wk-ta-font, inherit) / var(--wk-leading) var(--wk-font-sans);
+  padding: var(--wk-ta-pad, 0.6rem) 0.75rem;
+  border-radius: var(--wk-radius);
+  border: 1px solid var(--wk-border);
+  background: var(--wk-surface);
+  color: var(--wk-ink);
+  resize: vertical;
+  min-height: var(--wk-ta-min, 5rem);
+  width: 100%;
+  transition:
+    border-color var(--wk-ease),
+    box-shadow var(--wk-ease);
+}
+textarea:focus-visible {
+  outline: none;
+  box-shadow: var(--wk-focus);
+  border-color: var(--wk-accent);
+}
+:host([error]) textarea,
+:host([error]) .shell {
+  border-color: var(--wk-danger);
+}
+textarea:disabled {
+  opacity: 0.6;
+}
+.shell {
+  border: 1px solid var(--wk-border);
+  border-radius: var(--wk-radius);
+  background: var(--wk-surface);
+  overflow: hidden;
+  font-weight: 400;
+  transition:
+    border-color var(--wk-ease),
+    box-shadow var(--wk-ease);
+}
+.shell:focus-within {
+  box-shadow: var(--wk-focus);
+  border-color: var(--wk-accent);
+}
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wk-space-1);
+  padding: var(--wk-space-2);
+  border-bottom: 1px solid var(--wk-border);
+  background: color-mix(in srgb, var(--wk-bg) 65%, var(--wk-surface));
+}
+.toolbar button {
+  font: inherit;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--wk-ink);
+  border-radius: var(--wk-radius-sm);
+  min-width: 2rem;
+  min-height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: var(--wk-text-sm);
+}
+.toolbar button:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--wk-ink) 6%, transparent);
+}
+.toolbar button:focus-visible {
+  outline: none;
+  box-shadow: var(--wk-focus);
+}
+.toolbar button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.editor {
+  min-height: calc(var(--wk-ta-min, 5rem) + 2rem);
+  padding: var(--wk-ta-pad, var(--wk-space-3)) var(--wk-space-4);
+  font: var(--wk-ta-font, var(--wk-text-md)) / var(--wk-leading)
+    var(--wk-font-sans);
+  color: var(--wk-ink);
+  outline: none;
+  font-weight: 400;
+}
+.editor:empty::before {
+  content: attr(data-placeholder);
+  color: var(--wk-muted);
+  pointer-events: none;
+}
+:host([disabled]) .editor {
+  opacity: 0.6;
+  pointer-events: none;
+}

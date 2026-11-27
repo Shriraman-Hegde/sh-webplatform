@@ -1,4 +1,6 @@
-import { css, html } from "lit";
+import { html } from "lit";
+import { cssText } from "../../../styles/css.js";
+import wkStyles from "../../../styles/components/wk-breadcrumbs.css";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
 import "../wk-icon/index.js";
@@ -19,51 +21,7 @@ export class WkBreadcrumbs extends WkElement {
 
   static styles = [
     WkElement.styles,
-    css`
-      :host {
-        display: block;
-      }
-      nav ol {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--wk-space-2);
-        align-items: center;
-        font-size: 0.9rem;
-      }
-      li {
-        display: inline-flex;
-        align-items: center;
-        gap: var(--wk-space-2);
-        color: var(--wk-muted);
-      }
-      .crumb {
-        display: inline-flex;
-        align-items: center;
-        gap: var(--wk-space-1);
-      }
-      a {
-        color: var(--wk-accent);
-        text-decoration: none;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-      a:focus-visible {
-        outline: none;
-        box-shadow: var(--wk-focus);
-        border-radius: 2px;
-      }
-      .sep {
-        color: var(--wk-border);
-      }
-      [aria-current="page"] {
-        color: var(--wk-ink);
-        font-weight: 600;
-      }
-    `,
+    cssText(wkStyles),
   ];
 
   render() {

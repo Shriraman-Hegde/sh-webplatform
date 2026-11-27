@@ -1,0 +1,35 @@
+/*
+ * Shadow stylesheet adopted by every wk-* element.
+ * Tokens and color schemes stay in themes.css, which the host page loads.
+ */
+
+:host {
+  box-sizing: border-box;
+  font-family: var(--wk-font-sans);
+  color: var(--wk-ink);
+}
+
+:host *,
+:host *::before,
+:host *::after {
+  box-sizing: border-box;
+}
+
+:host([size="sm"]) {
+  --wk-control-h: var(--wk-control-h-sm);
+  --wk-control-pad-x: var(--wk-control-pad-x-sm);
+  --wk-control-font: var(--wk-text-sm);
+}
+
+:host([size="md"]),
+:host(:not([size])) {
+  --wk-control-h: var(--wk-control-h-md);
+  --wk-control-pad-x: var(--wk-control-pad-x-md);
+  --wk-control-font: var(--wk-text-md);
+}
+
+:host([size="lg"]) {
+  --wk-control-h: var(--wk-control-h-lg);
+  --wk-control-pad-x: var(--wk-control-pad-x-lg);
+  --wk-control-font: var(--wk-text-lg);
+}

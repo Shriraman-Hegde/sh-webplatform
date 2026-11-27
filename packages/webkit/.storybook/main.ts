@@ -1,4 +1,5 @@
 import type { StorybookConfig } from "@storybook/web-components-vite";
+import { cssTextPlugin } from "../css-text-plugin.mjs";
 
 const config: StorybookConfig = {
   stories: ["../stories/**/*.stories.@(js|ts)"],
@@ -11,6 +12,7 @@ const config: StorybookConfig = {
     const { mergeConfig } = await import("vite");
     return mergeConfig(config, {
       base: "/sh-webplatform/",
+      plugins: [cssTextPlugin()],
     });
   },
 };
