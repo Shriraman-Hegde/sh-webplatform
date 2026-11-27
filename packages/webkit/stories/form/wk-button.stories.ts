@@ -2,16 +2,29 @@ import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 import { generatedIconNames } from "@sh-webplatform/icons";
 import "../../src/components/form/wk-button/index.js";
+import { docs, overviewPage, row } from "../_helpers.js";
+
+const usage = `
+<wk-button variant="primary">Save</wk-button>
+<wk-button variant="secondary" size="sm">Cancel</wk-button>
+<wk-button variant="ghost" icon="search">Search</wk-button>
+<wk-button icon="plus" icon-only></wk-button>
+`.trim();
 
 const meta: Meta = {
   title: "Form/Button",
   component: "wk-button",
+  parameters: {
+    ...docs(`Action button. Variants, sizes, optional icons, and motion.
+
+### Usage
+\`\`\`html
+${usage}
+\`\`\``),
+  },
   argTypes: {
     label: { control: "text" },
-    variant: {
-      control: "select",
-      options: ["primary", "secondary", "ghost"],
-    },
+    variant: { control: "select", options: ["primary", "secondary", "ghost"] },
     size: { control: "select", options: ["sm", "md", "lg"] },
     disabled: { control: "boolean" },
     animated: { control: "boolean" },
@@ -25,10 +38,57 @@ const meta: Meta = {
     size: "md",
     disabled: false,
     animated: true,
-    icon: "",
+    icon: "check",
     iconPosition: "start",
     iconOnly: false,
   },
+};
+
+export default meta;
+type Story = StoryObj;
+
+export const Overview: Story = {
+  parameters: { controls: { disable: true } },
+  render: () =>
+    overviewPage("wk-button", usage, [
+      {
+        heading: "Variants",
+        body: row(
+          html`<wk-button variant="primary">Primary</wk-button>`,
+          html`<wk-button variant="secondary">Secondary</wk-button>`,
+          html`<wk-button variant="ghost">Ghost</wk-button>`,
+        ),
+      },
+      {
+        heading: "Sizes",
+        body: row(
+          html`<wk-button size="sm">Small</wk-button>`,
+          html`<wk-button size="md">Medium</wk-button>`,
+          html`<wk-button size="lg">Large</wk-button>`,
+        ),
+      },
+      {
+        heading: "Icons",
+        body: row(
+          html`<wk-button icon="check">With icon</wk-button>`,
+          html`<wk-button icon="external-link" icon-position="end"
+            >Icon end</wk-button
+          >`,
+          html`<wk-button icon="search" icon-only></wk-button>`,
+        ),
+      },
+      {
+        heading: "States",
+        body: row(
+          html`<wk-button disabled>Disabled</wk-button>`,
+          html`<wk-button ?animated=${false}>No animation</wk-button>`,
+        ),
+      },
+    ]),
+};
+
+export const Playground: Story = {
+  name: "Playground (in depth)",
   render: (args) => html`
     <div style="padding: 1.5rem">
       <wk-button
@@ -43,31 +103,4 @@ const meta: Meta = {
       >
     </div>
   `,
-};
-
-export default meta;
-type Story = StoryObj;
-
-export const Primary: Story = {};
-
-export const WithIcon: Story = {
-  args: { icon: "check" },
-};
-
-export const Sizes: Story = {
-  render: () => html`
-    <div style="padding:1.5rem;display:flex;gap:0.75rem;align-items:center">
-      <wk-button size="sm">Small</wk-button>
-      <wk-button size="md">Medium</wk-button>
-      <wk-button size="lg">Large</wk-button>
-    </div>
-  `,
-};
-
-export const IconOnly: Story = {
-  args: { icon: "search", iconOnly: true, label: "Search" },
-};
-
-export const Disabled: Story = {
-  args: { disabled: true },
 };

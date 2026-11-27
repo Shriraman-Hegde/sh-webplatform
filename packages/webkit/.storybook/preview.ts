@@ -58,6 +58,16 @@ const preview: Preview = {
       expanded: true,
       sort: "requiredFirst",
     },
+    options: {
+      storySort: {
+        order: ["Form", "Layout", "Composite"],
+        method: "configure",
+        includeNames: true,
+      },
+    },
+    docs: {
+      toc: true,
+    },
   },
 };
 
