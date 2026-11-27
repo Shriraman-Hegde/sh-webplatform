@@ -9,6 +9,7 @@ import "../../form/wk-select/index.js";
 import "../../form/wk-switch/index.js";
 import "../../form/wk-rich-text/index.js";
 import "../../form/wk-text-field/index.js";
+import "../../form/wk-textarea/index.js";
 import "../../layout/wk-accordion/index.js";
 import "../../layout/wk-alert/index.js";
 import "../../layout/wk-badge/index.js";
@@ -42,6 +43,8 @@ export class WkWorkbench extends WkElement {
     activeTab: { state: true },
     progress: { state: true },
     openIds: { state: true },
+    /** Opt-in: use wk-rich-text instead of plain textarea for notes. */
+    richNotes: { state: true },
   };
 
   declare theme: WebkitTheme;
@@ -56,6 +59,7 @@ export class WkWorkbench extends WkElement {
   declare activeTab: string;
   declare progress: number;
   declare openIds: string[];
+  declare richNotes: boolean;
 
   constructor() {
     super();
@@ -71,6 +75,7 @@ export class WkWorkbench extends WkElement {
     this.activeTab = "links";
     this.progress = 35;
     this.openIds = ["overview"];
+    this.richNotes = false;
   }
 
   static styles = [
@@ -182,15 +187,32 @@ export class WkWorkbench extends WkElement {
                   this.titleValue = e.detail.value;
                 }}
               ></wk-text-field>
-              <wk-rich-text
-                label="Notes"
-                size="md"
-                show-icons
-                .value=${this.notes}
-                @wk-input=${(e: CustomEvent<{ value: string }>) => {
-                  this.notes = e.detail.value;
+              <wk-switch
+                label="Rich text notes"
+                name="richNotes"
+                .checked=${this.richNotes}
+                @wk-change=${(e: CustomEvent<{ checked: boolean }>) => {
+                  this.richNotes = e.detail.checked;
                 }}
-              ></wk-rich-text>
+              ></wk-switch>
+              ${this.richNotes
+                ? html`<wk-rich-text
+                    label="Notes"
+                    size="md"
+                    show-icons
+                    .value=${this.notes}
+                    @wk-input=${(e: CustomEvent<{ value: string }>) => {
+                      this.notes = e.detail.value;
+                    }}
+                  ></wk-rich-text>`
+                : html`<wk-textarea
+                    label="Notes"
+                    name="notes"
+                    .value=${this.notes}
+                    @wk-input=${(e: CustomEvent<{ value: string }>) => {
+                      this.notes = e.detail.value;
+                    }}
+                  ></wk-textarea>`}
               <wk-select
                 label="Team"
                 name="team"

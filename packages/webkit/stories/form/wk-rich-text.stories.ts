@@ -3,7 +3,7 @@ import { html } from "lit";
 import "../../src/components/form/wk-rich-text/index.js";
 
 const meta: Meta = {
-  title: "Form/Rich Text",
+  title: "Form/Rich Text (optional)",
   component: "wk-rich-text",
   argTypes: {
     label: { control: "text" },
