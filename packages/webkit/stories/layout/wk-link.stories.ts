@@ -1,35 +1,59 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 import "../../src/components/layout/wk-link/index.js";
+import { attr, componentDocs, disabledArg, sizeArg } from "../_helpers.js";
+
 
 const meta: Meta = {
   title: "Layout/Link",
   component: "wk-link",
+  tags: ["autodocs"],
+  parameters: componentDocs("Accessible link with optional icon and size."),
   argTypes: {
-    label: { control: "text" },
-    href: { control: "text" },
-    target: { control: "text" },
-    disabled: { control: "boolean" },
+    label: attr("Link text (slot).", { defaultValue: "" }),
+    href: attr("Destination URL.", { defaultValue: "#" }),
+    size: sizeArg,
+    icon: attr("Optional icon name.", { defaultValue: "" }),
+    iconPosition: attr("Icon placement.", {
+      control: "select",
+      options: ["start", "end"],
+      defaultValue: "start",
+      type: '"start" | "end"',
+    }),
+    disabled: disabledArg,
   },
   args: {
     label: "Open record",
-    href: "/records/item-a",
-    target: "",
+    href: "#item-a",
+    size: "md",
+    icon: "",
+    iconPosition: "start",
     disabled: false,
   },
   render: (args) => html`
-    <div style="padding: 1.5rem">
-      <wk-link href=${args.href} target=${args.target} ?disabled=${args.disabled}
-        >${args.label}</wk-link
-      >
-    </div>
+    <wk-link
+      href=${args.href}
+      size=${args.size}
+      icon=${args.icon || undefined}
+      icon-position=${args.iconPosition}
+      ?disabled=${args.disabled}
+      >${args.label}</wk-link
+    >
   `,
 };
 
 export default meta;
 type Story = StoryObj;
 
-export const Default: Story = {};
+export const Overview: Story = {};
+
+export const WithIcon: Story = {
+  args: { icon: "link" },
+};
+
+export const IconRight: Story = {
+  args: { icon: "external-link", iconPosition: "end" },
+};
 
 export const Disabled: Story = {
   args: { disabled: true },

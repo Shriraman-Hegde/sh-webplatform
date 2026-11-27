@@ -1,8 +1,10 @@
 import { createContext } from "@lit/context";
+import type { TemplateResult } from "lit";
 
 /** Host-owned icon library resolved via Lit context (or module default). */
 export type IconLibrary = {
-  get(name: string): string | undefined;
+  get(name: string): TemplateResult | string | undefined;
+  names?: readonly string[];
 };
 
 export const iconContext = createContext<IconLibrary>(Symbol("wk-icons"));

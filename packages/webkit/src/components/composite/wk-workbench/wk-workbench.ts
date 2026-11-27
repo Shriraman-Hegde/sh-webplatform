@@ -1,7 +1,14 @@
 import { css, html } from "lit";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
-import { applyTheme, getTheme, type WebkitTheme } from "../../../theme/index.js";
+import {
+  applyMode,
+  applyTheme,
+  getMode,
+  getTheme,
+  type WebkitMode,
+  type WebkitTheme,
+} from "../../../theme/index.js";
 import "../../form/wk-button/index.js";
 import "../../form/wk-checkbox/index.js";
 import "../../form/wk-radio-group/index.js";
@@ -31,6 +38,7 @@ import "../../layout/wk-tooltip/index.js";
 export class WkWorkbench extends WkElement {
   static properties = {
     theme: { state: true },
+    mode: { state: true },
     bannerTone: { state: true },
     titleValue: { state: true },
     notes: { state: true },
@@ -42,9 +50,12 @@ export class WkWorkbench extends WkElement {
     activeTab: { state: true },
     progress: { state: true },
     openIds: { state: true },
+    /** Opt-in: use wk-rich-text instead of plain textarea for notes. */
+    richNotes: { state: true },
   };
 
   declare theme: WebkitTheme;
+  declare mode: WebkitMode;
   declare bannerTone: "empty" | "loading" | "error";
   declare titleValue: string;
   declare notes: string;
@@ -56,10 +67,12 @@ export class WkWorkbench extends WkElement {
   declare activeTab: string;
   declare progress: number;
   declare openIds: string[];
+  declare richNotes: boolean;
 
   constructor() {
     super();
     this.theme = "default";
+    this.mode = "day";
     this.bannerTone = "empty";
     this.titleValue = "Sample request";
     this.notes = "";
@@ -71,6 +84,7 @@ export class WkWorkbench extends WkElement {
     this.activeTab = "links";
     this.progress = 35;
     this.openIds = ["overview"];
+    this.richNotes = false;
   }
 
   static styles = [
@@ -107,7 +121,8 @@ export class WkWorkbench extends WkElement {
         align-items: center;
         margin-bottom: var(--wk-space-4);
       }
-      select.theme {
+      select.theme,
+      select.mode {
         font: inherit;
         border-radius: var(--wk-radius);
         border: 1px solid var(--wk-border);
@@ -115,16 +130,27 @@ export class WkWorkbench extends WkElement {
         color: var(--wk-ink);
         padding: 0.45rem 0.7rem;
       }
+      .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--wk-space-2);
+        align-items: center;
+      }
     `,
   ];
 
   connectedCallback() {
     super.connectedCallback();
     this.theme = applyTheme(getTheme());
+    this.mode = applyMode(getMode());
   }
 
   private setTheme(theme: WebkitTheme) {
     this.theme = applyTheme(theme);
+  }
+
+  private setMode(mode: WebkitMode) {
+    this.mode = applyMode(mode);
   }
 
   render() {
@@ -133,28 +159,47 @@ export class WkWorkbench extends WkElement {
         page-title="Workbench"
         subtitle="Synthetic demo page for webkit form + layout primitives"
       >
-        <select
-          slot="actions"
-          class="theme"
-          aria-label="Theme"
-          .value=${this.theme}
-          @change=${(e: Event) =>
-            this.setTheme((e.target as HTMLSelectElement).value as WebkitTheme)}
-        >
-          <option value="default">default</option>
-          <option value="warm">warm</option>
-        </select>
+        <div slot="actions" class="toolbar">
+          <select
+            class="theme"
+            aria-label="Theme"
+            .value=${this.theme}
+            @change=${(e: Event) =>
+              this.setTheme(
+                (e.target as HTMLSelectElement).value as WebkitTheme,
+              )}
+          >
+            <option value="default">default</option>
+            <option value="warm">warm</option>
+            <option value="slate">slate</option>
+            <option value="forest">forest</option>
+          </select>
+          <select
+            class="mode"
+            aria-label="Mode"
+            .value=${this.mode}
+            @change=${(e: Event) =>
+              this.setMode(
+                (e.target as HTMLSelectElement).value as WebkitMode,
+              )}
+          >
+            <option value="day">day</option>
+            <option value="night">night</option>
+          </select>
+        </div>
 
         <wk-breadcrumbs
           .items=${[
-            { label: "Home", href: "#" },
-            { label: "Team Alpha", href: "#" },
+            { label: "Home", href: "#", icon: "home" },
+            { label: "Team Alpha", href: "#", icon: "user" },
             { label: "Workbench" },
           ]}
         ></wk-breadcrumbs>
 
         <wk-status-banner
           tone=${this.bannerTone}
+          show-icon
+          size="md"
           message=${this.bannerTone === "loading"
             ? "Fetching linked records…"
             : this.bannerTone === "error"
@@ -165,23 +210,35 @@ export class WkWorkbench extends WkElement {
         <div class="grid">
           <wk-card heading="Request details">
             <div class="meta">
-              <wk-badge tone="accent">Draft</wk-badge>
+              <wk-badge tone="accent" icon="edit">Draft</wk-badge>
               ${this.urgent
-                ? html`<wk-badge tone="danger">Urgent</wk-badge>`
-                : html`<wk-badge>Normal</wk-badge>`}
+                ? html`<wk-badge tone="danger" icon="warn">Urgent</wk-badge>`
+                : html`<wk-badge icon="check">Normal</wk-badge>`}
             </div>
             <div class="row">
               <wk-text-field
                 label="Title"
                 name="title"
+                leading-icon="edit"
                 .value=${this.titleValue}
                 @wk-input=${(e: CustomEvent<{ value: string }>) => {
                   this.titleValue = e.detail.value;
                 }}
               ></wk-text-field>
+              <wk-switch
+                label="Rich text notes"
+                name="richNotes"
+                .checked=${this.richNotes}
+                @wk-change=${(e: CustomEvent<{ checked: boolean }>) => {
+                  this.richNotes = e.detail.checked;
+                }}
+              ></wk-switch>
               <wk-textarea
                 label="Notes"
                 name="notes"
+                size="md"
+                ?rich=${this.richNotes}
+                ?show-icons=${this.richNotes}
                 .value=${this.notes}
                 @wk-input=${(e: CustomEvent<{ value: string }>) => {
                   this.notes = e.detail.value;
@@ -190,6 +247,7 @@ export class WkWorkbench extends WkElement {
               <wk-select
                 label="Team"
                 name="team"
+                leading-icon="user"
                 .value=${this.dept}
                 .options=${[
                   { value: "alpha", label: "Team Alpha" },
@@ -235,6 +293,7 @@ export class WkWorkbench extends WkElement {
               <wk-tooltip content="Submit the sample request">
                 <wk-button
                   variant="primary"
+                  icon="check"
                   @click=${() => {
                     this.bannerTone = "loading";
                     this.progress = Math.min(100, this.progress + 20);
@@ -244,13 +303,15 @@ export class WkWorkbench extends WkElement {
               </wk-tooltip>
               <wk-button
                 variant="secondary"
+                icon="warn"
                 @click=${() => {
                   this.bannerTone = "error";
                 }}
                 >Simulate error</wk-button
               >
               <wk-button
-                variant="secondary"
+                variant="ghost"
+                icon="close"
                 @click=${() => {
                   this.bannerTone = "empty";
                 }}
@@ -258,6 +319,7 @@ export class WkWorkbench extends WkElement {
               >
               <wk-button
                 variant="secondary"
+                icon="external-link"
                 @click=${() => {
                   this.dialogOpen = true;
                 }}
@@ -275,17 +337,17 @@ export class WkWorkbench extends WkElement {
           </wk-card>
 
           <wk-card heading="Linked items">
-            <wk-alert tone="info" heading="Related items">
+            <wk-alert tone="info" heading="Related items" show-icon size="md">
               Open related records with
-              <wk-link href="#item-a">wk-link</wk-link>
+              <wk-link href="#item-a" icon="link">wk-link</wk-link>
               or browse tabs below.
             </wk-alert>
             <wk-divider></wk-divider>
             <wk-tabs
               .tabs=${[
-                { id: "links", label: "Links" },
-                { id: "table", label: "Table" },
-                { id: "more", label: "More" },
+                { id: "links", label: "Links", icon: "link" },
+                { id: "table", label: "Table", icon: "list" },
+                { id: "more", label: "More", icon: "menu" },
               ]}
               .active=${this.activeTab}
               @wk-change=${(e: CustomEvent<{ id: string }>) => {
@@ -295,11 +357,15 @@ export class WkWorkbench extends WkElement {
               <div slot="links" class="row">
                 <div>
                   <wk-icon name="check" label="Ready"></wk-icon>
-                  <wk-link href="#item-a">ITEM-A Sample record</wk-link>
+                  <wk-link href="#item-a" icon="external-link" icon-position="end"
+                    >ITEM-A Sample record</wk-link
+                  >
                 </div>
                 <div>
                   <wk-icon name="info" label="Info"></wk-icon>
-                  <wk-link href="#item-b">ITEM-B Sample record</wk-link>
+                  <wk-link href="#item-b" icon="external-link" icon-position="end"
+                    >ITEM-B Sample record</wk-link
+                  >
                 </div>
               </div>
               <div slot="table">
@@ -327,8 +393,8 @@ export class WkWorkbench extends WkElement {
                   : html`
                       <wk-accordion
                         .items=${[
-                          { id: "overview", title: "Overview" },
-                          { id: "notes", title: "Notes" },
+                          { id: "overview", title: "Overview", icon: "info" },
+                          { id: "notes", title: "Notes", icon: "edit" },
                         ]}
                         .openIds=${this.openIds}
                         @wk-change=${(
@@ -364,6 +430,7 @@ export class WkWorkbench extends WkElement {
           <wk-button
             slot="actions"
             variant="secondary"
+            icon="close"
             @click=${() => {
               this.dialogOpen = false;
             }}
@@ -372,6 +439,7 @@ export class WkWorkbench extends WkElement {
           <wk-button
             slot="actions"
             variant="primary"
+            icon="check"
             @click=${() => {
               this.dialogOpen = false;
               this.bannerTone = "loading";

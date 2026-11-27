@@ -1,8 +1,9 @@
 import { css, html } from "lit";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
+import "../wk-icon/index.js";
 
-export type WkTabItem = { id: string; label: string };
+export type WkTabItem = { id: string; label: string; icon?: string };
 
 export class WkTabs extends WkElement {
   static properties = {
@@ -41,6 +42,12 @@ export class WkTabs extends WkElement {
         cursor: pointer;
         border-bottom: 2px solid transparent;
         margin-bottom: -1px;
+        display: inline-flex;
+        align-items: center;
+        gap: var(--wk-space-2);
+        transition:
+          color var(--wk-ease),
+          border-color var(--wk-ease);
       }
       button[aria-selected="true"] {
         color: var(--wk-ink);
@@ -92,6 +99,9 @@ export class WkTabs extends WkElement {
               tabindex=${tab.id === this.active ? 0 : -1}
               @click=${() => this.select(tab.id)}
             >
+              ${tab.icon
+                ? html`<wk-icon name=${tab.icon} size="sm"></wk-icon>`
+                : null}
               ${tab.label}
             </button>
           `,

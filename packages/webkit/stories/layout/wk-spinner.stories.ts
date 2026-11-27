@@ -1,29 +1,42 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 import "../../src/components/layout/wk-spinner/index.js";
+import { attr, componentDocs, sizeArg } from "../_helpers.js";
+
 
 const meta: Meta = {
   title: "Layout/Spinner",
   component: "wk-spinner",
+  tags: ["autodocs"],
+  parameters: componentDocs("Loading indicator. `animated` respects global motion."),
   argTypes: {
-    label: { control: "text" },
-    size: {
-      control: "select",
-      options: ["sm", "md", "lg"],
-    },
+    label: attr("Status label.", { defaultValue: "Loading" }),
+    size: sizeArg,
+    animated: attr("Spin animation.", {
+      control: "boolean",
+      defaultValue: "true",
+      type: "boolean",
+    }),
   },
-  args: {
-    label: "Saving…",
-    size: "md",
-  },
+  args: { label: "Loading…", size: "md", animated: true },
   render: (args) => html`
-    <div style="padding: 1.5rem">
-      <wk-spinner label=${args.label} size=${args.size}></wk-spinner>
-    </div>
+    <wk-spinner
+      label=${args.label}
+      size=${args.size}
+      ?animated=${args.animated}
+    ></wk-spinner>
   `,
 };
 
 export default meta;
 type Story = StoryObj;
 
-export const Default: Story = {};
+export const Overview: Story = {};
+
+export const Large: Story = {
+  args: { size: "lg" },
+};
+
+export const Static: Story = {
+  args: { animated: false, label: "Static" },
+};

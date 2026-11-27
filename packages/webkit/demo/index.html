@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="default">
+<html lang="en" data-theme="default" data-mode="day" data-motion="system">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,25 +16,32 @@
         display: flex;
         gap: 0.75rem;
         align-items: center;
+        flex-wrap: wrap;
         padding: 0.75rem 1rem;
         border-bottom: 1px solid var(--wk-border);
+        background: var(--wk-surface);
       }
     </style>
     <script type="module">
+      import { iconRegistry } from "@sh-webplatform/icons";
       import { bootstrapWebkit } from "../src/bootstrap.ts";
       import "../src/components/composite/wk-workbench/index.ts";
 
-      bootstrapWebkit({
-        theme: "default",
-        icons: {
-          get: (name) =>
-            ({ check: "✓", close: "×", info: "ℹ", warn: "!" })[name],
-        },
-      });
-      const select = document.getElementById("theme");
-      select.addEventListener("change", () =>
-        bootstrapWebkit({ theme: select.value }),
-      );
+      const boot = () =>
+        bootstrapWebkit({
+          theme: document.getElementById("theme").value,
+          mode: document.getElementById("mode").value,
+          motion: document.getElementById("motion").value,
+          icons: document.getElementById("icons").checked
+            ? iconRegistry
+            : undefined,
+        });
+
+      boot();
+      document.getElementById("theme").addEventListener("change", boot);
+      document.getElementById("mode").addEventListener("change", boot);
+      document.getElementById("motion").addEventListener("change", boot);
+      document.getElementById("icons").addEventListener("change", boot);
     </script>
   </head>
   <body>
@@ -44,9 +51,30 @@
         <select id="theme">
           <option value="default">default</option>
           <option value="warm">warm</option>
+          <option value="slate">slate</option>
+          <option value="forest">forest</option>
         </select>
       </label>
-      <span>webkit host boot (tokens + icons)</span>
+      <label>
+        Mode
+        <select id="mode">
+          <option value="day">day</option>
+          <option value="night">night</option>
+        </select>
+      </label>
+      <label>
+        Motion
+        <select id="motion">
+          <option value="system">system</option>
+          <option value="on">on</option>
+          <option value="off">off</option>
+        </select>
+      </label>
+      <label>
+        <input id="icons" type="checkbox" checked />
+        Icons library
+      </label>
+      <span>webkit host boot (theme + mode + optional icons)</span>
     </div>
     <wk-workbench></wk-workbench>
   </body>

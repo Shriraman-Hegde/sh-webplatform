@@ -1,8 +1,9 @@
 import { css, html } from "lit";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
+import "../wk-icon/index.js";
 
-export type WkAccordionItem = { id: string; title: string };
+export type WkAccordionItem = { id: string; title: string; icon?: string };
 
 export class WkAccordion extends WkElement {
   static properties = {
@@ -49,17 +50,31 @@ export class WkAccordion extends WkElement {
         color: var(--wk-ink);
         padding: var(--wk-space-4);
         cursor: pointer;
+        transition: background var(--wk-ease);
+      }
+      button:hover {
+        background: color-mix(in srgb, var(--wk-ink) 3%, transparent);
+      }
+      .title {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--wk-space-2);
       }
       button:focus-visible {
         outline: none;
         box-shadow: inset var(--wk-focus);
       }
       .chevron {
-        color: var(--wk-muted);
-        transition: transform 120ms ease;
+        width: 0.45rem;
+        height: 0.45rem;
+        border-right: 2px solid var(--wk-muted);
+        border-bottom: 2px solid var(--wk-muted);
+        transform: rotate(45deg);
+        transition: transform var(--wk-ease);
+        flex-shrink: 0;
       }
       button[aria-expanded="true"] .chevron {
-        transform: rotate(180deg);
+        transform: rotate(225deg);
       }
       .panel {
         padding: 0 var(--wk-space-4) var(--wk-space-4);
@@ -103,8 +118,13 @@ export class WkAccordion extends WkElement {
               id="header-${item.id}"
               @click=${() => this.toggle(item.id)}
             >
-              <span>${item.title}</span>
-              <span class="chevron" aria-hidden="true">▾</span>
+              <span class="title">
+                ${item.icon
+                  ? html`<wk-icon name=${item.icon} size="sm"></wk-icon>`
+                  : null}
+                ${item.title}
+              </span>
+              <span class="chevron" aria-hidden="true"></span>
             </button>
             ${this.isOpen(item.id)
               ? html`<div

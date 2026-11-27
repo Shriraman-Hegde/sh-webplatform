@@ -1,13 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
+import "../../src/components/form/wk-button/index.js";
 import "../../src/components/layout/wk-page-shell/index.js";
+import { attr, componentDocs } from "../_helpers.js";
+
 
 const meta: Meta = {
   title: "Layout/Page Shell",
   component: "wk-page-shell",
+  tags: ["autodocs"],
+  parameters: componentDocs("Page frame with title, subtitle, actions slot, and content."),
   argTypes: {
-    pageTitle: { control: "text", name: "page-title" },
-    subtitle: { control: "text" },
+    pageTitle: attr("Page title.", {
+      defaultValue: "Workbench",
+    }),
+    subtitle: attr("Optional subtitle.", { defaultValue: "" }),
   },
   args: {
     pageTitle: "Workbench",
@@ -15,7 +22,8 @@ const meta: Meta = {
   },
   render: (args) => html`
     <wk-page-shell page-title=${args.pageTitle} subtitle=${args.subtitle}>
-      <p style="margin:0;color:var(--wk-muted)">Main content slot</p>
+      <wk-button slot="actions" variant="secondary">Action</wk-button>
+      <p style="margin:0">Page content in the default slot.</p>
     </wk-page-shell>
   `,
 };
@@ -23,4 +31,4 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj;
 
-export const Default: Story = {};
+export const Overview: Story = {};

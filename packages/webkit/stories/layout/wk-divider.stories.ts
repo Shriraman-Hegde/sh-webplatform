@@ -1,27 +1,25 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 import "../../src/components/layout/wk-divider/index.js";
+import { attr, componentDocs } from "../_helpers.js";
+
 
 const meta: Meta = {
   title: "Layout/Divider",
   component: "wk-divider",
+  tags: ["autodocs"],
+  parameters: componentDocs("Horizontal rule with optional mid-line label."),
   argTypes: {
-    label: { control: "text" },
+    label: attr("Optional label centered on the divider.", { defaultValue: "" }),
   },
-  args: {
-    label: "Details",
-  },
-  render: (args) => html`
-    <div style="padding: 1.5rem">
-      <wk-divider label=${args.label || ""}></wk-divider>
-    </div>
-  `,
+  args: { label: "Flags" },
+  render: (args) => html`<wk-divider label=${args.label}></wk-divider>`,
 };
 
 export default meta;
 type Story = StoryObj;
 
-export const Labeled: Story = {};
+export const Overview: Story = {};
 
 export const Plain: Story = {
   args: { label: "" },

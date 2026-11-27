@@ -1,15 +1,23 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 import "../../src/components/form/wk-checkbox/index.js";
+import { attr, componentDocs, disabledArg } from "../_helpers.js";
+
 
 const meta: Meta = {
   title: "Form/Checkbox",
   component: "wk-checkbox",
+  tags: ["autodocs"],
+  parameters: componentDocs("Labeled checkbox. Emits `wk-change` with `{ checked }`."),
   argTypes: {
-    label: { control: "text" },
-    name: { control: "text" },
-    checked: { control: "boolean" },
-    disabled: { control: "boolean" },
+    label: attr("Checkbox label.", { defaultValue: "" }),
+    name: attr("Native name attribute.", { defaultValue: "" }),
+    checked: attr("Checked state.", {
+      control: "boolean",
+      defaultValue: "false",
+      type: "boolean",
+    }),
+    disabled: disabledArg,
   },
   args: {
     label: "Mark as urgent",
@@ -18,22 +26,24 @@ const meta: Meta = {
     disabled: false,
   },
   render: (args) => html`
-    <div style="padding: 1.5rem">
-      <wk-checkbox
-        label=${args.label}
-        name=${args.name}
-        .checked=${args.checked}
-        ?disabled=${args.disabled}
-      ></wk-checkbox>
-    </div>
+    <wk-checkbox
+      label=${args.label}
+      name=${args.name}
+      .checked=${args.checked}
+      ?disabled=${args.disabled}
+    ></wk-checkbox>
   `,
 };
 
 export default meta;
 type Story = StoryObj;
 
-export const Default: Story = {};
+export const Overview: Story = {};
 
 export const Checked: Story = {
   args: { checked: true },
+};
+
+export const Disabled: Story = {
+  args: { disabled: true },
 };

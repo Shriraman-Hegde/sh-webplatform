@@ -1,23 +1,22 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 import "../../src/components/layout/wk-card/index.js";
+import { attr, componentDocs } from "../_helpers.js";
+
 
 const meta: Meta = {
   title: "Layout/Card",
   component: "wk-card",
+  tags: ["autodocs"],
+  parameters: componentDocs("Surface container with optional heading and default slot."),
   argTypes: {
-    heading: { control: "text" },
-    body: { control: "text" },
+    heading: attr("Optional card heading.", { defaultValue: "" }),
+    body: attr("Body text for the demo slot.", { defaultValue: "" }),
   },
-  args: {
-    heading: "Request details",
-    body: "Card body content for the workbench layout.",
-  },
+  args: { heading: "Request details", body: "Card body content goes here." },
   render: (args) => html`
-    <div style="padding: 1.5rem; max-width: 28rem">
-      <wk-card heading=${args.heading}>
-        <p style="margin:0;color:var(--wk-muted)">${args.body}</p>
-      </wk-card>
+    <div style="max-width:28rem">
+      <wk-card heading=${args.heading}>${args.body}</wk-card>
     </div>
   `,
 };
@@ -25,4 +24,8 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj;
 
-export const Default: Story = {};
+export const Overview: Story = {};
+
+export const BodyOnly: Story = {
+  args: { heading: "", body: "Untitled card" },
+};

@@ -1,22 +1,30 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 import "../../src/components/layout/wk-progress/index.js";
+import { attr, componentDocs } from "../_helpers.js";
+
 
 const meta: Meta = {
   title: "Layout/Progress",
   component: "wk-progress",
+  tags: ["autodocs"],
+  parameters: componentDocs("Labeled progress bar with percent readout."),
   argTypes: {
-    value: { control: { type: "range", min: 0, max: 100, step: 1 } },
-    max: { control: "number" },
-    label: { control: "text" },
+    value: attr("Current progress value.", {
+      control: { type: "range", min: 0, max: 100, step: 1 },
+      defaultValue: "0",
+      type: "number",
+    }),
+    max: attr("Maximum value.", {
+      control: "number",
+      defaultValue: "100",
+      type: "number",
+    }),
+    label: attr("Accessible / visible label.", { defaultValue: "" }),
   },
-  args: {
-    value: 42,
-    max: 100,
-    label: "Upload",
-  },
+  args: { value: 42, max: 100, label: "Upload" },
   render: (args) => html`
-    <div style="padding: 1.5rem; max-width: 24rem">
+    <div style="max-width:24rem">
       <wk-progress
         value=${args.value}
         max=${args.max}
@@ -29,7 +37,7 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj;
 
-export const Default: Story = {};
+export const Overview: Story = {};
 
 export const Complete: Story = {
   args: { value: 100, label: "Complete" },

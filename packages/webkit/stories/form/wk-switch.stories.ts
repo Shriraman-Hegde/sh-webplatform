@@ -1,39 +1,49 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 import "../../src/components/form/wk-switch/index.js";
+import { attr, componentDocs, disabledArg } from "../_helpers.js";
+
 
 const meta: Meta = {
   title: "Form/Switch",
   component: "wk-switch",
+  tags: ["autodocs"],
+  parameters: componentDocs("On/off toggle. Emits `wk-change` with `{ checked }`."),
   argTypes: {
-    label: { control: "text" },
-    name: { control: "text" },
-    checked: { control: "boolean" },
-    disabled: { control: "boolean" },
+    label: attr("Switch label.", { defaultValue: "" }),
+    name: attr("Native name attribute.", { defaultValue: "" }),
+    checked: attr("On/off state.", {
+      control: "boolean",
+      defaultValue: "false",
+      type: "boolean",
+    }),
+    disabled: disabledArg,
   },
   args: {
-    label: "Notify me",
+    label: "Email notifications",
     name: "notify",
-    checked: false,
+    checked: true,
     disabled: false,
   },
   render: (args) => html`
-    <div style="padding: 1.5rem">
-      <wk-switch
-        label=${args.label}
-        name=${args.name}
-        .checked=${args.checked}
-        ?disabled=${args.disabled}
-      ></wk-switch>
-    </div>
+    <wk-switch
+      label=${args.label}
+      name=${args.name}
+      .checked=${args.checked}
+      ?disabled=${args.disabled}
+    ></wk-switch>
   `,
 };
 
 export default meta;
 type Story = StoryObj;
 
-export const Default: Story = {};
+export const Overview: Story = {};
 
-export const On: Story = {
-  args: { checked: true },
+export const Off: Story = {
+  args: { checked: false },
+};
+
+export const Disabled: Story = {
+  args: { disabled: true },
 };

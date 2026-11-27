@@ -23,12 +23,17 @@ export class WkCard extends WkElement {
       border: 1px solid var(--wk-border);
       border-radius: calc(var(--wk-radius) + 2px);
       padding: var(--wk-space-6);
-      box-shadow: 0 10px 30px color-mix(in srgb, var(--wk-ink) 6%, transparent);
+      box-shadow: var(--wk-shadow-md);
+      transition: box-shadow var(--wk-ease), border-color var(--wk-ease);
+    }
+    :host(:hover) {
+      border-color: color-mix(in srgb, var(--wk-accent) 22%, var(--wk-border));
     }
     h2 {
       margin: 0 0 var(--wk-space-4);
-      font-size: 1.15rem;
+      font-size: var(--wk-text-lg);
       font-weight: 700;
+      letter-spacing: -0.01em;
     }
   `];
 

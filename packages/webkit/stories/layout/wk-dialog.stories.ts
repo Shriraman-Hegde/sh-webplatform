@@ -2,36 +2,57 @@ import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 import "../../src/components/form/wk-button/index.js";
 import "../../src/components/layout/wk-dialog/index.js";
+import { attr, componentDocs } from "../_helpers.js";
+
+
+function openDialog(id: string) {
+  const d = document.getElementById(id) as
+    | (HTMLElement & { open: boolean })
+    | null;
+  if (d) d.open = true;
+}
+
+function closeHost(e: Event) {
+  const host = (e.currentTarget as HTMLElement).closest(
+    "wk-dialog",
+  ) as HTMLElement & { open: boolean };
+  host.open = false;
+}
 
 const meta: Meta = {
   title: "Layout/Dialog",
   component: "wk-dialog",
+  tags: ["autodocs"],
+  parameters: componentDocs("Modal dialog. Emits `wk-close`. Body + `actions` slots."),
   argTypes: {
-    heading: { control: "text" },
-    open: { control: "boolean" },
-    body: { control: "text" },
+    heading: attr("Dialog heading.", { defaultValue: "" }),
   },
-  args: {
-    heading: "Confirm action",
-    open: true,
-    body: "This closes with Escape, backdrop, or the × control.",
-  },
+  args: { heading: "Confirm submit" },
   render: (args) => html`
-    <div style="padding: 1.5rem; min-height: 12rem">
-      <wk-dialog heading=${args.heading} ?open=${args.open}>
-        <p style="margin:0">${args.body}</p>
-        <wk-button slot="actions" variant="secondary">Cancel</wk-button>
-        <wk-button slot="actions" variant="primary">Confirm</wk-button>
-      </wk-dialog>
-    </div>
+    <wk-button
+      variant="primary"
+      @click=${() => openDialog("docs-dialog")}
+      >Open dialog</wk-button
+    >
+    <wk-dialog
+      id="docs-dialog"
+      heading=${args.heading}
+      @wk-close=${(e: Event) => {
+        (e.currentTarget as HTMLElement & { open: boolean }).open = false;
+      }}
+    >
+      <p style="margin:0">Submit the sample request?</p>
+      <wk-button slot="actions" variant="secondary" @click=${closeHost}
+        >Cancel</wk-button
+      >
+      <wk-button slot="actions" variant="primary" @click=${closeHost}
+        >Confirm</wk-button
+      >
+    </wk-dialog>
   `,
 };
 
 export default meta;
 type Story = StoryObj;
 
-export const Open: Story = {};
-
-export const Closed: Story = {
-  args: { open: false },
-};
+export const Overview: Story = {};

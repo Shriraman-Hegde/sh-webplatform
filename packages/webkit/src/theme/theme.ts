@@ -1,12 +1,12 @@
 /** Theme ids are kebab-case look names, not product/industry labels. */
-export type WebkitTheme = "default" | "warm";
+export const WEBKIT_THEMES = ["default", "warm", "slate", "forest"] as const;
+export type WebkitTheme = (typeof WEBKIT_THEMES)[number];
 
 const DEFAULT_THEME: WebkitTheme = "default";
-
-const THEMES = new Set<WebkitTheme>(["default", "warm"]);
+const THEMES = new Set<string>(WEBKIT_THEMES);
 
 export function normalizeTheme(value: string | null | undefined): WebkitTheme {
-  if (value && THEMES.has(value as WebkitTheme)) {
+  if (value && THEMES.has(value)) {
     return value as WebkitTheme;
   }
   return DEFAULT_THEME;

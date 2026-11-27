@@ -35,6 +35,9 @@ importers:
       '@lit/context':
         specifier: ^1.1.6
         version: 1.1.6
+      '@sh-webplatform/icons':
+        specifier: github:Shriraman-Hegde/sh-webplatform-icons#main
+        version: https://codeload.github.com/Shriraman-Hegde/sh-webplatform-icons/tar.gz/20ff3744ffc013c2c4aae19a5071caa5fad6565b(lit@3.3.3)
     devDependencies:
       '@babel/core':
         specifier: ^7.26.0
@@ -1707,6 +1710,12 @@ packages:
 
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
+
+  '@sh-webplatform/icons@https://codeload.github.com/Shriraman-Hegde/sh-webplatform-icons/tar.gz/20ff3744ffc013c2c4aae19a5071caa5fad6565b':
+    resolution: {tarball: https://codeload.github.com/Shriraman-Hegde/sh-webplatform-icons/tar.gz/20ff3744ffc013c2c4aae19a5071caa5fad6565b}
+    version: 0.1.0
+    peerDependencies:
+      lit: ^3.2.0
 
   '@sinonjs/commons@3.0.1':
     resolution: {integrity: sha512-K3mCHKQ9sVh8o1C9cxkwxaOmXoAMlDxC1mYyHrjqOWEcBjYr76t96zL2zlj5dUGZ3HSw240X1qgH3Mjf1yJWpQ==}
@@ -6369,6 +6378,10 @@ snapshots:
     optional: true
 
   '@rtsao/scc@1.1.0': {}
+
+  '@sh-webplatform/icons@https://codeload.github.com/Shriraman-Hegde/sh-webplatform-icons/tar.gz/20ff3744ffc013c2c4aae19a5071caa5fad6565b(lit@3.3.3)':
+    dependencies:
+      lit: 3.3.3
 
   '@sinonjs/commons@3.0.1':
     dependencies:
