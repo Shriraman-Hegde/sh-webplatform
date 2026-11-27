@@ -9,8 +9,10 @@ import "../../form/wk-select/index.js";
 import "../../form/wk-switch/index.js";
 import "../../form/wk-text-field/index.js";
 import "../../form/wk-textarea/index.js";
+import "../../layout/wk-accordion/index.js";
 import "../../layout/wk-alert/index.js";
 import "../../layout/wk-badge/index.js";
+import "../../layout/wk-breadcrumbs/index.js";
 import "../../layout/wk-card/index.js";
 import "../../layout/wk-data-table/index.js";
 import "../../layout/wk-dialog/index.js";
@@ -18,9 +20,12 @@ import "../../layout/wk-divider/index.js";
 import "../../layout/wk-icon/index.js";
 import "../../layout/wk-link/index.js";
 import "../../layout/wk-page-shell/index.js";
+import "../../layout/wk-progress/index.js";
+import "../../layout/wk-skeleton/index.js";
 import "../../layout/wk-spinner/index.js";
 import "../../layout/wk-status-banner/index.js";
 import "../../layout/wk-tabs/index.js";
+import "../../layout/wk-tooltip/index.js";
 
 
 export class WkWorkbench extends WkElement {
@@ -35,6 +40,8 @@ export class WkWorkbench extends WkElement {
     notify: { state: true },
     dialogOpen: { state: true },
     activeTab: { state: true },
+    progress: { state: true },
+    openIds: { state: true },
   };
 
   declare theme: WebkitTheme;
@@ -47,6 +54,8 @@ export class WkWorkbench extends WkElement {
   declare notify: boolean;
   declare dialogOpen: boolean;
   declare activeTab: string;
+  declare progress: number;
+  declare openIds: string[];
 
   constructor() {
     super();
@@ -60,6 +69,8 @@ export class WkWorkbench extends WkElement {
     this.notify = true;
     this.dialogOpen = false;
     this.activeTab = "links";
+    this.progress = 35;
+    this.openIds = ["overview"];
   }
 
   static styles = [
@@ -133,6 +144,14 @@ export class WkWorkbench extends WkElement {
           <option value="default">default</option>
           <option value="warm">warm</option>
         </select>
+
+        <wk-breadcrumbs
+          .items=${[
+            { label: "Home", href: "#" },
+            { label: "Team Alpha", href: "#" },
+            { label: "Workbench" },
+          ]}
+        ></wk-breadcrumbs>
 
         <wk-status-banner
           tone=${this.bannerTone}
@@ -213,13 +232,16 @@ export class WkWorkbench extends WkElement {
               ></wk-switch>
             </div>
             <div class="actions">
-              <wk-button
-                variant="primary"
-                @click=${() => {
-                  this.bannerTone = "loading";
-                }}
-                >Submit</wk-button
-              >
+              <wk-tooltip content="Submit the sample request">
+                <wk-button
+                  variant="primary"
+                  @click=${() => {
+                    this.bannerTone = "loading";
+                    this.progress = Math.min(100, this.progress + 20);
+                  }}
+                  >Submit</wk-button
+                >
+              </wk-tooltip>
               <wk-button
                 variant="secondary"
                 @click=${() => {
@@ -245,6 +267,11 @@ export class WkWorkbench extends WkElement {
                 ? html`<wk-spinner label="Working…"></wk-spinner>`
                 : null}
             </div>
+            <wk-divider label="Progress"></wk-divider>
+            <wk-progress
+              label="Completion"
+              .value=${this.progress}
+            ></wk-progress>
           </wk-card>
 
           <wk-card heading="Linked items">
@@ -258,6 +285,7 @@ export class WkWorkbench extends WkElement {
               .tabs=${[
                 { id: "links", label: "Links" },
                 { id: "table", label: "Table" },
+                { id: "more", label: "More" },
               ]}
               .active=${this.activeTab}
               @wk-change=${(e: CustomEvent<{ id: string }>) => {
@@ -288,6 +316,35 @@ export class WkWorkbench extends WkElement {
                     { id: "ITEM-C", type: "Record", owner: "Team Gamma" },
                   ]}
                 ></wk-data-table>
+              </div>
+              <div slot="more" class="row">
+                ${this.bannerTone === "loading"
+                  ? html`
+                      <wk-skeleton variant="text" width="70%"></wk-skeleton>
+                      <wk-skeleton variant="text" width="45%"></wk-skeleton>
+                      <wk-skeleton variant="rect" height="4rem"></wk-skeleton>
+                    `
+                  : html`
+                      <wk-accordion
+                        .items=${[
+                          { id: "overview", title: "Overview" },
+                          { id: "notes", title: "Notes" },
+                        ]}
+                        .openIds=${this.openIds}
+                        @wk-change=${(
+                          e: CustomEvent<{ openIds: string[] }>,
+                        ) => {
+                          this.openIds = e.detail.openIds;
+                        }}
+                      >
+                        <div slot="overview">
+                          Sample overview for ITEM-A under Team Alpha.
+                        </div>
+                        <div slot="notes">
+                          Generic notes placeholder for the linked record.
+                        </div>
+                      </wk-accordion>
+                    `}
               </div>
             </wk-tabs>
           </wk-card>
