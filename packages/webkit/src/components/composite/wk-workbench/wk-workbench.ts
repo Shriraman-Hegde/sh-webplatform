@@ -7,7 +7,6 @@ import "../../form/wk-checkbox/index.js";
 import "../../form/wk-radio-group/index.js";
 import "../../form/wk-select/index.js";
 import "../../form/wk-switch/index.js";
-import "../../form/wk-rich-text/index.js";
 import "../../form/wk-text-field/index.js";
 import "../../form/wk-textarea/index.js";
 import "../../layout/wk-accordion/index.js";
@@ -195,24 +194,17 @@ export class WkWorkbench extends WkElement {
                   this.richNotes = e.detail.checked;
                 }}
               ></wk-switch>
-              ${this.richNotes
-                ? html`<wk-rich-text
-                    label="Notes"
-                    size="md"
-                    show-icons
-                    .value=${this.notes}
-                    @wk-input=${(e: CustomEvent<{ value: string }>) => {
-                      this.notes = e.detail.value;
-                    }}
-                  ></wk-rich-text>`
-                : html`<wk-textarea
-                    label="Notes"
-                    name="notes"
-                    .value=${this.notes}
-                    @wk-input=${(e: CustomEvent<{ value: string }>) => {
-                      this.notes = e.detail.value;
-                    }}
-                  ></wk-textarea>`}
+              <wk-textarea
+                label="Notes"
+                name="notes"
+                size="md"
+                ?rich=${this.richNotes}
+                ?show-icons=${this.richNotes}
+                .value=${this.notes}
+                @wk-input=${(e: CustomEvent<{ value: string }>) => {
+                  this.notes = e.detail.value;
+                }}
+              ></wk-textarea>
               <wk-select
                 label="Team"
                 name="team"
