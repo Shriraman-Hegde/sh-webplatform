@@ -27,7 +27,8 @@
       bootstrapWebkit({
         theme: "default",
         icons: {
-          get: (name) => ({ check: "✓", close: "×" })[name],
+          get: (name) =>
+            ({ check: "✓", close: "×", info: "ℹ", warn: "!" })[name],
         },
       });
       const select = document.getElementById("theme");

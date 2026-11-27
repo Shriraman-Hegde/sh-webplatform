@@ -4,70 +4,108 @@ import { defineElement } from "../../../registry/index.js";
 import { applyTheme, getTheme, type WebkitTheme } from "../../../theme/index.js";
 import "../../form/wk-button/index.js";
 import "../../form/wk-checkbox/index.js";
+import "../../form/wk-radio-group/index.js";
 import "../../form/wk-select/index.js";
+import "../../form/wk-switch/index.js";
 import "../../form/wk-text-field/index.js";
+import "../../form/wk-textarea/index.js";
+import "../../layout/wk-alert/index.js";
+import "../../layout/wk-badge/index.js";
 import "../../layout/wk-card/index.js";
 import "../../layout/wk-data-table/index.js";
+import "../../layout/wk-dialog/index.js";
+import "../../layout/wk-divider/index.js";
+import "../../layout/wk-icon/index.js";
+import "../../layout/wk-link/index.js";
 import "../../layout/wk-page-shell/index.js";
+import "../../layout/wk-spinner/index.js";
 import "../../layout/wk-status-banner/index.js";
+import "../../layout/wk-tabs/index.js";
+
 
 export class WkWorkbench extends WkElement {
   static properties = {
     theme: { state: true },
     bannerTone: { state: true },
     titleValue: { state: true },
+    notes: { state: true },
     dept: { state: true },
+    priority: { state: true },
     urgent: { state: true },
+    notify: { state: true },
+    dialogOpen: { state: true },
+    activeTab: { state: true },
   };
 
   declare theme: WebkitTheme;
   declare bannerTone: "empty" | "loading" | "error";
   declare titleValue: string;
+  declare notes: string;
   declare dept: string;
+  declare priority: string;
   declare urgent: boolean;
+  declare notify: boolean;
+  declare dialogOpen: boolean;
+  declare activeTab: string;
 
   constructor() {
     super();
     this.theme = "default";
     this.bannerTone = "empty";
     this.titleValue = "Sample request";
-    this.dept = "stores";
+    this.notes = "";
+    this.dept = "alpha";
+    this.priority = "normal";
     this.urgent = false;
+    this.notify = true;
+    this.dialogOpen = false;
+    this.activeTab = "links";
   }
 
-  static styles = [WkElement.styles, css`
-    :host {
-      display: block;
-    }
-    .grid {
-      display: grid;
-      gap: var(--wk-space-6);
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    }
-    @media (max-width: 860px) {
-      .grid {
-        grid-template-columns: 1fr;
+  static styles = [
+    WkElement.styles,
+    css`
+      :host {
+        display: block;
       }
-    }
-    .row {
-      display: grid;
-      gap: var(--wk-space-4);
-    }
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--wk-space-2);
-      margin-top: var(--wk-space-4);
-    }
-    select.theme {
-      font: inherit;
-      border-radius: var(--wk-radius);
-      border: 1px solid var(--wk-border);
-      background: var(--wk-surface);
-      color: var(--wk-ink);
-      padding: 0.45rem 0.7rem;
-    }
-  `];
+      .grid {
+        display: grid;
+        gap: var(--wk-space-6);
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      }
+      @media (max-width: 860px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .row {
+        display: grid;
+        gap: var(--wk-space-4);
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--wk-space-2);
+        margin-top: var(--wk-space-4);
+        align-items: center;
+      }
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--wk-space-2);
+        align-items: center;
+        margin-bottom: var(--wk-space-4);
+      }
+      select.theme {
+        font: inherit;
+        border-radius: var(--wk-radius);
+        border: 1px solid var(--wk-border);
+        background: var(--wk-surface);
+        color: var(--wk-ink);
+        padding: 0.45rem 0.7rem;
+      }
+    `,
+  ];
 
   connectedCallback() {
     super.connectedCallback();
@@ -107,6 +145,12 @@ export class WkWorkbench extends WkElement {
 
         <div class="grid">
           <wk-card heading="Request details">
+            <div class="meta">
+              <wk-badge tone="accent">Draft</wk-badge>
+              ${this.urgent
+                ? html`<wk-badge tone="danger">Urgent</wk-badge>`
+                : html`<wk-badge>Normal</wk-badge>`}
+            </div>
             <div class="row">
               <wk-text-field
                 label="Title"
@@ -116,19 +160,41 @@ export class WkWorkbench extends WkElement {
                   this.titleValue = e.detail.value;
                 }}
               ></wk-text-field>
+              <wk-textarea
+                label="Notes"
+                name="notes"
+                .value=${this.notes}
+                @wk-input=${(e: CustomEvent<{ value: string }>) => {
+                  this.notes = e.detail.value;
+                }}
+              ></wk-textarea>
               <wk-select
-                label="Department"
-                name="department"
+                label="Team"
+                name="team"
                 .value=${this.dept}
                 .options=${[
-                  { value: "stores", label: "Stores" },
-                  { value: "production", label: "Production" },
-                  { value: "onboarding", label: "Onboarding" },
+                  { value: "alpha", label: "Team Alpha" },
+                  { value: "beta", label: "Team Beta" },
+                  { value: "gamma", label: "Team Gamma" },
                 ]}
                 @wk-change=${(e: CustomEvent<{ value: string }>) => {
                   this.dept = e.detail.value;
                 }}
               ></wk-select>
+              <wk-radio-group
+                label="Priority"
+                name="priority"
+                .value=${this.priority}
+                .options=${[
+                  { value: "low", label: "Low" },
+                  { value: "normal", label: "Normal" },
+                  { value: "high", label: "High" },
+                ]}
+                @wk-change=${(e: CustomEvent<{ value: string }>) => {
+                  this.priority = e.detail.value;
+                }}
+              ></wk-radio-group>
+              <wk-divider label="Flags"></wk-divider>
               <wk-checkbox
                 label="Mark as urgent"
                 name="urgent"
@@ -137,6 +203,14 @@ export class WkWorkbench extends WkElement {
                   this.urgent = e.detail.checked;
                 }}
               ></wk-checkbox>
+              <wk-switch
+                label="Email notifications"
+                name="notify"
+                .checked=${this.notify}
+                @wk-change=${(e: CustomEvent<{ checked: boolean }>) => {
+                  this.notify = e.detail.checked;
+                }}
+              ></wk-switch>
             </div>
             <div class="actions">
               <wk-button
@@ -160,25 +234,94 @@ export class WkWorkbench extends WkElement {
                 }}
                 >Reset banner</wk-button
               >
+              <wk-button
+                variant="secondary"
+                @click=${() => {
+                  this.dialogOpen = true;
+                }}
+                >Open dialog</wk-button
+              >
+              ${this.bannerTone === "loading"
+                ? html`<wk-spinner label="Working…"></wk-spinner>`
+                : null}
             </div>
           </wk-card>
 
           <wk-card heading="Linked items">
-            <wk-data-table
-              caption="Demo references"
-              .columns=${[
-                { key: "id", label: "ID" },
-                { key: "type", label: "Type" },
-                { key: "owner", label: "Owner" },
+            <wk-alert tone="info" heading="Related items">
+              Open related records with
+              <wk-link href="#item-a">wk-link</wk-link>
+              or browse tabs below.
+            </wk-alert>
+            <wk-divider></wk-divider>
+            <wk-tabs
+              .tabs=${[
+                { id: "links", label: "Links" },
+                { id: "table", label: "Table" },
               ]}
-              .rows=${[
-                { id: "COL-77", type: "Collateral", owner: "Risk" },
-                { id: "FAC-1001", type: "Facility", owner: "Credit" },
-                { id: "BOR-42", type: "Borrower", owner: "Onboarding" },
-              ]}
-            ></wk-data-table>
+              .active=${this.activeTab}
+              @wk-change=${(e: CustomEvent<{ id: string }>) => {
+                this.activeTab = e.detail.id;
+              }}
+            >
+              <div slot="links" class="row">
+                <div>
+                  <wk-icon name="check" label="Ready"></wk-icon>
+                  <wk-link href="#item-a">ITEM-A Sample record</wk-link>
+                </div>
+                <div>
+                  <wk-icon name="info" label="Info"></wk-icon>
+                  <wk-link href="#item-b">ITEM-B Sample record</wk-link>
+                </div>
+              </div>
+              <div slot="table">
+                <wk-data-table
+                  caption="Sample records"
+                  .columns=${[
+                    { key: "id", label: "ID" },
+                    { key: "type", label: "Type" },
+                    { key: "owner", label: "Owner" },
+                  ]}
+                  .rows=${[
+                    { id: "ITEM-A", type: "Record", owner: "Team Alpha" },
+                    { id: "ITEM-B", type: "Record", owner: "Team Beta" },
+                    { id: "ITEM-C", type: "Record", owner: "Team Gamma" },
+                  ]}
+                ></wk-data-table>
+              </div>
+            </wk-tabs>
           </wk-card>
         </div>
+
+        <wk-dialog
+          heading="Confirm submit"
+          .open=${this.dialogOpen}
+          @wk-close=${() => {
+            this.dialogOpen = false;
+          }}
+        >
+          <p style="margin:0">
+            Submit “${this.titleValue}” for ${this.dept} at ${this.priority}
+            priority?
+          </p>
+          <wk-button
+            slot="actions"
+            variant="secondary"
+            @click=${() => {
+              this.dialogOpen = false;
+            }}
+            >Cancel</wk-button
+          >
+          <wk-button
+            slot="actions"
+            variant="primary"
+            @click=${() => {
+              this.dialogOpen = false;
+              this.bannerTone = "loading";
+            }}
+            >Confirm</wk-button
+          >
+        </wk-dialog>
       </wk-page-shell>
     `;
   }

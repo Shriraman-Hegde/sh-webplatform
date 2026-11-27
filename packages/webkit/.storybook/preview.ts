@@ -3,7 +3,13 @@ import { bootstrapWebkit } from "../src/bootstrap.js";
 import type { WebkitTheme } from "../src/theme/index.js";
 import "../src/themes/themes.css";
 
-bootstrapWebkit({ theme: "default" });
+bootstrapWebkit({
+  theme: "default",
+  icons: {
+    get: (name) =>
+      ({ check: "✓", close: "×", info: "ℹ", warn: "!" })[name],
+  },
+});
 
 const preview: Preview = {
   globalTypes: {
@@ -30,7 +36,11 @@ const preview: Preview = {
     },
   ],
   parameters: {
-    layout: "fullscreen",
+    layout: "padded",
+    controls: {
+      expanded: true,
+      sort: "requiredFirst",
+    },
   },
 };
 
