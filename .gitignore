@@ -8,4 +8,7 @@ coverage
 .turbo
 .vite
 packages/*/dist
+packages/*/tsc-out
 packages/webkit/storybook-static
+packages/webkit/tsc-out
+

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" data-theme="default">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>webkit demo (open-wc / web-dev-server)</title>
+    <link rel="stylesheet" href="../src/themes/themes.css" />
+    <style>
+      body {
+        margin: 0;
+        font-family: var(--wk-font-sans, system-ui, sans-serif);
+        background: var(--wk-bg);
+        color: var(--wk-ink);
+      }
+      .bar {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid var(--wk-border);
+      }
+    </style>
+    <script type="module">
+      import { applyTheme } from "../src/theme/index.ts";
+      import "../src/components/composite/wk-workbench/index.ts";
+
+      applyTheme("default");
+      const select = document.getElementById("theme");
+      select.addEventListener("change", () => applyTheme(select.value));
+    </script>
+  </head>
+  <body>
+    <div class="bar">
+      <label>
+        Theme
+        <select id="theme">
+          <option value="default">default</option>
+          <option value="warm">warm</option>
+        </select>
+      </label>
+      <span>open-wc web-dev-server demo</span>
+    </div>
+    <wk-workbench></wk-workbench>
+  </body>
+</html>
