@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, nothing } from "lit";
 import { cssText } from "../../../styles/css.js";
 import wkStyles from "../../../styles/components/wk-text-field.css";
 import { WkElement } from "../../../base/index.js";
@@ -16,6 +16,8 @@ export class WkTextField extends WkElement {
     leadingIcon: { type: String, attribute: "leading-icon" },
     trailingIcon: { type: String, attribute: "trailing-icon" },
     placeholder: { type: String },
+    hint: { type: String },
+    message: { type: String },
   };
 
   declare label: string;
@@ -27,6 +29,8 @@ export class WkTextField extends WkElement {
   declare leadingIcon: string;
   declare trailingIcon: string;
   declare placeholder: string;
+  declare hint: string;
+  declare message: string;
 
   constructor() {
     super();
@@ -39,6 +43,8 @@ export class WkTextField extends WkElement {
     this.leadingIcon = "";
     this.trailingIcon = "";
     this.placeholder = "";
+    this.hint = "";
+    this.message = "";
   }
 
   static styles = [
@@ -62,6 +68,9 @@ export class WkTextField extends WkElement {
     const lead = this.leadingIcon?.trim();
     const trail = this.trailingIcon?.trim();
     const iconSize = this.size === "lg" ? "md" : "sm";
+    const described = [this.hint ? "hint" : "", this.message ? "message" : ""]
+      .filter(Boolean)
+      .join(" ");
     return html`
       <label>
         <span>${this.label}</span>
@@ -72,10 +81,13 @@ export class WkTextField extends WkElement {
               ></span>`
             : null}
           <input
+            part="control"
             name=${this.name}
             .value=${this.value}
             placeholder=${this.placeholder}
             ?disabled=${this.disabled}
+            aria-invalid=${this.error ? "true" : "false"}
+            aria-describedby=${described || nothing}
             @input=${this.onInput}
           />
           ${trail
@@ -84,6 +96,8 @@ export class WkTextField extends WkElement {
               ></span>`
             : null}
         </div>
+        ${this.hint ? html`<p id="hint" class="hint">${this.hint}</p>` : null}
+        ${this.message ? html`<p id="message" class="message">${this.message}</p>` : null}
       </label>
     `;
   }

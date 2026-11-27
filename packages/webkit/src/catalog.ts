@@ -14,7 +14,8 @@ export type ComponentDoc = {
 export const componentCatalog: ComponentDoc[] = [
   {
     tag: "wk-button",
-    summary: "Action button with variant, size, optional icon, and hover motion.",
+    summary:
+      "Action button with variant, size, optional icon, and hover motion. part=control. loading shows a spinner and disables the button.",
     example: `<wk-button variant="primary" icon="check">Save</wk-button>`,
     attributes: [
       { name: "variant", description: "primary | secondary | ghost" },
@@ -23,19 +24,22 @@ export const componentCatalog: ComponentDoc[] = [
       { name: "icon-position", description: "start | end" },
       { name: "icon-only", description: "Icon without a label" },
       { name: "disabled", description: "Disables the button" },
+      { name: "loading", description: "Busy state. Disables the button" },
       { name: "animated", description: "Hover motion. Honors data-motion" },
     ],
     events: [],
   },
   {
     tag: "wk-text-field",
-    summary: "Single-line text field.",
-    example: `<wk-text-field label="Title" name="title"></wk-text-field>`,
+    summary: "Single-line text field. part=control. hint is helper text. message is the error or status line.",
+    example: `<wk-text-field label="Title" name="title" hint="Shown on the record"></wk-text-field>`,
     attributes: [
       { name: "label", description: "Field label" },
       { name: "name", description: "Form name" },
       { name: "value", description: "Current value" },
       { name: "placeholder", description: "Placeholder" },
+      { name: "hint", description: "Helper text" },
+      { name: "message", description: "Error or status text" },
       { name: "leading-icon", description: "Icon before the text" },
       { name: "trailing-icon", description: "Icon after the text" },
       { name: "size", description: "sm | md | lg" },
@@ -188,14 +192,14 @@ export const componentCatalog: ComponentDoc[] = [
   },
   {
     tag: "wk-card",
-    summary: "Surface card. Heading plus default slot.",
+    summary: "Surface card. part=surface. Actions go in the actions slot.",
     example: `<wk-card heading="Request">Body</wk-card>`,
     attributes: [{ name: "heading", description: "Card heading" }],
     events: [],
   },
   {
     tag: "wk-dialog",
-    summary: "Modal dialog. Actions go in the actions slot.",
+    summary: "Modal dialog. part=panel and part=body. Actions go in the actions slot.",
     example: `<wk-dialog heading="Confirm" open>Save this record?</wk-dialog>`,
     attributes: [
       { name: "open", description: "Show the dialog" },
@@ -259,6 +263,34 @@ export const componentCatalog: ComponentDoc[] = [
     ],
     events: [],
   },
+  {
+    tag: "wk-chip",
+    summary: "Compact label. part=chip. removable fires wk-remove; the host removes the element.",
+    example: `<wk-chip variant="accent" removable>Draft</wk-chip>`,
+    attributes: [
+      { name: "variant", description: "neutral | accent" },
+      { name: "removable", description: "Shows a remove button" },
+    ],
+    events: ["wk-remove"],
+  },
+  {
+    tag: "wk-popover",
+    summary: "Anchored panel for content. part=panel. Light-dismisses. placement is bottom or top.",
+    example: `<wk-popover label="Details" placement="bottom"><p>Opened 2 days ago.</p></wk-popover>`,
+    attributes: [
+      { name: "label", description: "Trigger label" },
+      { name: "open", description: "Panel is open" },
+      { name: "placement", description: "bottom | top" },
+    ],
+    events: [],
+  },
+  {
+    tag: "wk-toolbar",
+    summary: "Row of actions. part=bar. Arrow keys move between buttons. label is the accessible name.",
+    example: `<wk-toolbar label="Record actions"><wk-button>Save</wk-button></wk-toolbar>`,
+    attributes: [{ name: "label", description: "Accessible name" }],
+    events: [],
+  },
 ];
 
 export const themeGuide = {
@@ -275,5 +307,5 @@ bootstrapWebkit({
   icons: defaultIconLibrary,
 });`,
   notes:
-    "Put data-theme, data-mode, and data-motion on the document element. themes.css holds color tokens. Component CSS is adopted inside each shadow root. data-motion=off sets --wk-motion to 0.",
+    "Put data-theme, data-mode, and data-motion on the document element. themes.css holds color tokens. Component CSS is adopted inside each shadow root, so a page rule cannot style the inner button or field. --wk-* tokens inherit into the shadow tree. Named parts (wk-button::part(control), wk-text-field::part(control), wk-card::part(surface), wk-dialog::part(panel)) are the styling hooks. Slots project the app's content. data-motion=off sets --wk-motion to 0.",
 };

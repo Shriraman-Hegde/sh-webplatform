@@ -68,6 +68,27 @@ button:disabled {
   transform: none;
   box-shadow: none;
 }
+.ring {
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, currentColor 35%, transparent);
+  border-top-color: currentColor;
+  animation: wk-spin 0.7s linear infinite;
+}
+@keyframes wk-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ring {
+    animation: none;
+  }
+}
+:host-context([data-motion="off"]) .ring {
+  animation: none;
+}
 .label {
   display: inline-flex;
 }

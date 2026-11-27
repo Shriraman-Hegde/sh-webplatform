@@ -1,5 +1,7 @@
 :host {
   display: block;
+}
+.surface {
   font-family: var(--wk-font-sans);
   color: var(--wk-ink);
   background: var(--wk-surface);
@@ -9,8 +11,17 @@
   box-shadow: var(--wk-shadow-md);
   transition: box-shadow var(--wk-ease), border-color var(--wk-ease);
 }
-:host(:hover) {
+.surface:hover {
   border-color: color-mix(in srgb, var(--wk-accent) 22%, var(--wk-border));
+}
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--wk-space-2);
+  margin-top: var(--wk-space-4);
+}
+.actions[hidden] {
+  display: none;
 }
 h2 {
   margin: 0 0 var(--wk-space-4);

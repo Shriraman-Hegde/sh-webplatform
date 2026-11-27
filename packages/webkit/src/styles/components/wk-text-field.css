@@ -55,3 +55,13 @@ input:focus-visible {
 input:disabled {
   opacity: 0.6;
 }
+.hint,
+.message {
+  margin: 0;
+  font-weight: 400;
+  font-size: var(--wk-text-xs);
+  color: var(--wk-muted);
+}
+:host([error]) .message {
+  color: var(--wk-danger);
+}

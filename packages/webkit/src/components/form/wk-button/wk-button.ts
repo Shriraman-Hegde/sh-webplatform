@@ -6,8 +6,11 @@ import { defineElement } from "../../../registry/index.js";
 import "../../layout/wk-icon/index.js";
 
 export class WkButton extends WkElement {
+  static shadowRootOptions = { mode: "open" as const, delegatesFocus: true };
+
   static properties = {
     disabled: { type: Boolean, reflect: true },
+    loading: { type: Boolean, reflect: true },
     variant: { type: String, reflect: true },
     size: { type: String, reflect: true },
     icon: { type: String },
@@ -17,6 +20,7 @@ export class WkButton extends WkElement {
   };
 
   declare disabled: boolean;
+  declare loading: boolean;
   declare variant: "primary" | "secondary" | "ghost";
   declare size: "sm" | "md" | "lg";
   declare icon: string;
@@ -27,6 +31,7 @@ export class WkButton extends WkElement {
   constructor() {
     super();
     this.disabled = false;
+    this.loading = false;
     this.variant = "primary";
     this.size = "md";
     this.icon = "";
@@ -40,6 +45,13 @@ export class WkButton extends WkElement {
     cssText(wkStyles),
   ];
 
+  protected willUpdate(changed: Map<string, unknown>): void {
+    if (changed.has("loading") || !this.hasUpdated) {
+      if (this.loading) this.setAttribute("aria-busy", "true");
+      else this.removeAttribute("aria-busy");
+    }
+  }
+
   render() {
     const iconName = this.icon?.trim();
     const iconEl = iconName
@@ -50,10 +62,12 @@ export class WkButton extends WkElement {
       : null;
     return html`
       <button
-        ?disabled=${this.disabled}
+        part="control"
+        ?disabled=${this.disabled || this.loading}
         type="button"
         aria-label=${this.iconOnly ? iconName || "Button" : nothing}
       >
+        ${this.loading ? html`<span class="ring" aria-hidden="true"></span>` : null}
         ${iconName && this.iconPosition !== "end" ? iconEl : null}
         ${this.iconOnly
           ? null

@@ -67,14 +67,14 @@ export class WkDialog extends WkElement {
 
   render() {
     return html`
-      <dialog @close=${this.onDialogClose}>
+      <dialog part="panel" @close=${this.onDialogClose}>
         <header>
           <h2>${this.heading}</h2>
           <button class="close" type="button" aria-label="Close" @click=${this.close}>
             ×
           </button>
         </header>
-        <div class="body"><slot></slot></div>
+        <div class="body" part="body"><slot></slot></div>
         <footer><slot name="actions"></slot></footer>
       </dialog>
     `;
