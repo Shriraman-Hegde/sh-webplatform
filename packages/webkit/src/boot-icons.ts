@@ -17,7 +17,7 @@ export const webkitIconNames: readonly string[] = [
 export const defaultIconLibrary: IconLibrary = {
   names: webkitIconNames,
   get(name) {
-    const extra = appIcons[name];
+    const extra = name in appIcons ? appIcons[name as keyof typeof appIcons] : undefined;
     return extra ? extra() : iconRegistry.get(name);
   },
 };

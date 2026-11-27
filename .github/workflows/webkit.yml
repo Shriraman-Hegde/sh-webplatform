@@ -18,6 +18,8 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install
+      - run: pnpm --filter @sh-webplatform/webkit-cli typecheck
+      - run: pnpm --filter @sh-webplatform/webkit-cli test
       - name: Install Playwright Chromium
         working-directory: packages/webkit
         run: pnpm exec playwright install --with-deps chromium

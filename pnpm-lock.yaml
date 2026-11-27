@@ -6,7 +6,11 @@ settings:
 
 importers:
 
-  .: {}
+  .:
+    devDependencies:
+      '@sh-webplatform/webkit-cli':
+        specifier: workspace:*
+        version: link:packages/webkit-cli
 
   packages/sample-consumer:
     dependencies:
@@ -132,6 +136,19 @@ importers:
       vite:
         specifier: ^6.0.3
         version: 6.4.6(@types/node@22.20.7)(jiti@2.7.0)(lightningcss@1.33.0)(terser@5.51.4)
+
+  packages/webkit-cli:
+    dependencies:
+      '@sh-webplatform/icons':
+        specifier: github:Shriraman-Hegde/sh-webplatform-icons#main
+        version: https://codeload.github.com/Shriraman-Hegde/sh-webplatform-icons/tar.gz/3261c90448f6804c10681856335c722da7e93a1d(lit@3.3.3)
+    devDependencies:
+      '@types/node':
+        specifier: ^22.20.0
+        version: 22.20.7
+      typescript:
+        specifier: ^5.7.2
+        version: 5.9.3
 
   packages/webkit-mcp:
     dependencies:
