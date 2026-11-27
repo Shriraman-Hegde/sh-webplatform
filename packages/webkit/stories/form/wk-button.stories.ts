@@ -9,7 +9,9 @@ const meta: Meta = {
   title: "Form/Button",
   component: "wk-button",
   tags: ["autodocs"],
-  parameters: componentDocs("Button triggers an action. Supports variants, sizes, optional icons, and motion."),
+  parameters: componentDocs(
+    "Button triggers an action. `loading` shows a spinner and disables the control. Style the inner button with `wk-button::part(control)`. Tokens such as `--wk-accent` inherit into the shadow tree.",
+  ),
   argTypes: {
     label: attr("Button label text (slot content).", { defaultValue: "Save" }),
     variant: attr("Visual style.", {
@@ -20,6 +22,11 @@ const meta: Meta = {
     }),
     size: sizeArg,
     disabled: disabledArg,
+    loading: attr("Busy state. Disables the button and shows a spinner.", {
+      control: "boolean",
+      defaultValue: "false",
+      type: "boolean",
+    }),
     animated: attr("Enable hover motion (honors data-motion).", {
       control: "boolean",
       defaultValue: "true",
@@ -47,6 +54,7 @@ const meta: Meta = {
     variant: "primary",
     size: "md",
     disabled: false,
+    loading: false,
     animated: true,
     icon: "",
     iconPosition: "start",
@@ -57,6 +65,7 @@ const meta: Meta = {
       variant=${args.variant}
       size=${args.size}
       ?disabled=${args.disabled}
+      ?loading=${args.loading}
       ?animated=${args.animated}
       icon=${args.icon || undefined}
       icon-position=${args.iconPosition}
@@ -100,4 +109,8 @@ export const Sizes: Story = {
 
 export const Disabled: Story = {
   args: { disabled: true },
+};
+
+export const Loading: Story = {
+  args: { loading: true, label: "Saving" },
 };

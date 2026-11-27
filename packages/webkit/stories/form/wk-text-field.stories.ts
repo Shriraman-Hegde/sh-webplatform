@@ -8,7 +8,9 @@ const meta: Meta = {
   title: "Form/Text Field",
   component: "wk-text-field",
   tags: ["autodocs"],
-  parameters: componentDocs("Single-line labeled input. Emits `wk-input`. Optional leading/trailing icons."),
+  parameters: componentDocs(
+    "Single-line labeled input. Emits `wk-input`. `hint` is helper text. `message` is the error or status line. Style the input with `wk-text-field::part(control)`.",
+  ),
   argTypes: {
     label: attr("Field label.", { defaultValue: "" }),
     name: attr("Native name attribute.", { defaultValue: "" }),
@@ -23,6 +25,10 @@ const meta: Meta = {
       defaultValue: "false",
       type: "boolean",
     }),
+    hint: attr("Helper text under the field.", { defaultValue: "" }),
+    message: attr("Error or status text. Uses the danger color when error is set.", {
+      defaultValue: "",
+    }),
   },
   args: {
     label: "Title",
@@ -34,6 +40,8 @@ const meta: Meta = {
     trailingIcon: "",
     disabled: false,
     error: false,
+    hint: "",
+    message: "",
   },
   render: (args) => html`
     <div style="max-width:28rem">
@@ -47,6 +55,8 @@ const meta: Meta = {
         trailing-icon=${args.trailingIcon || undefined}
         ?disabled=${args.disabled}
         ?error=${args.error}
+        hint=${args.hint || undefined}
+        message=${args.message || undefined}
       ></wk-text-field>
     </div>
   `,
@@ -62,7 +72,11 @@ export const WithIcons: Story = {
 };
 
 export const Error: Story = {
-  args: { error: true, value: "Invalid" },
+  args: { error: true, value: "Invalid", message: "Use at least 3 characters." },
+};
+
+export const WithHint: Story = {
+  args: { hint: "Shown on the record.", value: "Quarterly review" },
 };
 
 export const Sizes: Story = {

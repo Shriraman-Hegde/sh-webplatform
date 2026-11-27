@@ -1,0 +1,30 @@
+:host {
+  display: inline-block;
+}
+.trigger {
+  font: 600 var(--wk-control-font, var(--wk-text-md)) / 1.2 var(--wk-font-sans);
+  min-height: var(--wk-control-h);
+  padding: 0 var(--wk-control-pad-x);
+  border-radius: var(--wk-radius);
+  border: 1px solid var(--wk-border);
+  background: var(--wk-surface);
+  color: var(--wk-ink);
+  cursor: pointer;
+}
+.trigger:focus-visible {
+  outline: none;
+  box-shadow: var(--wk-focus);
+}
+.panel {
+  position: fixed;
+  margin: 0;
+  inset: auto;
+  padding: var(--wk-space-4);
+  border: 1px solid var(--wk-border);
+  border-radius: var(--wk-radius);
+  background: var(--wk-surface);
+  color: var(--wk-ink);
+  box-shadow: var(--wk-shadow-md);
+  min-width: 16rem;
+  max-width: min(20rem, calc(100vw - 1rem));
+}

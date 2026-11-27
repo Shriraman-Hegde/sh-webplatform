@@ -28,4 +28,7 @@ export * from "./layout/wk-menu/index.js";
 export * from "./layout/wk-toast/index.js";
 export * from "./layout/wk-avatar/index.js";
 export * from "./layout/wk-empty/index.js";
+export * from "./layout/wk-chip/index.js";
+export * from "./layout/wk-popover/index.js";
+export * from "./layout/wk-toolbar/index.js";
 export * from "./composite/wk-workbench/index.js";

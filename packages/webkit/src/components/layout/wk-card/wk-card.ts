@@ -11,6 +11,8 @@ export class WkCard extends WkElement {
 
   declare heading: string;
 
+  private actionsOpen = false;
+
   constructor() {
     super();
     this.heading = "";
@@ -18,10 +20,25 @@ export class WkCard extends WkElement {
 
   static styles = [WkElement.styles, cssText(wkStyles)];
 
+  private onActions(event: Event): void {
+    const slot = event.target as HTMLSlotElement;
+    const open = slot.assignedNodes({ flatten: true }).some((node) => {
+      return node.nodeType !== Node.TEXT_NODE || Boolean(node.textContent?.trim());
+    });
+    if (open === this.actionsOpen) return;
+    this.actionsOpen = open;
+    this.requestUpdate();
+  }
+
   render() {
     return html`
-      ${this.heading ? html`<h2>${this.heading}</h2>` : null}
-      <slot></slot>
+      <div class="surface" part="surface">
+        ${this.heading ? html`<h2>${this.heading}</h2>` : null}
+        <div class="body"><slot></slot></div>
+        <div class="actions" ?hidden=${!this.actionsOpen}>
+          <slot name="actions" @slotchange=${this.onActions}></slot>
+        </div>
+      </div>
     `;
   }
 }

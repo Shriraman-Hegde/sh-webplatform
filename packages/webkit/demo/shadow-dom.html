@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" data-theme="default" data-mode="day" data-motion="on">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>webkit shadow DOM</title>
+    <link rel="stylesheet" href="../src/themes/themes.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 1.5rem;
+        display: grid;
+        gap: 1.5rem;
+        max-width: 40rem;
+        font-family: var(--wk-font-sans, system-ui, sans-serif);
+        background: var(--wk-bg);
+        color: var(--wk-ink);
+      }
+      p {
+        margin: 0 0 0.5rem;
+      }
+      .try-pierce wk-button button {
+        background: #b42318;
+        border-radius: 0;
+      }
+      wk-button.token {
+        --wk-accent: #7c3aed;
+      }
+      wk-button.shaped::part(control) {
+        border-radius: 999px;
+      }
+      wk-card.flat::part(surface) {
+        box-shadow: none;
+        border-radius: 0;
+      }
+      .row {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+    </style>
+    <script type="module">
+      import { bootstrapWebkit } from "../src/bootstrap.ts";
+      import { defaultIconLibrary } from "../src/boot-icons.ts";
+      import "../src/components/form/wk-button/index.ts";
+      import "../src/components/form/wk-text-field/index.ts";
+      import "../src/components/layout/wk-card/index.ts";
+      import "../src/components/layout/wk-chip/index.ts";
+      import "../src/components/layout/wk-popover/index.ts";
+      import "../src/components/layout/wk-toolbar/index.ts";
+
+      bootstrapWebkit({ theme: "default", mode: "day", motion: "on", icons: defaultIconLibrary });
+
+      document.querySelector("#remove")?.addEventListener("wk-remove", (event) => {
+        event.target.remove();
+      });
+    </script>
+  </head>
+  <body>
+    <section class="try-pierce">
+      <p>Page CSS paints the inner button red. The shadow root blocks that rule.</p>
+      <wk-button>Blocked</wk-button>
+    </section>
+    <section>
+      <p>Setting --wk-accent on the element changes the fill.</p>
+      <wk-button class="token">Token</wk-button>
+    </section>
+    <section>
+      <p>wk-button::part(control) changes only the radius.</p>
+      <wk-button class="shaped">Part</wk-button>
+    </section>
+    <wk-button loading>Saving</wk-button>
+    <wk-text-field
+      label="Title"
+      hint="Shown on the record"
+      value="Quarterly review"
+    ></wk-text-field>
+    <wk-text-field
+      label="Code"
+      error
+      message="Use at least 3 characters."
+      value="ab"
+    ></wk-text-field>
+    <wk-card class="flat" heading="Request">
+      The surface part dropped the shadow and the radius.
+      <wk-button slot="actions" variant="secondary">Cancel</wk-button>
+      <wk-button slot="actions">File</wk-button>
+    </wk-card>
+    <div class="row">
+      <wk-chip>Neutral</wk-chip>
+      <wk-chip id="remove" variant="accent" removable>Draft</wk-chip>
+    </div>
+    <wk-popover label="Details"><p style="margin:0">Opened 2 days ago.</p></wk-popover>
+    <wk-toolbar label="Record actions">
+      <wk-button>Save</wk-button>
+      <wk-button variant="secondary">Cancel</wk-button>
+    </wk-toolbar>
+  </body>
+</html>
