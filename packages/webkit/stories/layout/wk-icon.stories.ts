@@ -1,14 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
-import { bootstrapWebkit } from "../../src/bootstrap.js";
+import { generatedIconNames } from "@sh-webplatform/icons";
 import "../../src/components/layout/wk-icon/index.js";
-
-bootstrapWebkit({
-  icons: {
-    get: (name) =>
-      ({ check: "✓", close: "×", info: "ℹ", warn: "!" })[name],
-  },
-});
 
 const meta: Meta = {
   title: "Layout/Icon",
@@ -16,7 +9,7 @@ const meta: Meta = {
   argTypes: {
     name: {
       control: "select",
-      options: ["check", "close", "info", "warn", "missing"],
+      options: [...generatedIconNames, "missing"],
     },
     label: { control: "text" },
     size: { control: "select", options: ["sm", "md", "lg"] },
@@ -37,3 +30,18 @@ export default meta;
 type Story = StoryObj;
 
 export const Default: Story = {};
+
+export const Gallery: Story = {
+  render: () => html`
+    <div style="padding: 1.5rem; display: flex; flex-wrap: wrap; gap: 1rem">
+      ${generatedIconNames.map(
+        (name) => html`
+          <div style="display:grid;gap:0.35rem;place-items:center;width:4.5rem">
+            <wk-icon name=${name} size="lg"></wk-icon>
+            <span style="font-size:0.7rem;color:var(--wk-muted)">${name}</span>
+          </div>
+        `,
+      )}
+    </div>
+  `,
+};

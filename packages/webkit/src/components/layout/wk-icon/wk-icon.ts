@@ -4,7 +4,7 @@ import { defineElement } from "../../../registry/index.js";
 
 /**
  * Renders a named glyph from the host icon library (`bootstrapWebkit` / Lit context).
- * Falls back to the `name` text when the library has no entry.
+ * Prefers SVG TemplateResults from `@sh-webplatform/icons`; falls back to text.
  */
 export class WkIcon extends WkElement {
   static properties = {
@@ -31,28 +31,33 @@ export class WkIcon extends WkElement {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        line-height: 1;
+        line-height: 0;
         color: inherit;
+        flex-shrink: 0;
       }
       .glyph {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        font-weight: 700;
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+      .glyph > svg,
+      .glyph ::slotted(svg) {
+        width: 100%;
+        height: 100%;
+        display: block;
       }
       :host([size="sm"]) .glyph {
-        font-size: 0.85rem;
         width: 1rem;
         height: 1rem;
       }
       :host([size="md"]) .glyph,
       :host(:not([size])) .glyph {
-        font-size: 1rem;
         width: 1.25rem;
         height: 1.25rem;
       }
       :host([size="lg"]) .glyph {
-        font-size: 1.35rem;
         width: 1.6rem;
         height: 1.6rem;
       }

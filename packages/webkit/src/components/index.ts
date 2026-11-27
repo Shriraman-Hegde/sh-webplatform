@@ -5,6 +5,7 @@ export * from "./form/wk-select/index.js";
 export * from "./form/wk-checkbox/index.js";
 export * from "./form/wk-switch/index.js";
 export * from "./form/wk-radio-group/index.js";
+export * from "./form/wk-rich-text/index.js";
 export * from "./layout/wk-card/index.js";
 export * from "./layout/wk-page-shell/index.js";
 export * from "./layout/wk-data-table/index.js";

@@ -1,14 +1,12 @@
 import type { Preview } from "@storybook/web-components";
 import { bootstrapWebkit } from "../src/bootstrap.js";
+import { defaultIconLibrary } from "../src/boot-icons.js";
 import type { WebkitTheme } from "../src/theme/index.js";
 import "../src/themes/themes.css";
 
 bootstrapWebkit({
   theme: "default",
-  icons: {
-    get: (name) =>
-      ({ check: "✓", close: "×", info: "ℹ", warn: "!" })[name],
-  },
+  icons: defaultIconLibrary,
 });
 
 const preview: Preview = {
@@ -31,7 +29,10 @@ const preview: Preview = {
   },
   decorators: [
     (story, context) => {
-      bootstrapWebkit({ theme: context.globals.theme as WebkitTheme });
+      bootstrapWebkit({
+        theme: context.globals.theme as WebkitTheme,
+        icons: defaultIconLibrary,
+      });
       return story();
     },
   ],

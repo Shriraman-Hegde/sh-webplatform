@@ -12,15 +12,22 @@ const meta: Meta = {
     },
     heading: { control: "text" },
     body: { control: "text" },
+    hideIcon: { control: "boolean" },
   },
   args: {
     tone: "info",
     heading: "Heads up",
     body: "Review the request before submitting.",
+    hideIcon: false,
   },
   render: (args) => html`
     <div style="padding: 1.5rem; max-width: 32rem">
-      <wk-alert tone=${args.tone} heading=${args.heading}>${args.body}</wk-alert>
+      <wk-alert
+        tone=${args.tone}
+        heading=${args.heading}
+        ?hide-icon=${args.hideIcon}
+        >${args.body}</wk-alert
+      >
     </div>
   `,
 };

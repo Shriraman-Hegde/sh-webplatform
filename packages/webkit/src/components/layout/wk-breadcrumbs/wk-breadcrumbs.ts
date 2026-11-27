@@ -1,8 +1,9 @@
 import { css, html } from "lit";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
+import "../wk-icon/index.js";
 
-export type WkBreadcrumbItem = { label: string; href?: string };
+export type WkBreadcrumbItem = { label: string; href?: string; icon?: string };
 
 export class WkBreadcrumbs extends WkElement {
   static properties = {
@@ -38,6 +39,11 @@ export class WkBreadcrumbs extends WkElement {
         gap: var(--wk-space-2);
         color: var(--wk-muted);
       }
+      .crumb {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--wk-space-1);
+      }
       a {
         color: var(--wk-accent);
         text-decoration: none;
@@ -70,10 +76,18 @@ export class WkBreadcrumbs extends WkElement {
               <li>
                 ${index > 0 ? html`<span class="sep" aria-hidden="true">/</span>` : null}
                 ${index === last || !item.href
-                  ? html`<span aria-current=${index === last ? "page" : undefined}
-                      >${item.label}</span
+                  ? html`<span
+                      class="crumb"
+                      aria-current=${index === last ? "page" : undefined}
+                      >${item.icon
+                        ? html`<wk-icon name=${item.icon} size="sm"></wk-icon>`
+                        : null}${item.label}</span
                     >`
-                  : html`<a href=${item.href}>${item.label}</a>`}
+                  : html`<a class="crumb" href=${item.href}
+                      >${item.icon
+                        ? html`<wk-icon name=${item.icon} size="sm"></wk-icon>`
+                        : null}${item.label}</a
+                    >`}
               </li>
             `,
           )}

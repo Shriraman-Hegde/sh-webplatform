@@ -21,19 +21,17 @@
       }
     </style>
     <script type="module">
+      import { iconRegistry } from "@sh-webplatform/icons";
       import { bootstrapWebkit } from "../src/bootstrap.ts";
       import "../src/components/composite/wk-workbench/index.ts";
 
       bootstrapWebkit({
         theme: "default",
-        icons: {
-          get: (name) =>
-            ({ check: "✓", close: "×", info: "ℹ", warn: "!" })[name],
-        },
+        icons: iconRegistry,
       });
       const select = document.getElementById("theme");
       select.addEventListener("change", () =>
-        bootstrapWebkit({ theme: select.value }),
+        bootstrapWebkit({ theme: select.value, icons: iconRegistry }),
       );
     </script>
   </head>
@@ -46,7 +44,7 @@
           <option value="warm">warm</option>
         </select>
       </label>
-      <span>webkit host boot (tokens + icons)</span>
+      <span>webkit host boot (tokens + @sh-webplatform/icons)</span>
     </div>
     <wk-workbench></wk-workbench>
   </body>

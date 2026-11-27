@@ -7,8 +7,8 @@ import "../../form/wk-checkbox/index.js";
 import "../../form/wk-radio-group/index.js";
 import "../../form/wk-select/index.js";
 import "../../form/wk-switch/index.js";
+import "../../form/wk-rich-text/index.js";
 import "../../form/wk-text-field/index.js";
-import "../../form/wk-textarea/index.js";
 import "../../layout/wk-accordion/index.js";
 import "../../layout/wk-alert/index.js";
 import "../../layout/wk-badge/index.js";
@@ -147,8 +147,8 @@ export class WkWorkbench extends WkElement {
 
         <wk-breadcrumbs
           .items=${[
-            { label: "Home", href: "#" },
-            { label: "Team Alpha", href: "#" },
+            { label: "Home", href: "#", icon: "home" },
+            { label: "Team Alpha", href: "#", icon: "user" },
             { label: "Workbench" },
           ]}
         ></wk-breadcrumbs>
@@ -165,31 +165,32 @@ export class WkWorkbench extends WkElement {
         <div class="grid">
           <wk-card heading="Request details">
             <div class="meta">
-              <wk-badge tone="accent">Draft</wk-badge>
+              <wk-badge tone="accent" icon="edit">Draft</wk-badge>
               ${this.urgent
-                ? html`<wk-badge tone="danger">Urgent</wk-badge>`
-                : html`<wk-badge>Normal</wk-badge>`}
+                ? html`<wk-badge tone="danger" icon="warn">Urgent</wk-badge>`
+                : html`<wk-badge icon="check">Normal</wk-badge>`}
             </div>
             <div class="row">
               <wk-text-field
                 label="Title"
                 name="title"
+                leading-icon="edit"
                 .value=${this.titleValue}
                 @wk-input=${(e: CustomEvent<{ value: string }>) => {
                   this.titleValue = e.detail.value;
                 }}
               ></wk-text-field>
-              <wk-textarea
+              <wk-rich-text
                 label="Notes"
-                name="notes"
                 .value=${this.notes}
                 @wk-input=${(e: CustomEvent<{ value: string }>) => {
                   this.notes = e.detail.value;
                 }}
-              ></wk-textarea>
+              ></wk-rich-text>
               <wk-select
                 label="Team"
                 name="team"
+                leading-icon="user"
                 .value=${this.dept}
                 .options=${[
                   { value: "alpha", label: "Team Alpha" },
@@ -235,6 +236,7 @@ export class WkWorkbench extends WkElement {
               <wk-tooltip content="Submit the sample request">
                 <wk-button
                   variant="primary"
+                  icon="check"
                   @click=${() => {
                     this.bannerTone = "loading";
                     this.progress = Math.min(100, this.progress + 20);
@@ -244,13 +246,15 @@ export class WkWorkbench extends WkElement {
               </wk-tooltip>
               <wk-button
                 variant="secondary"
+                icon="warn"
                 @click=${() => {
                   this.bannerTone = "error";
                 }}
                 >Simulate error</wk-button
               >
               <wk-button
-                variant="secondary"
+                variant="ghost"
+                icon="close"
                 @click=${() => {
                   this.bannerTone = "empty";
                 }}
@@ -258,6 +262,7 @@ export class WkWorkbench extends WkElement {
               >
               <wk-button
                 variant="secondary"
+                icon="external-link"
                 @click=${() => {
                   this.dialogOpen = true;
                 }}
@@ -277,15 +282,15 @@ export class WkWorkbench extends WkElement {
           <wk-card heading="Linked items">
             <wk-alert tone="info" heading="Related items">
               Open related records with
-              <wk-link href="#item-a">wk-link</wk-link>
+              <wk-link href="#item-a" icon="link">wk-link</wk-link>
               or browse tabs below.
             </wk-alert>
             <wk-divider></wk-divider>
             <wk-tabs
               .tabs=${[
-                { id: "links", label: "Links" },
-                { id: "table", label: "Table" },
-                { id: "more", label: "More" },
+                { id: "links", label: "Links", icon: "link" },
+                { id: "table", label: "Table", icon: "list" },
+                { id: "more", label: "More", icon: "menu" },
               ]}
               .active=${this.activeTab}
               @wk-change=${(e: CustomEvent<{ id: string }>) => {
@@ -295,11 +300,15 @@ export class WkWorkbench extends WkElement {
               <div slot="links" class="row">
                 <div>
                   <wk-icon name="check" label="Ready"></wk-icon>
-                  <wk-link href="#item-a">ITEM-A Sample record</wk-link>
+                  <wk-link href="#item-a" icon="external-link" icon-position="end"
+                    >ITEM-A Sample record</wk-link
+                  >
                 </div>
                 <div>
                   <wk-icon name="info" label="Info"></wk-icon>
-                  <wk-link href="#item-b">ITEM-B Sample record</wk-link>
+                  <wk-link href="#item-b" icon="external-link" icon-position="end"
+                    >ITEM-B Sample record</wk-link
+                  >
                 </div>
               </div>
               <div slot="table">
@@ -327,8 +336,8 @@ export class WkWorkbench extends WkElement {
                   : html`
                       <wk-accordion
                         .items=${[
-                          { id: "overview", title: "Overview" },
-                          { id: "notes", title: "Notes" },
+                          { id: "overview", title: "Overview", icon: "info" },
+                          { id: "notes", title: "Notes", icon: "edit" },
                         ]}
                         .openIds=${this.openIds}
                         @wk-change=${(
@@ -364,6 +373,7 @@ export class WkWorkbench extends WkElement {
           <wk-button
             slot="actions"
             variant="secondary"
+            icon="close"
             @click=${() => {
               this.dialogOpen = false;
             }}
@@ -372,6 +382,7 @@ export class WkWorkbench extends WkElement {
           <wk-button
             slot="actions"
             variant="primary"
+            icon="check"
             @click=${() => {
               this.dialogOpen = false;
               this.bannerTone = "loading";
