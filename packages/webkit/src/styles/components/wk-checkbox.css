@@ -1,0 +1,20 @@
+:host {
+  display: block;
+  font-family: var(--wk-font-sans);
+  color: var(--wk-ink);
+}
+label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wk-space-2);
+  font-size: 0.95rem;
+}
+input {
+  width: 1.05rem;
+  height: 1.05rem;
+  accent-color: var(--wk-accent);
+}
+input:focus-visible {
+  outline: none;
+  box-shadow: var(--wk-focus);
+}

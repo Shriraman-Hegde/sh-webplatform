@@ -1,4 +1,6 @@
-import { css, html } from "lit";
+import { html } from "lit";
+import { cssText } from "../../../styles/css.js";
+import wkStyles from "../../../styles/components/wk-spinner.css";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
 
@@ -22,49 +24,7 @@ export class WkSpinner extends WkElement {
 
   static styles = [
     WkElement.styles,
-    css`
-      :host {
-        display: inline-flex;
-        align-items: center;
-        gap: var(--wk-space-2);
-        color: var(--wk-muted);
-        font-size: 0.9rem;
-      }
-      .ring {
-        border-radius: 50%;
-        border: 2px solid var(--wk-border);
-        border-top-color: var(--wk-accent);
-      }
-      :host([animated]) .ring {
-        animation: spin 0.7s linear infinite;
-      }
-      :host([size="sm"]) .ring {
-        width: 0.9rem;
-        height: 0.9rem;
-      }
-      :host([size="md"]) .ring,
-      :host(:not([size])) .ring {
-        width: 1.15rem;
-        height: 1.15rem;
-      }
-      :host([size="lg"]) .ring {
-        width: 1.6rem;
-        height: 1.6rem;
-      }
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-      @media (prefers-reduced-motion: reduce) {
-        :host([animated]) .ring {
-          animation: none;
-        }
-      }
-      :host-context([data-motion="off"]) .ring {
-        animation: none !important;
-      }
-    `,
+    cssText(wkStyles),
   ];
 
   render() {

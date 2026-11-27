@@ -1,4 +1,6 @@
-import { css, html } from "lit";
+import { html } from "lit";
+import { cssText } from "../../../styles/css.js";
+import wkStyles from "../../../styles/components/wk-radio-group.css";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
 
@@ -30,39 +32,7 @@ export class WkRadioGroup extends WkElement {
 
   static styles = [
     WkElement.styles,
-    css`
-      :host {
-        display: block;
-      }
-      fieldset {
-        margin: 0;
-        border: 0;
-        padding: 0;
-        display: grid;
-        gap: var(--wk-space-2);
-      }
-      legend {
-        font-size: 0.9rem;
-        font-weight: 600;
-        margin-bottom: var(--wk-space-1);
-        padding: 0;
-      }
-      label {
-        display: inline-flex;
-        align-items: center;
-        gap: var(--wk-space-2);
-        font-size: 0.95rem;
-      }
-      input {
-        accent-color: var(--wk-accent);
-        width: 1.05rem;
-        height: 1.05rem;
-      }
-      input:focus-visible {
-        outline: none;
-        box-shadow: var(--wk-focus);
-      }
-    `,
+    cssText(wkStyles),
   ];
 
   private onChange(e: Event) {

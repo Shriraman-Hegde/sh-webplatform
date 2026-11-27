@@ -1,0 +1,24 @@
+:host {
+  display: block;
+}
+.row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--wk-space-3);
+  color: var(--wk-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+hr {
+  border: 0;
+  border-top: 1px solid var(--wk-border);
+  margin: 0;
+}
+.plain {
+  border: 0;
+  border-top: 1px solid var(--wk-border);
+  margin: var(--wk-space-2) 0;
+}

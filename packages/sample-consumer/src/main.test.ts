@@ -1,9 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { normalizeTheme } from "@sh-webplatform/webkit";
+import { normalizeMode, normalizeTheme } from "@sh-webplatform/webkit";
 
 describe("sample-consumer theme bridge", () => {
-  it("uses webkit normalizeTheme", () => {
-    expect(normalizeTheme("warm")).toBe("warm");
+  it("uses webkit look and mode normalizers", () => {
+    expect(normalizeTheme("forest")).toBe("forest");
     expect(normalizeTheme("finance")).toBe("default");
+    expect(normalizeMode("night")).toBe("night");
+    expect(normalizeMode("nope")).toBe("day");
   });
 });

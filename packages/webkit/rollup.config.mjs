@@ -1,4 +1,5 @@
 import { createBasicConfig } from "@open-wc/building-rollup";
+import { rollupCssTextPlugin } from "./css-text-plugin.mjs";
 
 /**
  * open-wc Rollup via `createBasicConfig` plugins.
@@ -19,7 +20,7 @@ export default [
       sourcemap: true,
     },
     external: [/^lit($|\/)/, /^@lit\//],
-    plugins,
+    plugins: [rollupCssTextPlugin(), ...plugins],
     // Keep customElements.define / theme side effects when lit is external.
     treeshake: {
       moduleSideEffects: true,
@@ -33,6 +34,6 @@ export default [
       name: "ShWebkit",
       sourcemap: true,
     },
-    plugins,
+    plugins: [rollupCssTextPlugin(), ...plugins],
   },
 ];

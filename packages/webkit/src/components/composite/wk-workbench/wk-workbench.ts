@@ -1,4 +1,6 @@
-import { css, html } from "lit";
+import { html } from "lit";
+import { cssText } from "../../../styles/css.js";
+import wkStyles from "../../../styles/components/wk-workbench.css";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
 import {
@@ -89,54 +91,7 @@ export class WkWorkbench extends WkElement {
 
   static styles = [
     WkElement.styles,
-    css`
-      :host {
-        display: block;
-      }
-      .grid {
-        display: grid;
-        gap: var(--wk-space-6);
-        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-      }
-      @media (max-width: 860px) {
-        .grid {
-          grid-template-columns: 1fr;
-        }
-      }
-      .row {
-        display: grid;
-        gap: var(--wk-space-4);
-      }
-      .actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--wk-space-2);
-        margin-top: var(--wk-space-4);
-        align-items: center;
-      }
-      .meta {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--wk-space-2);
-        align-items: center;
-        margin-bottom: var(--wk-space-4);
-      }
-      select.theme,
-      select.mode {
-        font: inherit;
-        border-radius: var(--wk-radius);
-        border: 1px solid var(--wk-border);
-        background: var(--wk-surface);
-        color: var(--wk-ink);
-        padding: 0.45rem 0.7rem;
-      }
-      .toolbar {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--wk-space-2);
-        align-items: center;
-      }
-    `,
+    cssText(wkStyles),
   ];
 
   connectedCallback() {
@@ -247,12 +202,12 @@ export class WkWorkbench extends WkElement {
               <wk-select
                 label="Team"
                 name="team"
-                leading-icon="user"
+                hoist
                 .value=${this.dept}
                 .options=${[
-                  { value: "alpha", label: "Team Alpha" },
-                  { value: "beta", label: "Team Beta" },
-                  { value: "gamma", label: "Team Gamma" },
+                  { value: "alpha", label: "Team Alpha", icon: "user" },
+                  { value: "beta", label: "Team Beta", icon: "home" },
+                  { value: "gamma", label: "Team Gamma", icon: "settings" },
                 ]}
                 @wk-change=${(e: CustomEvent<{ value: string }>) => {
                   this.dept = e.detail.value;

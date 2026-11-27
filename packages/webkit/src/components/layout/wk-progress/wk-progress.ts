@@ -1,4 +1,6 @@
-import { css, html } from "lit";
+import { html } from "lit";
+import { cssText } from "../../../styles/css.js";
+import wkStyles from "../../../styles/components/wk-progress.css";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
 
@@ -22,36 +24,7 @@ export class WkProgress extends WkElement {
 
   static styles = [
     WkElement.styles,
-    css`
-      :host {
-        display: grid;
-        gap: var(--wk-space-2);
-      }
-      .meta {
-        display: flex;
-        justify-content: space-between;
-        gap: var(--wk-space-3);
-        font-size: 0.85rem;
-        color: var(--wk-muted);
-      }
-      .track {
-        height: 0.55rem;
-        border-radius: 999px;
-        background: var(--wk-border);
-        overflow: hidden;
-      }
-      .fill {
-        height: 100%;
-        border-radius: inherit;
-        background: var(--wk-accent);
-        transition: width 160ms ease;
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .fill {
-          transition: none;
-        }
-      }
-    `,
+    cssText(wkStyles),
   ];
 
   private get percent(): number {

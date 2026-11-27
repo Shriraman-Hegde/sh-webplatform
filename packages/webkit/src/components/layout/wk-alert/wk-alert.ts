@@ -1,4 +1,6 @@
-import { css, html } from "lit";
+import { html } from "lit";
+import { cssText } from "../../../styles/css.js";
+import wkStyles from "../../../styles/components/wk-alert.css";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
 import "../wk-icon/index.js";
@@ -38,83 +40,7 @@ export class WkAlert extends WkElement {
 
   static styles = [
     WkElement.styles,
-    css`
-      :host {
-        display: block;
-      }
-      :host([size="sm"]) .alert {
-        padding: var(--wk-space-3);
-        gap: var(--wk-space-2);
-      }
-      :host([size="lg"]) .alert {
-        padding: var(--wk-space-5);
-        gap: var(--wk-space-4);
-      }
-      .alert {
-        border-radius: var(--wk-radius);
-        border: 1px solid var(--wk-border);
-        background: var(--wk-banner-bg);
-        padding: var(--wk-space-4);
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: var(--wk-space-3);
-        align-items: start;
-        box-shadow: var(--wk-shadow-sm);
-      }
-      .alert.has-icon {
-        grid-template-columns: auto 1fr;
-      }
-      .icon {
-        margin-top: 0.1rem;
-        color: var(--wk-accent);
-      }
-      .content {
-        display: grid;
-        gap: var(--wk-space-2);
-      }
-      .heading {
-        margin: 0;
-        font-size: var(--wk-control-font, var(--wk-text-md));
-        font-weight: 700;
-      }
-      .body {
-        margin: 0;
-        font-size: var(--wk-text-sm);
-        line-height: var(--wk-leading);
-        color: var(--wk-ink);
-      }
-      :host([size="sm"]) .body {
-        font-size: var(--wk-text-xs);
-      }
-      :host([size="lg"]) .heading {
-        font-size: var(--wk-text-lg);
-      }
-      :host([tone="info"]) .alert {
-        border-color: color-mix(in srgb, var(--wk-accent) 35%, var(--wk-border));
-      }
-      :host([tone="success"]) .alert {
-        background: color-mix(in srgb, var(--wk-success) 10%, var(--wk-surface));
-        border-color: color-mix(in srgb, var(--wk-success) 35%, var(--wk-border));
-      }
-      :host([tone="success"]) .icon {
-        color: var(--wk-success);
-      }
-      :host([tone="warning"]) .alert {
-        background: color-mix(in srgb, var(--wk-warning) 10%, var(--wk-surface));
-        border-color: color-mix(in srgb, var(--wk-warning) 35%, var(--wk-border));
-      }
-      :host([tone="warning"]) .icon {
-        color: var(--wk-warning);
-      }
-      :host([tone="danger"]) .alert {
-        background: color-mix(in srgb, var(--wk-danger) 10%, var(--wk-surface));
-        border-color: color-mix(in srgb, var(--wk-danger) 35%, var(--wk-border));
-        color: var(--wk-danger);
-      }
-      :host([tone="danger"]) .icon {
-        color: var(--wk-danger);
-      }
-    `,
+    cssText(wkStyles),
   ];
 
   private resolveIcon(): string | null {

@@ -1,4 +1,6 @@
-import { css, html } from "lit";
+import { html } from "lit";
+import { cssText } from "../../../styles/css.js";
+import wkStyles from "../../../styles/components/wk-data-table.css";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
 
@@ -23,38 +25,7 @@ export class WkDataTable extends WkElement {
     this.caption = "";
   }
 
-  static styles = [WkElement.styles, css`
-    :host {
-      display: block;
-      font-family: var(--wk-font-sans);
-      color: var(--wk-ink);
-      overflow: auto;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: var(--wk-surface);
-    }
-    th,
-    td {
-      text-align: left;
-      padding: 0.7rem 0.85rem;
-      border-bottom: 1px solid var(--wk-border);
-      font-size: 0.92rem;
-    }
-    th {
-      color: var(--wk-muted);
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-      font-size: 0.75rem;
-    }
-    caption {
-      text-align: left;
-      padding: 0 0 var(--wk-space-3);
-      font-weight: 700;
-    }
-  `];
+  static styles = [WkElement.styles, cssText(wkStyles)];
 
   render() {
     return html`

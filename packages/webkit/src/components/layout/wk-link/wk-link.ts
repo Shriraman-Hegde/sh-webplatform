@@ -1,4 +1,6 @@
-import { css, html, nothing } from "lit";
+import { html, nothing } from "lit";
+import { cssText } from "../../../styles/css.js";
+import wkStyles from "../../../styles/components/wk-link.css";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
@@ -33,41 +35,7 @@ export class WkLink extends WkElement {
 
   static styles = [
     WkElement.styles,
-    css`
-      :host {
-        display: inline;
-      }
-      :host([size="sm"]) a {
-        font-size: var(--wk-text-sm);
-      }
-      :host([size="lg"]) a {
-        font-size: var(--wk-text-lg);
-      }
-      a {
-        color: var(--wk-accent);
-        text-decoration: underline;
-        text-underline-offset: 0.12em;
-        font: inherit;
-        display: inline-flex;
-        align-items: center;
-        gap: var(--wk-space-1);
-        transition: color var(--wk-ease);
-      }
-      a:hover {
-        color: color-mix(in srgb, var(--wk-accent) 80%, var(--wk-ink));
-      }
-      a:focus-visible {
-        outline: none;
-        box-shadow: var(--wk-focus);
-        border-radius: 2px;
-      }
-      :host([disabled]) a {
-        color: var(--wk-muted);
-        pointer-events: none;
-        text-decoration: none;
-        cursor: not-allowed;
-      }
-    `,
+    cssText(wkStyles),
   ];
 
   render() {

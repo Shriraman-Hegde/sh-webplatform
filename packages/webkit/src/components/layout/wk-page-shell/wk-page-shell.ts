@@ -1,4 +1,6 @@
-import { css, html } from "lit";
+import { html } from "lit";
+import { cssText } from "../../../styles/css.js";
+import wkStyles from "../../../styles/components/wk-page-shell.css";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
 
@@ -17,43 +19,7 @@ export class WkPageShell extends WkElement {
     this.subtitle = "";
   }
 
-  static styles = [WkElement.styles, css`
-    :host {
-      display: block;
-      min-height: 100%;
-      font-family: var(--wk-font-sans);
-      color: var(--wk-ink);
-      background: var(--wk-bg);
-    }
-    header {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: var(--wk-space-4);
-      padding: var(--wk-space-6);
-      border-bottom: 1px solid var(--wk-border);
-      background: color-mix(in srgb, var(--wk-surface) 88%, transparent);
-    }
-    h1 {
-      margin: 0;
-      font-size: 1.6rem;
-      letter-spacing: -0.02em;
-    }
-    p {
-      margin: var(--wk-space-1) 0 0;
-      color: var(--wk-muted);
-    }
-    .actions {
-      display: flex;
-      gap: var(--wk-space-2);
-      align-items: center;
-    }
-    main {
-      padding: var(--wk-space-6);
-      display: grid;
-      gap: var(--wk-space-6);
-    }
-  `];
+  static styles = [WkElement.styles, cssText(wkStyles)];
 
   render() {
     return html`

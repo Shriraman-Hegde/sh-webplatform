@@ -1,0 +1,28 @@
+:host {
+  display: grid;
+  gap: var(--wk-space-2);
+}
+.meta {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--wk-space-3);
+  font-size: 0.85rem;
+  color: var(--wk-muted);
+}
+.track {
+  height: 0.55rem;
+  border-radius: 999px;
+  background: var(--wk-border);
+  overflow: hidden;
+}
+.fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--wk-accent);
+  transition: width 160ms ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .fill {
+    transition: none;
+  }
+}

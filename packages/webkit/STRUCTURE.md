@@ -9,6 +9,7 @@ Follows [open-wc](https://github.com/open-wc/open-wc) practices for Lit web comp
 | Layer | Path | Role |
 |-------|------|------|
 | Design tokens | `src/themes/`, `src/theme/` | CSS custom properties + `data-theme` / `data-mode` |
+| Shadow CSS | `src/styles/` | `bootstrap.css` on every element; one sheet per component in `styles/components/` |
 | Element registry | `src/registry/` | `defineElement` — define each `wk-*` once |
 | Base element | `src/base/wk-element.ts` | Shared host styles, `dir`/`lang`, icon access |
 | Lit context | `src/context/` | Icon library (host sets via `bootstrapWebkit` / provider) |
