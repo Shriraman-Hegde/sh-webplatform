@@ -6,15 +6,18 @@ import "../wk-icon/index.js";
 export class WkBadge extends WkElement {
   static properties = {
     tone: { type: String, reflect: true },
+    size: { type: String, reflect: true },
     icon: { type: String },
   };
 
   declare tone: "neutral" | "accent" | "success" | "danger";
+  declare size: "sm" | "md" | "lg";
   declare icon: string;
 
   constructor() {
     super();
     this.tone = "neutral";
+    this.size = "md";
     this.icon = "";
   }
 
@@ -23,6 +26,14 @@ export class WkBadge extends WkElement {
     css`
       :host {
         display: inline-flex;
+      }
+      :host([size="sm"]) span {
+        font-size: 0.65rem;
+        padding: 0.15rem 0.45rem;
+      }
+      :host([size="lg"]) span {
+        font-size: 0.85rem;
+        padding: 0.35rem 0.75rem;
       }
       span {
         display: inline-flex;
@@ -58,9 +69,13 @@ export class WkBadge extends WkElement {
   ];
 
   render() {
+    const icon = this.icon?.trim();
     return html`<span>
-      ${this.icon
-        ? html`<wk-icon name=${this.icon} size="sm"></wk-icon>`
+      ${icon
+        ? html`<wk-icon
+            name=${icon}
+            size=${this.size === "lg" ? "md" : "sm"}
+          ></wk-icon>`
         : null}
       <slot></slot>
     </span>`;

@@ -9,6 +9,7 @@ export class WkLink extends WkElement {
     href: { type: String },
     target: { type: String },
     disabled: { type: Boolean, reflect: true },
+    size: { type: String, reflect: true },
     icon: { type: String },
     iconPosition: { type: String, attribute: "icon-position", reflect: true },
   };
@@ -16,6 +17,7 @@ export class WkLink extends WkElement {
   declare href: string;
   declare target: string;
   declare disabled: boolean;
+  declare size: "sm" | "md" | "lg";
   declare icon: string;
   declare iconPosition: "start" | "end";
 
@@ -24,6 +26,7 @@ export class WkLink extends WkElement {
     this.href = "#";
     this.target = "";
     this.disabled = false;
+    this.size = "md";
     this.icon = "";
     this.iconPosition = "start";
   }
@@ -33,6 +36,12 @@ export class WkLink extends WkElement {
     css`
       :host {
         display: inline;
+      }
+      :host([size="sm"]) a {
+        font-size: var(--wk-text-sm);
+      }
+      :host([size="lg"]) a {
+        font-size: var(--wk-text-lg);
       }
       a {
         color: var(--wk-accent);

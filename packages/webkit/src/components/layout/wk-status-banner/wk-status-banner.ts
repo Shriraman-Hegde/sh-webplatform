@@ -13,15 +13,24 @@ export class WkStatusBanner extends WkElement {
   static properties = {
     tone: { type: String, reflect: true },
     message: { type: String },
+    size: { type: String, reflect: true },
+    showIcon: { type: Boolean, attribute: "show-icon", reflect: true },
+    animated: { type: Boolean, reflect: true },
   };
 
   declare tone: "empty" | "loading" | "error";
   declare message: string;
+  declare size: "sm" | "md" | "lg";
+  declare showIcon: boolean;
+  declare animated: boolean;
 
   constructor() {
     super();
     this.tone = "empty";
     this.message = "";
+    this.size = "md";
+    this.showIcon = false;
+    this.animated = true;
   }
 
   static styles = [
@@ -29,6 +38,14 @@ export class WkStatusBanner extends WkElement {
     css`
       :host {
         display: block;
+      }
+      :host([size="sm"]) .banner {
+        padding: var(--wk-space-3);
+        font-size: var(--wk-text-sm);
+      }
+      :host([size="lg"]) .banner {
+        padding: var(--wk-space-5);
+        font-size: var(--wk-text-lg);
       }
       .banner {
         border-radius: var(--wk-radius);
@@ -56,8 +73,12 @@ export class WkStatusBanner extends WkElement {
       :host([tone="loading"]) .banner {
         border-style: dashed;
       }
-      :host([tone="loading"]) .icon {
+      :host([tone="loading"][animated]) .icon {
         animation: spin 1.1s linear infinite;
+        animation-play-state: paused;
+      }
+      :host([tone="loading"][animated]) .icon {
+        animation-play-state: running;
       }
       @keyframes spin {
         to {
@@ -65,9 +86,13 @@ export class WkStatusBanner extends WkElement {
         }
       }
       @media (prefers-reduced-motion: reduce) {
-        :host([tone="loading"]) .icon {
+        :host([tone="loading"][animated]) .icon {
           animation: none;
         }
+      }
+      :root[data-motion="off"] :host([tone="loading"][animated]) .icon,
+      :host-context([data-motion="off"]) .icon {
+        animation: none;
       }
     `,
   ];
@@ -79,9 +104,16 @@ export class WkStatusBanner extends WkElement {
         : this.tone === "error"
           ? "Something went wrong."
           : "Nothing to show yet.";
-    const icon = toneIcon[this.tone] ?? "info";
+    const icon = this.showIcon ? (toneIcon[this.tone] ?? "info") : null;
     return html`<div class="banner" role="status">
-      <span class="icon"><wk-icon name=${icon} size="md"></wk-icon></span>
+      ${icon
+        ? html`<span class="icon"
+            ><wk-icon
+              name=${icon}
+              size=${this.size === "sm" ? "sm" : "md"}
+            ></wk-icon
+          ></span>`
+        : null}
       <span>${this.message || fallback}</span>
     </div>`;
   }

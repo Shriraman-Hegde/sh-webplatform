@@ -1,20 +1,39 @@
 import { setIconLibrary, type IconLibrary } from "./context/icons.js";
+import {
+  applyMotion,
+  type WebkitMotion,
+} from "./theme/motion.js";
 import { applyTheme, type WebkitTheme } from "./theme/theme.js";
 
 export type BootstrapOptions = {
   theme?: WebkitTheme | string;
+  /** Optional icon registry from `@sh-webplatform/icons` (or a custom map). */
   icons?: IconLibrary;
-  /** Document root that receives `data-theme` (default: document). */
+  /**
+   * Kit motion: `on` | `off` | `system` (default).
+   * Sets `data-motion` on the document; components honor `--wk-motion` / `--wk-ease`.
+   */
+  motion?: WebkitMotion | string;
+  /** Document root that receives `data-theme` / `data-motion` (default: document). */
   root?: ParentNode & { documentElement?: HTMLElement };
 };
 
+export type BootstrapResult = {
+  theme: WebkitTheme;
+  motion: WebkitMotion;
+};
+
 /**
- * Host boot helper (diagram: load kit once, link tokens, set icon libraries).
- * Call before rendering feature UI. Tag registration happens via component imports.
+ * Host boot helper. Icons and motion are optional — omit `icons` to run without
+ * an icon library; omit `motion` to follow system reduced-motion.
  */
-export function bootstrapWebkit(options: BootstrapOptions = {}): WebkitTheme {
+export function bootstrapWebkit(
+  options: BootstrapOptions = {},
+): BootstrapResult {
   if (options.icons) {
     setIconLibrary(options.icons);
   }
-  return applyTheme(options.theme ?? "default", options.root);
+  const theme = applyTheme(options.theme ?? "default", options.root);
+  const motion = applyMotion(options.motion ?? "system", options.root);
+  return { theme, motion };
 }

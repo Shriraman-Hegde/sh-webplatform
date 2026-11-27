@@ -6,15 +6,18 @@ export class WkSpinner extends WkElement {
   static properties = {
     label: { type: String },
     size: { type: String, reflect: true },
+    animated: { type: Boolean, reflect: true },
   };
 
   declare label: string;
   declare size: "sm" | "md" | "lg";
+  declare animated: boolean;
 
   constructor() {
     super();
     this.label = "Loading";
     this.size = "md";
+    this.animated = true;
   }
 
   static styles = [
@@ -31,6 +34,8 @@ export class WkSpinner extends WkElement {
         border-radius: 50%;
         border: 2px solid var(--wk-border);
         border-top-color: var(--wk-accent);
+      }
+      :host([animated]) .ring {
         animation: spin 0.7s linear infinite;
       }
       :host([size="sm"]) .ring {
@@ -52,10 +57,12 @@ export class WkSpinner extends WkElement {
         }
       }
       @media (prefers-reduced-motion: reduce) {
-        .ring {
+        :host([animated]) .ring {
           animation: none;
-          border-top-color: var(--wk-accent);
         }
+      }
+      :host-context([data-motion="off"]) .ring {
+        animation: none !important;
       }
     `,
   ];

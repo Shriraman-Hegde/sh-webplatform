@@ -10,6 +10,7 @@ export class WkTextField extends WkElement {
     value: { type: String },
     disabled: { type: Boolean, reflect: true },
     error: { type: Boolean, reflect: true },
+    size: { type: String, reflect: true },
     leadingIcon: { type: String, attribute: "leading-icon" },
     trailingIcon: { type: String, attribute: "trailing-icon" },
     placeholder: { type: String },
@@ -20,6 +21,7 @@ export class WkTextField extends WkElement {
   declare value: string;
   declare disabled: boolean;
   declare error: boolean;
+  declare size: "sm" | "md" | "lg";
   declare leadingIcon: string;
   declare trailingIcon: string;
   declare placeholder: string;
@@ -31,6 +33,7 @@ export class WkTextField extends WkElement {
     this.value = "";
     this.disabled = false;
     this.error = false;
+    this.size = "md";
     this.leadingIcon = "";
     this.trailingIcon = "";
     this.placeholder = "";
@@ -41,6 +44,16 @@ export class WkTextField extends WkElement {
     css`
       :host {
         display: block;
+      }
+      :host([size="sm"]) {
+        --wk-control-h: var(--wk-control-h-sm);
+        --wk-control-pad-x: var(--wk-control-pad-x-sm);
+        --wk-control-font: var(--wk-text-sm);
+      }
+      :host([size="lg"]) {
+        --wk-control-h: var(--wk-control-h-lg);
+        --wk-control-pad-x: var(--wk-control-pad-x-lg);
+        --wk-control-font: var(--wk-text-lg);
       }
       label {
         display: grid;
@@ -67,10 +80,10 @@ export class WkTextField extends WkElement {
         right: 0.75rem;
       }
       input {
-        font: inherit;
+        font: var(--wk-control-font, var(--wk-text-md)) / 1.2 var(--wk-font-sans);
         width: 100%;
         min-height: var(--wk-control-h);
-        padding: 0.6rem 0.75rem;
+        padding: 0.45rem var(--wk-control-pad-x, 0.75rem);
         border-radius: var(--wk-radius);
         border: 1px solid var(--wk-border);
         background: var(--wk-surface);
@@ -79,11 +92,9 @@ export class WkTextField extends WkElement {
           border-color var(--wk-ease),
           box-shadow var(--wk-ease);
       }
-      :host([leading-icon]) input,
       .field:has(.lead) input {
         padding-left: 2.35rem;
       }
-      :host([trailing-icon]) input,
       .field:has(.trail) input {
         padding-right: 2.35rem;
       }
@@ -114,13 +125,16 @@ export class WkTextField extends WkElement {
   }
 
   render() {
+    const lead = this.leadingIcon?.trim();
+    const trail = this.trailingIcon?.trim();
+    const iconSize = this.size === "lg" ? "md" : "sm";
     return html`
       <label>
         <span>${this.label}</span>
         <div class="field">
-          ${this.leadingIcon
+          ${lead
             ? html`<span class="lead"
-                ><wk-icon name=${this.leadingIcon} size="sm"></wk-icon
+                ><wk-icon name=${lead} size=${iconSize}></wk-icon
               ></span>`
             : null}
           <input
@@ -130,9 +144,9 @@ export class WkTextField extends WkElement {
             ?disabled=${this.disabled}
             @input=${this.onInput}
           />
-          ${this.trailingIcon
+          ${trail
             ? html`<span class="trail"
-                ><wk-icon name=${this.trailingIcon} size="sm"></wk-icon
+                ><wk-icon name=${trail} size=${iconSize}></wk-icon
               ></span>`
             : null}
         </div>

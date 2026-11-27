@@ -26,14 +26,19 @@ export class WkRichText extends WkElement {
     value: { type: String },
     disabled: { type: Boolean, reflect: true },
     error: { type: Boolean, reflect: true },
+    size: { type: String, reflect: true },
     placeholder: { type: String },
+    /** When true, toolbar uses icon glyphs (requires icon library). */
+    showIcons: { type: Boolean, attribute: "show-icons", reflect: true },
   };
 
   declare label: string;
   declare value: string;
   declare disabled: boolean;
   declare error: boolean;
+  declare size: "sm" | "md" | "lg";
   declare placeholder: string;
+  declare showIcons: boolean;
 
   #editor?: HTMLDivElement;
   #syncing = false;
@@ -44,7 +49,9 @@ export class WkRichText extends WkElement {
     this.value = "";
     this.disabled = false;
     this.error = false;
+    this.size = "md";
     this.placeholder = "Write something…";
+    this.showIcons = false;
   }
 
   static styles = [
@@ -52,6 +59,22 @@ export class WkRichText extends WkElement {
     css`
       :host {
         display: block;
+      }
+      :host([size="sm"]) {
+        --wk-rt-pad: var(--wk-space-2);
+        --wk-rt-font: var(--wk-text-sm);
+        --wk-rt-min: 5rem;
+      }
+      :host([size="md"]),
+      :host(:not([size])) {
+        --wk-rt-pad: var(--wk-space-3);
+        --wk-rt-font: var(--wk-text-md);
+        --wk-rt-min: 7rem;
+      }
+      :host([size="lg"]) {
+        --wk-rt-pad: var(--wk-space-4);
+        --wk-rt-font: var(--wk-text-lg);
+        --wk-rt-min: 9rem;
       }
       .wrap {
         display: grid;
@@ -97,6 +120,8 @@ export class WkRichText extends WkElement {
         align-items: center;
         justify-content: center;
         cursor: pointer;
+        font-weight: 700;
+        font-size: var(--wk-text-sm);
       }
       .toolbar button:hover:not(:disabled) {
         background: color-mix(in srgb, var(--wk-ink) 6%, transparent);
@@ -110,9 +135,10 @@ export class WkRichText extends WkElement {
         cursor: not-allowed;
       }
       .editor {
-        min-height: 7rem;
-        padding: var(--wk-space-3) var(--wk-space-4);
-        font: var(--wk-text-md) / var(--wk-leading) var(--wk-font-sans);
+        min-height: var(--wk-rt-min, 7rem);
+        padding: var(--wk-rt-pad, var(--wk-space-3)) var(--wk-space-4);
+        font: var(--wk-rt-font, var(--wk-text-md)) / var(--wk-leading)
+          var(--wk-font-sans);
         color: var(--wk-ink);
         outline: none;
       }
@@ -182,60 +208,44 @@ export class WkRichText extends WkElement {
     this.exec("createLink", url);
   }
 
+  private tool(
+    title: string,
+    label: string,
+    icon: string,
+    onClick: () => void,
+  ) {
+    return html`
+      <button
+        type="button"
+        title=${title}
+        ?disabled=${this.disabled}
+        @click=${onClick}
+      >
+        ${this.showIcons
+          ? html`<wk-icon name=${icon} size="sm"></wk-icon>`
+          : label}
+      </button>
+    `;
+  }
+
   render() {
     return html`
       <div class="wrap">
         ${this.label ? html`<div class="label">${this.label}</div>` : null}
         <div class="shell">
           <div class="toolbar" role="toolbar" aria-label="Formatting">
-            <button
-              type="button"
-              title="Bold"
-              ?disabled=${this.disabled}
-              @click=${() => this.exec("bold")}
-            >
-              <wk-icon name="bold" size="sm"></wk-icon>
-            </button>
-            <button
-              type="button"
-              title="Italic"
-              ?disabled=${this.disabled}
-              @click=${() => this.exec("italic")}
-            >
-              <wk-icon name="italic" size="sm"></wk-icon>
-            </button>
-            <button
-              type="button"
-              title="Underline"
-              ?disabled=${this.disabled}
-              @click=${() => this.exec("underline")}
-            >
-              <wk-icon name="underline" size="sm"></wk-icon>
-            </button>
-            <button
-              type="button"
-              title="Bulleted list"
-              ?disabled=${this.disabled}
-              @click=${() => this.exec("insertUnorderedList")}
-            >
-              <wk-icon name="list" size="sm"></wk-icon>
-            </button>
-            <button
-              type="button"
-              title="Numbered list"
-              ?disabled=${this.disabled}
-              @click=${() => this.exec("insertOrderedList")}
-            >
-              <wk-icon name="list" size="sm"></wk-icon>
-            </button>
-            <button
-              type="button"
-              title="Link"
-              ?disabled=${this.disabled}
-              @click=${() => this.link()}
-            >
-              <wk-icon name="link" size="sm"></wk-icon>
-            </button>
+            ${this.tool("Bold", "B", "bold", () => this.exec("bold"))}
+            ${this.tool("Italic", "I", "italic", () => this.exec("italic"))}
+            ${this.tool("Underline", "U", "underline", () =>
+              this.exec("underline"),
+            )}
+            ${this.tool("Bulleted list", "•", "list", () =>
+              this.exec("insertUnorderedList"),
+            )}
+            ${this.tool("Numbered list", "1.", "list", () =>
+              this.exec("insertOrderedList"),
+            )}
+            ${this.tool("Link", "Link", "link", () => this.link())}
           </div>
           <div
             class="editor"

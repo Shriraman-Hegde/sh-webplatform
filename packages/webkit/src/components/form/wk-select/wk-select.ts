@@ -11,6 +11,7 @@ export class WkSelect extends WkElement {
     name: { type: String },
     value: { type: String },
     disabled: { type: Boolean, reflect: true },
+    size: { type: String, reflect: true },
     options: { attribute: false },
     leadingIcon: { type: String, attribute: "leading-icon" },
   };
@@ -19,6 +20,7 @@ export class WkSelect extends WkElement {
   declare name: string;
   declare value: string;
   declare disabled: boolean;
+  declare size: "sm" | "md" | "lg";
   declare options: WkSelectOption[];
   declare leadingIcon: string;
 
@@ -28,6 +30,7 @@ export class WkSelect extends WkElement {
     this.name = "";
     this.value = "";
     this.disabled = false;
+    this.size = "md";
     this.options = [];
     this.leadingIcon = "";
   }
@@ -37,6 +40,16 @@ export class WkSelect extends WkElement {
     css`
       :host {
         display: block;
+      }
+      :host([size="sm"]) {
+        --wk-control-h: var(--wk-control-h-sm);
+        --wk-control-pad-x: var(--wk-control-pad-x-sm);
+        --wk-control-font: var(--wk-text-sm);
+      }
+      :host([size="lg"]) {
+        --wk-control-h: var(--wk-control-h-lg);
+        --wk-control-pad-x: var(--wk-control-pad-x-lg);
+        --wk-control-font: var(--wk-text-lg);
       }
       label {
         display: grid;
@@ -49,24 +62,29 @@ export class WkSelect extends WkElement {
         display: flex;
         align-items: center;
       }
-      .lead,
-      .chevron {
+      .lead {
         position: absolute;
+        left: 0.75rem;
         color: var(--wk-muted);
         display: inline-flex;
         pointer-events: none;
       }
-      .lead {
-        left: 0.75rem;
-      }
       .chevron {
-        right: 0.75rem;
+        position: absolute;
+        right: 0.85rem;
+        width: 0.45rem;
+        height: 0.45rem;
+        border-right: 2px solid var(--wk-muted);
+        border-bottom: 2px solid var(--wk-muted);
+        transform: rotate(45deg);
+        pointer-events: none;
+        margin-top: -0.15rem;
       }
       select {
-        font: inherit;
+        font: var(--wk-control-font, var(--wk-text-md)) / 1.2 var(--wk-font-sans);
         width: 100%;
         min-height: var(--wk-control-h);
-        padding: 0.6rem 2.35rem 0.6rem 0.75rem;
+        padding: 0.45rem 2.2rem 0.45rem var(--wk-control-pad-x, 0.75rem);
         border-radius: var(--wk-radius);
         border: 1px solid var(--wk-border);
         background: var(--wk-surface);
@@ -100,13 +118,17 @@ export class WkSelect extends WkElement {
   }
 
   render() {
+    const lead = this.leadingIcon?.trim();
     return html`
       <label>
         <span>${this.label}</span>
         <div class="field">
-          ${this.leadingIcon
+          ${lead
             ? html`<span class="lead"
-                ><wk-icon name=${this.leadingIcon} size="sm"></wk-icon
+                ><wk-icon
+                  name=${lead}
+                  size=${this.size === "lg" ? "md" : "sm"}
+                ></wk-icon
               ></span>`
             : null}
           <select
@@ -125,9 +147,7 @@ export class WkSelect extends WkElement {
                 </option>`,
             )}
           </select>
-          <span class="chevron"
-            ><wk-icon name="chevron-down" size="sm"></wk-icon
-          ></span>
+          <span class="chevron" aria-hidden="true"></span>
         </div>
       </label>
     `;

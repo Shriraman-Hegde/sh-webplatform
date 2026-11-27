@@ -65,11 +65,16 @@ export class WkAccordion extends WkElement {
         box-shadow: inset var(--wk-focus);
       }
       .chevron {
-        color: var(--wk-muted);
+        width: 0.45rem;
+        height: 0.45rem;
+        border-right: 2px solid var(--wk-muted);
+        border-bottom: 2px solid var(--wk-muted);
+        transform: rotate(45deg);
         transition: transform var(--wk-ease);
+        flex-shrink: 0;
       }
       button[aria-expanded="true"] .chevron {
-        transform: rotate(180deg);
+        transform: rotate(225deg);
       }
       .panel {
         padding: 0 var(--wk-space-4) var(--wk-space-4);
@@ -119,11 +124,7 @@ export class WkAccordion extends WkElement {
                   : null}
                 ${item.title}
               </span>
-              <wk-icon
-                class="chevron"
-                name="chevron-down"
-                size="sm"
-              ></wk-icon>
+              <span class="chevron" aria-hidden="true"></span>
             </button>
             ${this.isOpen(item.id)
               ? html`<div

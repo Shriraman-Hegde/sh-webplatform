@@ -7,24 +7,30 @@ export class WkButton extends WkElement {
   static properties = {
     disabled: { type: Boolean, reflect: true },
     variant: { type: String, reflect: true },
+    size: { type: String, reflect: true },
     icon: { type: String },
     iconPosition: { type: String, attribute: "icon-position", reflect: true },
     iconOnly: { type: Boolean, attribute: "icon-only", reflect: true },
+    animated: { type: Boolean, reflect: true },
   };
 
   declare disabled: boolean;
   declare variant: "primary" | "secondary" | "ghost";
+  declare size: "sm" | "md" | "lg";
   declare icon: string;
   declare iconPosition: "start" | "end";
   declare iconOnly: boolean;
+  declare animated: boolean;
 
   constructor() {
     super();
     this.disabled = false;
     this.variant = "primary";
+    this.size = "md";
     this.icon = "";
     this.iconPosition = "start";
     this.iconOnly = false;
+    this.animated = true;
   }
 
   static styles = [
@@ -33,17 +39,30 @@ export class WkButton extends WkElement {
       :host {
         display: inline-block;
       }
+      :host([size="sm"]) {
+        --wk-control-h: var(--wk-control-h-sm);
+        --wk-control-pad-x: var(--wk-control-pad-x-sm);
+        --wk-control-font: var(--wk-text-sm);
+      }
+      :host([size="lg"]) {
+        --wk-control-h: var(--wk-control-h-lg);
+        --wk-control-pad-x: var(--wk-control-pad-x-lg);
+        --wk-control-font: var(--wk-text-lg);
+      }
       button {
-        font: 600 var(--wk-text-md) / 1.2 var(--wk-font-sans);
+        font: 600 var(--wk-control-font, var(--wk-text-md)) / 1.2
+          var(--wk-font-sans);
         border-radius: var(--wk-radius);
         border: 1px solid transparent;
         min-height: var(--wk-control-h);
-        padding: 0.55rem 1rem;
+        padding: 0 calc(var(--wk-control-pad-x));
         cursor: pointer;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: var(--wk-space-2);
+      }
+      :host([animated]) button {
         transition:
           background var(--wk-ease),
           color var(--wk-ease),
@@ -51,11 +70,11 @@ export class WkButton extends WkElement {
           box-shadow var(--wk-ease),
           transform var(--wk-ease);
       }
-      button:hover:not(:disabled) {
-        transform: translateY(-1px);
+      :host([animated]) button:hover:not(:disabled) {
+        transform: translateY(calc(-1px * var(--wk-motion, 1)));
         box-shadow: var(--wk-shadow-sm);
       }
-      button:active:not(:disabled) {
+      :host([animated]) button:active:not(:disabled) {
         transform: translateY(0);
       }
       button:focus-visible {
@@ -88,7 +107,7 @@ export class WkButton extends WkElement {
         background: color-mix(in srgb, var(--wk-ink) 5%, transparent);
       }
       :host([icon-only]) button {
-        padding: 0.55rem;
+        padding: 0;
         width: var(--wk-control-h);
       }
       button:disabled {
@@ -104,21 +123,25 @@ export class WkButton extends WkElement {
   ];
 
   render() {
-    const iconEl = this.icon
-      ? html`<wk-icon name=${this.icon} size="sm"></wk-icon>`
+    const iconName = this.icon?.trim();
+    const iconEl = iconName
+      ? html`<wk-icon
+          name=${iconName}
+          size=${this.size === "lg" ? "md" : "sm"}
+        ></wk-icon>`
       : null;
     return html`
       <button
         ?disabled=${this.disabled}
         type="button"
-        aria-label=${this.iconOnly ? this.icon || "Button" : nothing}
+        aria-label=${this.iconOnly ? iconName || "Button" : nothing}
       >
-        ${this.icon && this.iconPosition !== "end" ? iconEl : null}
+        ${iconName && this.iconPosition !== "end" ? iconEl : null}
         ${this.iconOnly
           ? null
           : html`<span class="label"><slot></slot></span>`}
-        ${this.icon && this.iconPosition === "end" ? iconEl : null}
-        ${!this.icon ? html`<slot name="icon"></slot>` : null}
+        ${iconName && this.iconPosition === "end" ? iconEl : null}
+        ${!iconName ? html`<slot name="icon"></slot>` : null}
       </button>
     `;
   }

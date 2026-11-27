@@ -12,16 +12,49 @@
   --wk-space-5: 1.25rem;
   --wk-space-6: 1.5rem;
   --wk-space-8: 2rem;
-  --wk-control-h: 2.5rem;
+  --wk-control-h-sm: 2rem;
+  --wk-control-h-md: 2.5rem;
+  --wk-control-h-lg: 3rem;
+  --wk-control-h: var(--wk-control-h-md);
+  --wk-control-pad-x-sm: 0.65rem;
+  --wk-control-pad-x-md: 0.9rem;
+  --wk-control-pad-x-lg: 1.1rem;
+  --wk-control-pad-x: var(--wk-control-pad-x-md);
   --wk-text-xs: 0.75rem;
   --wk-text-sm: 0.875rem;
   --wk-text-md: 0.95rem;
   --wk-text-lg: 1.15rem;
+  --wk-control-font: var(--wk-text-md);
   --wk-leading: 1.45;
   --wk-shadow-sm: 0 1px 2px color-mix(in srgb, var(--wk-ink) 6%, transparent);
   --wk-shadow-md: 0 10px 28px color-mix(in srgb, var(--wk-ink) 8%, transparent);
   --wk-focus: 0 0 0 3px color-mix(in srgb, var(--wk-accent) 45%, transparent);
-  --wk-ease: 140ms ease;
+  --wk-ease-duration: 140ms;
+  --wk-ease: var(--wk-ease-duration) ease;
+  --wk-motion: 1;
+}
+
+/* Size scale helpers consumed by :host([size=…]) on controls */
+:host([size="sm"]),
+[data-wk-size="sm"] {
+  --wk-control-h: var(--wk-control-h-sm);
+  --wk-control-pad-x: var(--wk-control-pad-x-sm);
+  --wk-control-font: var(--wk-text-sm);
+}
+
+:host([size="md"]),
+:host(:not([size])),
+[data-wk-size="md"] {
+  --wk-control-h: var(--wk-control-h-md);
+  --wk-control-pad-x: var(--wk-control-pad-x-md);
+  --wk-control-font: var(--wk-text-md);
+}
+
+:host([size="lg"]),
+[data-wk-size="lg"] {
+  --wk-control-h: var(--wk-control-h-lg);
+  --wk-control-pad-x: var(--wk-control-pad-x-lg);
+  --wk-control-font: var(--wk-text-lg);
 }
 
 :root[data-theme="default"],
@@ -56,9 +89,35 @@
   --wk-banner-bg: #f3e7d3;
 }
 
+/* Explicit off */
+:root[data-motion="off"],
+:host([data-motion="off"]) {
+  --wk-ease-duration: 0ms;
+  --wk-ease: 0ms;
+  --wk-motion: 0;
+}
+
+/* Explicit on (still honor reduced-motion below) */
+:root[data-motion="on"],
+:host([data-motion="on"]),
+:root[data-motion="system"],
+:host([data-motion="system"]),
+:root:not([data-motion]),
+:host(:not([data-motion])) {
+  --wk-ease-duration: 140ms;
+  --wk-ease: 140ms ease;
+  --wk-motion: 1;
+}
+
 @media (prefers-reduced-motion: reduce) {
   :root,
-  :host {
+  :host,
+  :root[data-motion="system"],
+  :host([data-motion="system"]),
+  :root:not([data-motion]),
+  :host(:not([data-motion])) {
+    --wk-ease-duration: 0ms;
     --wk-ease: 0ms;
+    --wk-motion: 0;
   }
 }

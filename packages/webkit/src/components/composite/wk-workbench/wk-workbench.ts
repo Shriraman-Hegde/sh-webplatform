@@ -155,6 +155,8 @@ export class WkWorkbench extends WkElement {
 
         <wk-status-banner
           tone=${this.bannerTone}
+          show-icon
+          size="md"
           message=${this.bannerTone === "loading"
             ? "Fetching linked records…"
             : this.bannerTone === "error"
@@ -182,6 +184,8 @@ export class WkWorkbench extends WkElement {
               ></wk-text-field>
               <wk-rich-text
                 label="Notes"
+                size="md"
+                show-icons
                 .value=${this.notes}
                 @wk-input=${(e: CustomEvent<{ value: string }>) => {
                   this.notes = e.detail.value;
@@ -280,7 +284,7 @@ export class WkWorkbench extends WkElement {
           </wk-card>
 
           <wk-card heading="Linked items">
-            <wk-alert tone="info" heading="Related items">
+            <wk-alert tone="info" heading="Related items" show-icon size="md">
               Open related records with
               <wk-link href="#item-a" icon="link">wk-link</wk-link>
               or browse tabs below.

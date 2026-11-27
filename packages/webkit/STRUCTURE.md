@@ -35,7 +35,8 @@ Follows [open-wc](https://github.com/open-wc/open-wc) practices for Lit web comp
   - `index.ts` — public barrel for that component
 - Themes: kebab-case **look** ids on `data-theme` — never product/industry labels.
   - Current: `default` | `warm`
-  - Host boot: `bootstrapWebkit({ theme, icons: iconRegistry })` with registry from `@sh-webplatform/icons`
+  - Host boot: `bootstrapWebkit({ theme, motion, icons? })` — icons & motion optional; registry from `@sh-webplatform/icons` when used
+  - Controls: `size="sm|md|lg"`; icons via optional props (`icon`, `show-icon`, `show-icons`); motion via `animated` + `data-motion`
 
 ## Trees
 
