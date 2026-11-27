@@ -1,4 +1,5 @@
 import { html, type TemplateResult } from "lit";
+import { type AppIconName, appIconNames } from "./app-icon-names.js";
 
 const svg = (content: TemplateResult) =>
   html`<svg
@@ -14,7 +15,7 @@ const svg = (content: TemplateResult) =>
   </svg>`;
 
 /** App glyphs the kit adds on top of `@sh-webplatform/icons`. */
-export const appIcons: Record<string, () => TemplateResult> = {
+export const appIcons = {
   calendar: () =>
     svg(
       html`<rect x="3" y="5" width="18" height="16" rx="2"></rect>
@@ -83,6 +84,6 @@ export const appIcons: Record<string, () => TemplateResult> = {
         d="M6 3h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 4 5a2 2 0 0 1 2-2z"
       ></path>`,
     ),
-};
+} satisfies Record<AppIconName, () => TemplateResult>;
 
-export const appIconNames = Object.keys(appIcons);
+export { appIconNames };

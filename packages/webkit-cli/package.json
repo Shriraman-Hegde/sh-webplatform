@@ -1,0 +1,24 @@
+{
+  "name": "@sh-webplatform/webkit-cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Terminal lookup for wk-* components, icons, and theme setup",
+  "bin": {
+    "wk": "./src/cli.ts"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "test": "node --test src/cli.test.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@sh-webplatform/icons": "github:Shriraman-Hegde/sh-webplatform-icons#main"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.0",
+    "typescript": "^5.7.2"
+  }
+}
