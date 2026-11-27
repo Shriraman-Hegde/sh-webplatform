@@ -1,0 +1,28 @@
+:host {
+  display: block;
+}
+div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--wk-space-3);
+  padding: var(--wk-space-8) var(--wk-space-4);
+  color: var(--wk-muted);
+}
+h2 {
+  margin: 0;
+  color: var(--wk-ink);
+  font-size: 1.15rem;
+}
+.body:empty,
+.actions:empty {
+  display: none;
+}
+.actions {
+  display: flex;
+  gap: var(--wk-space-2);
+}
+wk-icon {
+  color: var(--wk-accent);
+}

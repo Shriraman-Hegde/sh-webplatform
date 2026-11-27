@@ -2,6 +2,9 @@
   display: contents;
 }
 dialog {
+  transition:
+    opacity var(--wk-ease),
+    transform var(--wk-ease);
   border: 1px solid var(--wk-border);
   border-radius: calc(var(--wk-radius) + 2px);
   padding: 0;
@@ -13,6 +16,12 @@ dialog {
 }
 dialog::backdrop {
   background: color-mix(in srgb, var(--wk-ink) 45%, transparent);
+}
+@starting-style {
+  dialog[open] {
+    opacity: calc(1 - var(--wk-motion, 1));
+    transform: translateY(calc(8px * var(--wk-motion, 1)));
+  }
 }
 header {
   display: flex;

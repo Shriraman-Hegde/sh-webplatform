@@ -1,0 +1,58 @@
+:host {
+  display: none;
+  position: fixed;
+  z-index: 30;
+  right: var(--wk-space-4);
+  bottom: var(--wk-space-4);
+  max-width: min(22rem, calc(100vw - 2rem));
+}
+:host([open]) {
+  display: block;
+  animation: wk-toast-in var(--wk-ease);
+}
+@keyframes wk-toast-in {
+  from {
+    opacity: calc(1 - var(--wk-motion, 1));
+    transform: translateY(calc(8px * var(--wk-motion, 1)));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+div {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--wk-space-3);
+  padding: var(--wk-space-3) var(--wk-space-4);
+  border: 1px solid var(--wk-border);
+  border-radius: var(--wk-radius);
+  background: var(--wk-surface);
+  color: var(--wk-ink);
+  box-shadow: var(--wk-shadow-md);
+}
+:host([tone="success"]) div {
+  border-color: color-mix(in srgb, var(--wk-success) 45%, var(--wk-border));
+}
+:host([tone="warning"]) div {
+  border-color: color-mix(in srgb, var(--wk-warning) 45%, var(--wk-border));
+}
+:host([tone="danger"]) div {
+  border-color: color-mix(in srgb, var(--wk-danger) 45%, var(--wk-border));
+}
+p {
+  margin: 0;
+  flex: 1;
+}
+button {
+  font: inherit;
+  border: 0;
+  background: transparent;
+  color: var(--wk-muted);
+  cursor: pointer;
+  border-radius: var(--wk-radius);
+}
+button:focus-visible {
+  outline: none;
+  box-shadow: var(--wk-focus);
+}

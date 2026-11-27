@@ -1,0 +1,31 @@
+:host {
+  display: inline-block;
+}
+span[role="img"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--wk-radius-pill);
+  background: color-mix(in srgb, var(--wk-accent) 16%, var(--wk-surface));
+  color: var(--wk-accent);
+  overflow: hidden;
+  font-weight: 700;
+  font-size: var(--wk-text-sm);
+}
+:host([size="sm"]) span[role="img"] {
+  width: 2rem;
+  height: 2rem;
+  font-size: var(--wk-text-xs);
+}
+:host([size="lg"]) span[role="img"] {
+  width: 3.25rem;
+  height: 3.25rem;
+  font-size: var(--wk-text-md);
+}
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
