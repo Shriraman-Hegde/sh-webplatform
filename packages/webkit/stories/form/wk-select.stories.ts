@@ -9,21 +9,12 @@ const options = [
   { value: "gamma", label: "Team Gamma" },
 ];
 
-const usage = `<wk-select
-  label="Team"
-  name="team"
-  value="alpha"
-  .options=\${[{ value: "alpha", label: "Team Alpha" }]}
-></wk-select>`;
 
 const meta: Meta = {
   title: "Form/Select",
   component: "wk-select",
   tags: ["autodocs"],
-  parameters: componentDocs(
-    "Labeled select. Emits `wk-change`. Optional leading icon; CSS chevron.",
-    usage,
-  ),
+  parameters: componentDocs("Labeled select. Emits `wk-change`. Optional leading icon; CSS chevron."),
   argTypes: {
     label: attr("Field label.", { defaultValue: "" }),
     value: attr("Selected value.", {

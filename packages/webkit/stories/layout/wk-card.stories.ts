@@ -3,18 +3,12 @@ import { html } from "lit";
 import "../../src/components/layout/wk-card/index.js";
 import { attr, componentDocs } from "../_helpers.js";
 
-const usage = `<wk-card heading="Request details">
-  <p>Card body content</p>
-</wk-card>`;
 
 const meta: Meta = {
   title: "Layout/Card",
   component: "wk-card",
   tags: ["autodocs"],
-  parameters: componentDocs(
-    "Surface container with optional heading and default slot.",
-    usage,
-  ),
+  parameters: componentDocs("Surface container with optional heading and default slot."),
   argTypes: {
     heading: attr("Optional card heading.", { defaultValue: "" }),
     body: attr("Body text for the demo slot.", { defaultValue: "" }),

@@ -3,17 +3,12 @@ import { html } from "lit";
 import "../../src/components/layout/wk-badge/index.js";
 import { attr, componentDocs, sizeArg } from "../_helpers.js";
 
-const usage = `<wk-badge>Draft</wk-badge>
-<wk-badge tone="accent" icon="edit">Live</wk-badge>`;
 
 const meta: Meta = {
   title: "Layout/Badge",
   component: "wk-badge",
   tags: ["autodocs"],
-  parameters: componentDocs(
-    "Compact status chip. Optional icon and size.",
-    usage,
-  ),
+  parameters: componentDocs("Compact status chip. Optional icon and size."),
   argTypes: {
     label: attr("Badge label (slot).", { defaultValue: "Draft" }),
     tone: attr("Visual tone.", {

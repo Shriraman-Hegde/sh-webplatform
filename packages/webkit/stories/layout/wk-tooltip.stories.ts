@@ -4,18 +4,12 @@ import "../../src/components/form/wk-button/index.js";
 import "../../src/components/layout/wk-tooltip/index.js";
 import { attr, componentDocs } from "../_helpers.js";
 
-const usage = `<wk-tooltip content="More about this action" placement="top">
-  <wk-button variant="secondary">Hover me</wk-button>
-</wk-tooltip>`;
 
 const meta: Meta = {
   title: "Layout/Tooltip",
   component: "wk-tooltip",
   tags: ["autodocs"],
-  parameters: componentDocs(
-    "Hover/focus tip around a slotted trigger.",
-    usage,
-  ),
+  parameters: componentDocs("Hover/focus tip around a slotted trigger."),
   argTypes: {
     content: attr("Tooltip text.", { defaultValue: "" }),
     placement: attr("Placement relative to the trigger.", {

@@ -3,18 +3,12 @@ import { html } from "lit";
 import "../../src/components/form/wk-textarea/index.js";
 import { attr, componentDocs, disabledArg, sizeArg } from "../_helpers.js";
 
-const usage = `<wk-textarea label="Notes" name="notes"></wk-textarea>
-<wk-textarea label="Notes" rich></wk-textarea>
-<wk-textarea label="Notes" rich show-icons></wk-textarea>`;
 
 const meta: Meta = {
   title: "Form/Textarea",
   component: "wk-textarea",
   tags: ["autodocs"],
-  parameters: componentDocs(
-    "Multi-line notes. Plain by default; set `rich` for optional rich-text editing.",
-    usage,
-  ),
+  parameters: componentDocs("Multi-line notes. Plain by default; set `rich` for optional rich-text editing."),
   argTypes: {
     label: attr("Field label.", { defaultValue: "" }),
     name: attr("Native name attribute.", { defaultValue: "" }),

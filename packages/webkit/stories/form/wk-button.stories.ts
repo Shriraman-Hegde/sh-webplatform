@@ -4,18 +4,12 @@ import { generatedIconNames } from "@sh-webplatform/icons";
 import "../../src/components/form/wk-button/index.js";
 import { attr, componentDocs, disabledArg, sizeArg } from "../_helpers.js";
 
-const usage = `<wk-button variant="primary">Save</wk-button>
-<wk-button variant="secondary" icon="check">Confirm</wk-button>
-<wk-button icon="search" icon-only></wk-button>`;
 
 const meta: Meta = {
   title: "Form/Button",
   component: "wk-button",
   tags: ["autodocs"],
-  parameters: componentDocs(
-    "Button triggers an action. Supports variants, sizes, optional icons, and motion.",
-    usage,
-  ),
+  parameters: componentDocs("Button triggers an action. Supports variants, sizes, optional icons, and motion."),
   argTypes: {
     label: attr("Button label text (slot content).", { defaultValue: "Save" }),
     variant: attr("Visual style.", {

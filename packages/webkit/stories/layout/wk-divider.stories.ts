@@ -3,17 +3,12 @@ import { html } from "lit";
 import "../../src/components/layout/wk-divider/index.js";
 import { attr, componentDocs } from "../_helpers.js";
 
-const usage = `<wk-divider></wk-divider>
-<wk-divider label="Flags"></wk-divider>`;
 
 const meta: Meta = {
   title: "Layout/Divider",
   component: "wk-divider",
   tags: ["autodocs"],
-  parameters: componentDocs(
-    "Horizontal rule with optional mid-line label.",
-    usage,
-  ),
+  parameters: componentDocs("Horizontal rule with optional mid-line label."),
   argTypes: {
     label: attr("Optional label centered on the divider.", { defaultValue: "" }),
   },

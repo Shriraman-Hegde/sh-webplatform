@@ -9,21 +9,12 @@ const tabs = [
   { id: "files", label: "Files" },
 ];
 
-const usage = `<wk-tabs
-  .tabs=\${[{ id: "overview", label: "Overview", icon: "info" }]}
-  active="overview"
->
-  <div slot="overview">Panel</div>
-</wk-tabs>`;
 
 const meta: Meta = {
   title: "Layout/Tabs",
   component: "wk-tabs",
   tags: ["autodocs"],
-  parameters: componentDocs(
-    "Tab list + panels. Optional `icon` on items. Emits `wk-change`.",
-    usage,
-  ),
+  parameters: componentDocs("Tab list + panels. Optional `icon` on items. Emits `wk-change`."),
   argTypes: {
     active: attr("Active tab id.", {
       control: "select",

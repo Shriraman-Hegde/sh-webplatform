@@ -9,21 +9,12 @@ const items = [
   { id: "c", title: "History" },
 ];
 
-const usage = `<wk-accordion
-  .items=\${[{ id: "a", title: "Accordion title" }]}
-  .openIds=\${["a"]}
->
-  <div slot="a">Expanded content</div>
-</wk-accordion>`;
 
 const meta: Meta = {
   title: "Layout/Accordion",
   component: "wk-accordion",
   tags: ["autodocs"],
-  parameters: componentDocs(
-    "Accordion shows a brief summary and expands to show additional content.",
-    usage,
-  ),
+  parameters: componentDocs("Accordion shows a brief summary and expands to show additional content."),
   argTypes: {
     multiple: attr("Allow multiple panels open at once.", {
       control: "boolean",

@@ -3,22 +3,12 @@ import { html } from "lit";
 import "../../src/components/layout/wk-breadcrumbs/index.js";
 import { componentDocs } from "../_helpers.js";
 
-const usage = `<wk-breadcrumbs
-  .items=\${[
-    { label: "Home", href: "#", icon: "home" },
-    { label: "Team Alpha", href: "#" },
-    { label: "ITEM-A" },
-  ]}
-></wk-breadcrumbs>`;
 
 const meta: Meta = {
   title: "Layout/Breadcrumbs",
   component: "wk-breadcrumbs",
   tags: ["autodocs"],
-  parameters: componentDocs(
-    "Nav trail. Last item is current page. Optional `icon` per item.",
-    usage,
-  ),
+  parameters: componentDocs("Nav trail. Last item is current page. Optional `icon` per item."),
   render: () => html`
     <wk-breadcrumbs
       .items=${[

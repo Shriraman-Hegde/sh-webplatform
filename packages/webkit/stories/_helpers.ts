@@ -1,23 +1,16 @@
 import type { ArgTypes } from "@storybook/web-components";
 
-/** Docs blurb + HTML usage fence for the component page. */
-export function componentDocs(summary: string, usage: string): {
+/** Docs blurb for the component page (no Usage block — use Show code on the canvas). */
+export function componentDocs(summary: string): {
   docs: {
     description: { component: string };
-    source: { type: "dynamic" };
   };
 } {
   return {
     docs: {
       description: {
-        component: `${summary.trim()}
-
-### Usage
-\`\`\`html
-${usage.trim()}
-\`\`\``,
+        component: summary.trim(),
       },
-      source: { type: "dynamic" },
     },
   };
 }

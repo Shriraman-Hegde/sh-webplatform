@@ -3,16 +3,12 @@ import { html } from "lit";
 import "../../src/components/form/wk-checkbox/index.js";
 import { attr, componentDocs, disabledArg } from "../_helpers.js";
 
-const usage = `<wk-checkbox label="Mark as urgent" name="urgent"></wk-checkbox>`;
 
 const meta: Meta = {
   title: "Form/Checkbox",
   component: "wk-checkbox",
   tags: ["autodocs"],
-  parameters: componentDocs(
-    "Labeled checkbox. Emits `wk-change` with `{ checked }`.",
-    usage,
-  ),
+  parameters: componentDocs("Labeled checkbox. Emits `wk-change` with `{ checked }`."),
   argTypes: {
     label: attr("Checkbox label.", { defaultValue: "" }),
     name: attr("Native name attribute.", { defaultValue: "" }),

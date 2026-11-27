@@ -3,16 +3,12 @@ import { html } from "lit";
 import "../../src/components/layout/wk-progress/index.js";
 import { attr, componentDocs } from "../_helpers.js";
 
-const usage = `<wk-progress label="Upload" value="42" max="100"></wk-progress>`;
 
 const meta: Meta = {
   title: "Layout/Progress",
   component: "wk-progress",
   tags: ["autodocs"],
-  parameters: componentDocs(
-    "Labeled progress bar with percent readout.",
-    usage,
-  ),
+  parameters: componentDocs("Labeled progress bar with percent readout."),
   argTypes: {
     value: attr("Current progress value.", {
       control: { type: "range", min: 0, max: 100, step: 1 },

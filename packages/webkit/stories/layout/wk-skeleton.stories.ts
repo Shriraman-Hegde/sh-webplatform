@@ -3,17 +3,12 @@ import { html } from "lit";
 import "../../src/components/layout/wk-skeleton/index.js";
 import { attr, componentDocs, sizeArg } from "../_helpers.js";
 
-const usage = `<wk-skeleton variant="text" width="80%"></wk-skeleton>
-<wk-skeleton variant="rect" height="4rem"></wk-skeleton>`;
 
 const meta: Meta = {
   title: "Layout/Skeleton",
   component: "wk-skeleton",
   tags: ["autodocs"],
-  parameters: componentDocs(
-    "Loading placeholder. Optional shimmer via `animated`.",
-    usage,
-  ),
+  parameters: componentDocs("Loading placeholder. Optional shimmer via `animated`."),
   argTypes: {
     variant: attr("Shape variant.", {
       control: "select",

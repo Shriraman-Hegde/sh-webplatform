@@ -3,17 +3,12 @@ import { html } from "lit";
 import "../../src/components/layout/wk-status-banner/index.js";
 import { attr, componentDocs, sizeArg } from "../_helpers.js";
 
-const usage = `<wk-status-banner tone="empty" message="Nothing yet."></wk-status-banner>
-<wk-status-banner tone="loading" show-icon></wk-status-banner>`;
 
 const meta: Meta = {
   title: "Layout/Status Banner",
   component: "wk-status-banner",
   tags: ["autodocs"],
-  parameters: componentDocs(
-    "Page-level status. Icons optional via `show-icon`.",
-    usage,
-  ),
+  parameters: componentDocs("Page-level status. Icons optional via `show-icon`."),
   argTypes: {
     tone: attr("Banner tone.", {
       control: "select",

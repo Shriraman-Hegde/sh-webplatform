@@ -3,16 +3,12 @@ import { html } from "lit";
 import "../../src/components/layout/wk-spinner/index.js";
 import { attr, componentDocs, sizeArg } from "../_helpers.js";
 
-const usage = `<wk-spinner label="Loading…"></wk-spinner>`;
 
 const meta: Meta = {
   title: "Layout/Spinner",
   component: "wk-spinner",
   tags: ["autodocs"],
-  parameters: componentDocs(
-    "Loading indicator. `animated` respects global motion.",
-    usage,
-  ),
+  parameters: componentDocs("Loading indicator. `animated` respects global motion."),
   argTypes: {
     label: attr("Status label.", { defaultValue: "Loading" }),
     size: sizeArg,

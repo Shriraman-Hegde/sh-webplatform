@@ -14,20 +14,12 @@ const rows = [
   { id: "ITEM-C", type: "Record", owner: "Team Gamma" },
 ];
 
-const usage = `<wk-data-table
-  caption="Sample records"
-  .columns=\${[{ key: "id", label: "ID" }]}
-  .rows=\${[{ id: "ITEM-A" }]}
-></wk-data-table>`;
 
 const meta: Meta = {
   title: "Layout/Data Table",
   component: "wk-data-table",
   tags: ["autodocs"],
-  parameters: componentDocs(
-    "Simple data table from columns + rows.",
-    usage,
-  ),
+  parameters: componentDocs("Simple data table from columns + rows."),
   argTypes: {
     caption: attr("Table caption.", { defaultValue: "" }),
   },

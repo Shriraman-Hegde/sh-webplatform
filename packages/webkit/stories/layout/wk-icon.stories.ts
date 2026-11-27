@@ -4,17 +4,12 @@ import { generatedIconNames } from "@sh-webplatform/icons";
 import "../../src/components/layout/wk-icon/index.js";
 import { attr, componentDocs, sizeArg } from "../_helpers.js";
 
-const usage = `bootstrapWebkit({ icons: iconRegistry });
-<wk-icon name="check" label="Done" size="md"></wk-icon>`;
 
 const meta: Meta = {
   title: "Layout/Icon",
   component: "wk-icon",
   tags: ["autodocs"],
-  parameters: componentDocs(
-    "Named SVG from `@sh-webplatform/icons` via host `bootstrapWebkit({ icons })`.",
-    usage,
-  ),
+  parameters: componentDocs("Named SVG from `@sh-webplatform/icons` via host `bootstrapWebkit({ icons })`."),
   argTypes: {
     name: attr("Icon name from the registry.", {
       control: "select",

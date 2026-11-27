@@ -3,17 +3,12 @@ import { html } from "lit";
 import "../../src/components/layout/wk-link/index.js";
 import { attr, componentDocs, disabledArg, sizeArg } from "../_helpers.js";
 
-const usage = `<wk-link href="#item-a">ITEM-A</wk-link>
-<wk-link href="#docs" icon="external-link" icon-position="end">Docs</wk-link>`;
 
 const meta: Meta = {
   title: "Layout/Link",
   component: "wk-link",
   tags: ["autodocs"],
-  parameters: componentDocs(
-    "Accessible link with optional icon and size.",
-    usage,
-  ),
+  parameters: componentDocs("Accessible link with optional icon and size."),
   argTypes: {
     label: attr("Link text (slot).", { defaultValue: "" }),
     href: attr("Destination URL.", { defaultValue: "#" }),

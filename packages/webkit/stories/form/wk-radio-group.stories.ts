@@ -9,21 +9,12 @@ const options = [
   { value: "high", label: "High" },
 ];
 
-const usage = `<wk-radio-group
-  label="Priority"
-  name="priority"
-  value="normal"
-  .options=\${[{ value: "low", label: "Low" }, { value: "normal", label: "Normal" }]}
-></wk-radio-group>`;
 
 const meta: Meta = {
   title: "Form/Radio Group",
   component: "wk-radio-group",
   tags: ["autodocs"],
-  parameters: componentDocs(
-    "Exclusive choice group. Emits `wk-change` with `{ value }`.",
-    usage,
-  ),
+  parameters: componentDocs("Exclusive choice group. Emits `wk-change` with `{ value }`."),
   argTypes: {
     label: attr("Group label.", { defaultValue: "" }),
     value: attr("Selected option value.", {

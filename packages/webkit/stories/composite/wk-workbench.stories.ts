@@ -3,8 +3,6 @@ import { html } from "lit";
 import "../../src/components/composite/wk-workbench/index.js";
 import { componentDocs } from "../_helpers.js";
 
-const usage = `bootstrapWebkit({ theme: "default", icons: iconRegistry });
-<wk-workbench></wk-workbench>`;
 
 const meta: Meta = {
   title: "Composite/Workbench",
@@ -13,10 +11,7 @@ const meta: Meta = {
   parameters: {
     layout: "fullscreen",
     controls: { disable: true },
-    ...componentDocs(
-      "Composition demo of form + layout primitives. Open individual component Overviews for Attributes and usage.",
-      usage,
-    ),
+    ...componentDocs("Composition demo of form + layout primitives. Open individual component Overviews for Attributes and usage."),
   },
   render: () => html`<wk-workbench></wk-workbench>`,
 };

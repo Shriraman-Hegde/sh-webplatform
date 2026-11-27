@@ -3,17 +3,12 @@ import { html } from "lit";
 import "../../src/components/layout/wk-alert/index.js";
 import { attr, componentDocs, sizeArg } from "../_helpers.js";
 
-const usage = `<wk-alert tone="info" heading="Heads up">Review before submit.</wk-alert>
-<wk-alert tone="success" show-icon>Saved.</wk-alert>`;
 
 const meta: Meta = {
   title: "Layout/Alert",
   component: "wk-alert",
   tags: ["autodocs"],
-  parameters: componentDocs(
-    "Inline message for feedback. Icons are optional (`show-icon` or `icon`).",
-    usage,
-  ),
+  parameters: componentDocs("Inline message for feedback. Icons are optional (`show-icon` or `icon`)."),
   argTypes: {
     tone: attr("Alert tone.", {
       control: "select",

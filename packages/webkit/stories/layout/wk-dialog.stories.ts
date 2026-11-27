@@ -4,10 +4,6 @@ import "../../src/components/form/wk-button/index.js";
 import "../../src/components/layout/wk-dialog/index.js";
 import { attr, componentDocs } from "../_helpers.js";
 
-const usage = `<wk-dialog heading="Confirm" .open=\${open} @wk-close=\${...}>
-  <p>Body</p>
-  <wk-button slot="actions" variant="primary">OK</wk-button>
-</wk-dialog>`;
 
 function openDialog(id: string) {
   const d = document.getElementById(id) as
@@ -27,10 +23,7 @@ const meta: Meta = {
   title: "Layout/Dialog",
   component: "wk-dialog",
   tags: ["autodocs"],
-  parameters: componentDocs(
-    "Modal dialog. Emits `wk-close`. Body + `actions` slots.",
-    usage,
-  ),
+  parameters: componentDocs("Modal dialog. Emits `wk-close`. Body + `actions` slots."),
   argTypes: {
     heading: attr("Dialog heading.", { defaultValue: "" }),
   },

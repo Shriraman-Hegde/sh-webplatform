@@ -3,17 +3,12 @@ import { html } from "lit";
 import "../../src/components/form/wk-text-field/index.js";
 import { attr, componentDocs, disabledArg, sizeArg } from "../_helpers.js";
 
-const usage = `<wk-text-field label="Title" name="title" value="Sample"></wk-text-field>
-<wk-text-field label="Search" leading-icon="search" placeholder="Find…"></wk-text-field>`;
 
 const meta: Meta = {
   title: "Form/Text Field",
   component: "wk-text-field",
   tags: ["autodocs"],
-  parameters: componentDocs(
-    "Single-line labeled input. Emits `wk-input`. Optional leading/trailing icons.",
-    usage,
-  ),
+  parameters: componentDocs("Single-line labeled input. Emits `wk-input`. Optional leading/trailing icons."),
   argTypes: {
     label: attr("Field label.", { defaultValue: "" }),
     name: attr("Native name attribute.", { defaultValue: "" }),

@@ -3,16 +3,12 @@ import { html } from "lit";
 import "../../src/components/form/wk-switch/index.js";
 import { attr, componentDocs, disabledArg } from "../_helpers.js";
 
-const usage = `<wk-switch label="Email notifications" name="notify"></wk-switch>`;
 
 const meta: Meta = {
   title: "Form/Switch",
   component: "wk-switch",
   tags: ["autodocs"],
-  parameters: componentDocs(
-    "On/off toggle. Emits `wk-change` with `{ checked }`.",
-    usage,
-  ),
+  parameters: componentDocs("On/off toggle. Emits `wk-change` with `{ checked }`."),
   argTypes: {
     label: attr("Switch label.", { defaultValue: "" }),
     name: attr("Native name attribute.", { defaultValue: "" }),
