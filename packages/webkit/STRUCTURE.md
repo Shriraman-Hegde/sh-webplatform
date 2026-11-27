@@ -8,11 +8,11 @@ Follows [open-wc](https://github.com/open-wc/open-wc) practices for Lit web comp
 
 | Layer | Path | Role |
 |-------|------|------|
-| Design tokens | `src/themes/`, `src/theme/` | CSS custom properties + `data-theme` |
+| Design tokens | `src/themes/`, `src/theme/` | CSS custom properties + `data-theme` / `data-mode` |
 | Element registry | `src/registry/` | `defineElement` — define each `wk-*` once |
 | Base element | `src/base/wk-element.ts` | Shared host styles, `dir`/`lang`, icon access |
 | Lit context | `src/context/` | Icon library (host sets via `bootstrapWebkit` / provider) |
-| Boot | `src/bootstrap.ts` | Host calls once: theme + icons |
+| Boot | `src/bootstrap.ts` | Host calls once: theme + mode + icons |
 | Icons (sister) | [`@sh-webplatform/icons`](https://github.com/Shriraman-Hegde/sh-webplatform-icons) | SVG → Lit `sh-icon-*` + `iconRegistry` — not vendored here |
 
 ## Toolchain (open-wc)
@@ -34,8 +34,9 @@ Follows [open-wc](https://github.com/open-wc/open-wc) practices for Lit web comp
   - `wk-<name>.ts` — implementation (extends `WkElement`)
   - `index.ts` — public barrel for that component
 - Themes: kebab-case **look** ids on `data-theme` — never product/industry labels.
-  - Current: `default` | `warm`
-  - Host boot: `bootstrapWebkit({ theme, motion, icons? })` — icons & motion optional; registry from `@sh-webplatform/icons` when used
+  - Looks: `default` | `warm` | `slate` | `forest`
+  - Modes: `day` | `night` on `data-mode` (surfaces; independent of look)
+  - Host boot: `bootstrapWebkit({ theme, mode?, motion, icons? })` — mode defaults to `day`; icons & motion optional; registry from `@sh-webplatform/icons` when used
   - Controls: `size="sm|md|lg"`; icons via optional props (`icon`, `show-icon`, `show-icons`); motion via `animated` + `data-motion`
   - Rich text is optional on `wk-textarea` via `rich` (and optional `show-icons`)
 

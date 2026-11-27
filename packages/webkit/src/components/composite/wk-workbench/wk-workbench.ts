@@ -1,7 +1,14 @@
 import { css, html } from "lit";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
-import { applyTheme, getTheme, type WebkitTheme } from "../../../theme/index.js";
+import {
+  applyMode,
+  applyTheme,
+  getMode,
+  getTheme,
+  type WebkitMode,
+  type WebkitTheme,
+} from "../../../theme/index.js";
 import "../../form/wk-button/index.js";
 import "../../form/wk-checkbox/index.js";
 import "../../form/wk-radio-group/index.js";
@@ -31,6 +38,7 @@ import "../../layout/wk-tooltip/index.js";
 export class WkWorkbench extends WkElement {
   static properties = {
     theme: { state: true },
+    mode: { state: true },
     bannerTone: { state: true },
     titleValue: { state: true },
     notes: { state: true },
@@ -47,6 +55,7 @@ export class WkWorkbench extends WkElement {
   };
 
   declare theme: WebkitTheme;
+  declare mode: WebkitMode;
   declare bannerTone: "empty" | "loading" | "error";
   declare titleValue: string;
   declare notes: string;
@@ -63,6 +72,7 @@ export class WkWorkbench extends WkElement {
   constructor() {
     super();
     this.theme = "default";
+    this.mode = "day";
     this.bannerTone = "empty";
     this.titleValue = "Sample request";
     this.notes = "";
@@ -111,7 +121,8 @@ export class WkWorkbench extends WkElement {
         align-items: center;
         margin-bottom: var(--wk-space-4);
       }
-      select.theme {
+      select.theme,
+      select.mode {
         font: inherit;
         border-radius: var(--wk-radius);
         border: 1px solid var(--wk-border);
@@ -119,16 +130,27 @@ export class WkWorkbench extends WkElement {
         color: var(--wk-ink);
         padding: 0.45rem 0.7rem;
       }
+      .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--wk-space-2);
+        align-items: center;
+      }
     `,
   ];
 
   connectedCallback() {
     super.connectedCallback();
     this.theme = applyTheme(getTheme());
+    this.mode = applyMode(getMode());
   }
 
   private setTheme(theme: WebkitTheme) {
     this.theme = applyTheme(theme);
+  }
+
+  private setMode(mode: WebkitMode) {
+    this.mode = applyMode(mode);
   }
 
   render() {
@@ -137,17 +159,34 @@ export class WkWorkbench extends WkElement {
         page-title="Workbench"
         subtitle="Synthetic demo page for webkit form + layout primitives"
       >
-        <select
-          slot="actions"
-          class="theme"
-          aria-label="Theme"
-          .value=${this.theme}
-          @change=${(e: Event) =>
-            this.setTheme((e.target as HTMLSelectElement).value as WebkitTheme)}
-        >
-          <option value="default">default</option>
-          <option value="warm">warm</option>
-        </select>
+        <div slot="actions" class="toolbar">
+          <select
+            class="theme"
+            aria-label="Theme"
+            .value=${this.theme}
+            @change=${(e: Event) =>
+              this.setTheme(
+                (e.target as HTMLSelectElement).value as WebkitTheme,
+              )}
+          >
+            <option value="default">default</option>
+            <option value="warm">warm</option>
+            <option value="slate">slate</option>
+            <option value="forest">forest</option>
+          </select>
+          <select
+            class="mode"
+            aria-label="Mode"
+            .value=${this.mode}
+            @change=${(e: Event) =>
+              this.setMode(
+                (e.target as HTMLSelectElement).value as WebkitMode,
+              )}
+          >
+            <option value="day">day</option>
+            <option value="night">night</option>
+          </select>
+        </div>
 
         <wk-breadcrumbs
           .items=${[

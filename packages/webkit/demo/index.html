@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="default" data-motion="system">
+<html lang="en" data-theme="default" data-mode="day" data-motion="system">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,6 +19,7 @@
         flex-wrap: wrap;
         padding: 0.75rem 1rem;
         border-bottom: 1px solid var(--wk-border);
+        background: var(--wk-surface);
       }
     </style>
     <script type="module">
@@ -29,6 +30,7 @@
       const boot = () =>
         bootstrapWebkit({
           theme: document.getElementById("theme").value,
+          mode: document.getElementById("mode").value,
           motion: document.getElementById("motion").value,
           icons: document.getElementById("icons").checked
             ? iconRegistry
@@ -37,6 +39,7 @@
 
       boot();
       document.getElementById("theme").addEventListener("change", boot);
+      document.getElementById("mode").addEventListener("change", boot);
       document.getElementById("motion").addEventListener("change", boot);
       document.getElementById("icons").addEventListener("change", boot);
     </script>
@@ -48,6 +51,15 @@
         <select id="theme">
           <option value="default">default</option>
           <option value="warm">warm</option>
+          <option value="slate">slate</option>
+          <option value="forest">forest</option>
+        </select>
+      </label>
+      <label>
+        Mode
+        <select id="mode">
+          <option value="day">day</option>
+          <option value="night">night</option>
         </select>
       </label>
       <label>
@@ -62,7 +74,7 @@
         <input id="icons" type="checkbox" checked />
         Icons library
       </label>
-      <span>webkit host boot (optional icons + motion)</span>
+      <span>webkit host boot (theme + mode + optional icons)</span>
     </div>
     <wk-workbench></wk-workbench>
   </body>

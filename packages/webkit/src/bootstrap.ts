@@ -1,5 +1,9 @@
 import { setIconLibrary, type IconLibrary } from "./context/icons.js";
 import {
+  applyMode,
+  type WebkitMode,
+} from "./theme/mode.js";
+import {
   applyMotion,
   type WebkitMotion,
 } from "./theme/motion.js";
@@ -7,6 +11,8 @@ import { applyTheme, type WebkitTheme } from "./theme/theme.js";
 
 export type BootstrapOptions = {
   theme?: WebkitTheme | string;
+  /** Day / night surface mode (default: day). */
+  mode?: WebkitMode | string;
   /** Optional icon registry from `@sh-webplatform/icons` (or a custom map). */
   icons?: IconLibrary;
   /**
@@ -14,12 +20,13 @@ export type BootstrapOptions = {
    * Sets `data-motion` on the document; components honor `--wk-motion` / `--wk-ease`.
    */
   motion?: WebkitMotion | string;
-  /** Document root that receives `data-theme` / `data-motion` (default: document). */
+  /** Document root that receives data-* attrs (default: document). */
   root?: ParentNode & { documentElement?: HTMLElement };
 };
 
 export type BootstrapResult = {
   theme: WebkitTheme;
+  mode: WebkitMode;
   motion: WebkitMotion;
 };
 
@@ -34,6 +41,7 @@ export function bootstrapWebkit(
     setIconLibrary(options.icons);
   }
   const theme = applyTheme(options.theme ?? "default", options.root);
+  const mode = applyMode(options.mode ?? "day", options.root);
   const motion = applyMotion(options.motion ?? "system", options.root);
-  return { theme, motion };
+  return { theme, mode, motion };
 }

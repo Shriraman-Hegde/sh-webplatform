@@ -1,11 +1,18 @@
 import type { Preview } from "@storybook/web-components";
 import { bootstrapWebkit } from "../src/bootstrap.js";
 import { defaultIconLibrary } from "../src/boot-icons.js";
-import type { WebkitMotion, WebkitTheme } from "../src/theme/index.js";
+import {
+  WEBKIT_MODES,
+  WEBKIT_THEMES,
+  type WebkitMode,
+  type WebkitMotion,
+  type WebkitTheme,
+} from "../src/theme/index.js";
 import "../src/themes/themes.css";
 
 bootstrapWebkit({
   theme: "default",
+  mode: "day",
   motion: "system",
   icons: defaultIconLibrary,
 });
@@ -14,14 +21,20 @@ const preview: Preview = {
   tags: ["autodocs"],
   globalTypes: {
     theme: {
-      description: "webkit theme",
+      description: "webkit look theme",
       toolbar: {
         title: "Theme",
         icon: "paintbrush",
-        items: [
-          { value: "default", title: "default" },
-          { value: "warm", title: "warm" },
-        ],
+        items: WEBKIT_THEMES.map((value) => ({ value, title: value })),
+        dynamicTitle: true,
+      },
+    },
+    mode: {
+      description: "day / night mode",
+      toolbar: {
+        title: "Mode",
+        icon: "mirror",
+        items: WEBKIT_MODES.map((value) => ({ value, title: value })),
         dynamicTitle: true,
       },
     },
@@ -41,12 +54,14 @@ const preview: Preview = {
   },
   initialGlobals: {
     theme: "default",
+    mode: "day",
     motion: "system",
   },
   decorators: [
     (story, context) => {
       bootstrapWebkit({
         theme: context.globals.theme as WebkitTheme,
+        mode: context.globals.mode as WebkitMode,
         motion: context.globals.motion as WebkitMotion,
         icons: defaultIconLibrary,
       });
@@ -54,7 +69,6 @@ const preview: Preview = {
     },
   ],
   parameters: {
-    // Match SC WebKit docs: land on Docs/Overview with Attributes table + Show code
     viewMode: "docs",
     layout: "padded",
     controls: {
