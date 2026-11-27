@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 import "../../src/components/layout/wk-data-table/index.js";
-import { docs, overviewPage } from "../_helpers.js";
+import { attr, componentDocs } from "../_helpers.js";
 
 const columns = [
   { key: "id", label: "ID" },
@@ -14,54 +14,34 @@ const rows = [
   { id: "ITEM-C", type: "Record", owner: "Team Gamma" },
 ];
 
-const usage = `
-<wk-data-table
+const usage = `<wk-data-table
   caption="Sample records"
   .columns=\${[{ key: "id", label: "ID" }]}
   .rows=\${[{ id: "ITEM-A" }]}
-></wk-data-table>
-`.trim();
+></wk-data-table>`;
 
 const meta: Meta = {
   title: "Layout/Data Table",
   component: "wk-data-table",
-  parameters: {
-    ...docs(`Simple data table from columns + rows.
-
-### Usage
-\`\`\`html
-${usage}
-\`\`\``),
+  tags: ["autodocs"],
+  parameters: componentDocs(
+    "Simple data table from columns + rows.",
+    usage,
+  ),
+  argTypes: {
+    caption: attr("Table caption.", { defaultValue: "" }),
   },
+  args: { caption: "Sample records" },
+  render: (args) => html`
+    <wk-data-table
+      caption=${args.caption}
+      .columns=${columns}
+      .rows=${rows}
+    ></wk-data-table>
+  `,
 };
 
 export default meta;
 type Story = StoryObj;
 
-export const Overview: Story = {
-  parameters: { controls: { disable: true } },
-  render: () =>
-    overviewPage("wk-data-table", usage, [
-      {
-        heading: "Sample",
-        body: html`<wk-data-table
-          caption="Sample records"
-          .columns=${columns}
-          .rows=${rows}
-        ></wk-data-table>`,
-      },
-    ]),
-};
-
-export const Playground: Story = {
-  name: "Playground (in depth)",
-  render: () => html`
-    <div style="padding:1.5rem">
-      <wk-data-table
-        caption="Sample records"
-        .columns=${columns}
-        .rows=${rows}
-      ></wk-data-table>
-    </div>
-  `,
-};
+export const Overview: Story = {};

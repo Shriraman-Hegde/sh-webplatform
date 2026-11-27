@@ -1,71 +1,54 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 import "../../src/components/layout/wk-badge/index.js";
-import { docs, overviewPage, row } from "../_helpers.js";
+import { attr, componentDocs, sizeArg } from "../_helpers.js";
 
-const usage = `
-<wk-badge>Draft</wk-badge>
-<wk-badge tone="accent" icon="edit">Live</wk-badge>
-<wk-badge tone="danger" size="sm">Urgent</wk-badge>
-`.trim();
+const usage = `<wk-badge>Draft</wk-badge>
+<wk-badge tone="accent" icon="edit">Live</wk-badge>`;
 
 const meta: Meta = {
   title: "Layout/Badge",
   component: "wk-badge",
-  parameters: {
-    ...docs(`Status chip. Optional \`icon\` and \`size\`.
-
-### Usage
-\`\`\`html
-${usage}
-\`\`\``),
-  },
+  tags: ["autodocs"],
+  parameters: componentDocs(
+    "Compact status chip. Optional icon and size.",
+    usage,
+  ),
   argTypes: {
-    label: { control: "text" },
-    tone: {
+    label: attr("Badge label (slot).", { defaultValue: "Draft" }),
+    tone: attr("Visual tone.", {
       control: "select",
       options: ["neutral", "accent", "success", "danger"],
-    },
-    size: { control: "select", options: ["sm", "md", "lg"] },
-    icon: { control: "text" },
+      defaultValue: "neutral",
+      type: '"neutral" | "accent" | "success" | "danger"',
+    }),
+    size: sizeArg,
+    icon: attr("Optional icon name.", { defaultValue: "" }),
   },
   args: { label: "Draft", tone: "neutral", size: "md", icon: "" },
+  render: (args) => html`
+    <wk-badge
+      tone=${args.tone}
+      size=${args.size}
+      icon=${args.icon || undefined}
+      >${args.label}</wk-badge
+    >
+  `,
 };
 
 export default meta;
 type Story = StoryObj;
 
-export const Overview: Story = {
-  parameters: { controls: { disable: true } },
-  render: () =>
-    overviewPage("wk-badge", usage, [
-      {
-        heading: "Tones",
-        body: row(
-          html`<wk-badge>Neutral</wk-badge>`,
-          html`<wk-badge tone="accent">Accent</wk-badge>`,
-          html`<wk-badge tone="success">Success</wk-badge>`,
-          html`<wk-badge tone="danger">Danger</wk-badge>`,
-        ),
-      },
-      {
-        heading: "Icons & sizes",
-        body: row(
-          html`<wk-badge icon="check" tone="success">Ready</wk-badge>`,
-          html`<wk-badge size="sm">Small</wk-badge>`,
-          html`<wk-badge size="lg" tone="accent">Large</wk-badge>`,
-        ),
-      },
-    ]),
+export const Overview: Story = {};
+
+export const Accent: Story = {
+  args: { tone: "accent", label: "Live", icon: "edit" },
 };
 
-export const Playground: Story = {
-  name: "Playground (in depth)",
-  render: (args) => html`
-    <div style="padding:1.5rem">
-      <wk-badge tone=${args.tone} size=${args.size} icon=${args.icon || undefined}
-        >${args.label}</wk-badge
-      >
-    </div>
-  `,
+export const Success: Story = {
+  args: { tone: "success", label: "Ready", icon: "check" },
+};
+
+export const Danger: Story = {
+  args: { tone: "danger", label: "Urgent", icon: "warn" },
 };

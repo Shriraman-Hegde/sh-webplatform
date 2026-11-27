@@ -2,35 +2,51 @@ import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 import { generatedIconNames } from "@sh-webplatform/icons";
 import "../../src/components/form/wk-button/index.js";
-import { docs, overviewPage, row } from "../_helpers.js";
+import { attr, componentDocs, disabledArg, sizeArg } from "../_helpers.js";
 
-const usage = `
-<wk-button variant="primary">Save</wk-button>
-<wk-button variant="secondary" size="sm">Cancel</wk-button>
-<wk-button variant="ghost" icon="search">Search</wk-button>
-<wk-button icon="plus" icon-only></wk-button>
-`.trim();
+const usage = `<wk-button variant="primary">Save</wk-button>
+<wk-button variant="secondary" icon="check">Confirm</wk-button>
+<wk-button icon="search" icon-only></wk-button>`;
 
 const meta: Meta = {
   title: "Form/Button",
   component: "wk-button",
-  parameters: {
-    ...docs(`Action button. Variants, sizes, optional icons, and motion.
-
-### Usage
-\`\`\`html
-${usage}
-\`\`\``),
-  },
+  tags: ["autodocs"],
+  parameters: componentDocs(
+    "Button triggers an action. Supports variants, sizes, optional icons, and motion.",
+    usage,
+  ),
   argTypes: {
-    label: { control: "text" },
-    variant: { control: "select", options: ["primary", "secondary", "ghost"] },
-    size: { control: "select", options: ["sm", "md", "lg"] },
-    disabled: { control: "boolean" },
-    animated: { control: "boolean" },
-    icon: { control: "select", options: ["", ...generatedIconNames] },
-    iconPosition: { control: "select", options: ["start", "end"] },
-    iconOnly: { control: "boolean" },
+    label: attr("Button label text (slot content).", { defaultValue: "Save" }),
+    variant: attr("Visual style.", {
+      control: "select",
+      options: ["primary", "secondary", "ghost"],
+      defaultValue: "primary",
+      type: '"primary" | "secondary" | "ghost"',
+    }),
+    size: sizeArg,
+    disabled: disabledArg,
+    animated: attr("Enable hover motion (honors data-motion).", {
+      control: "boolean",
+      defaultValue: "true",
+      type: "boolean",
+    }),
+    icon: attr("Optional icon name from the icon library.", {
+      control: "select",
+      options: ["", ...generatedIconNames],
+      defaultValue: "",
+    }),
+    iconPosition: attr("Icon placement when icon is set.", {
+      control: "select",
+      options: ["start", "end"],
+      defaultValue: "start",
+      type: '"start" | "end"',
+    }),
+    iconOnly: attr("Render icon without label.", {
+      control: "boolean",
+      defaultValue: "false",
+      type: "boolean",
+    }),
   },
   args: {
     label: "Save",
@@ -38,69 +54,56 @@ ${usage}
     size: "md",
     disabled: false,
     animated: true,
-    icon: "check",
+    icon: "",
     iconPosition: "start",
     iconOnly: false,
   },
+  render: (args) => html`
+    <wk-button
+      variant=${args.variant}
+      size=${args.size}
+      ?disabled=${args.disabled}
+      ?animated=${args.animated}
+      icon=${args.icon || undefined}
+      icon-position=${args.iconPosition}
+      ?icon-only=${args.iconOnly}
+      >${args.label}</wk-button
+    >
+  `,
 };
 
 export default meta;
 type Story = StoryObj;
 
-export const Overview: Story = {
-  parameters: { controls: { disable: true } },
-  render: () =>
-    overviewPage("wk-button", usage, [
-      {
-        heading: "Variants",
-        body: row(
-          html`<wk-button variant="primary">Primary</wk-button>`,
-          html`<wk-button variant="secondary">Secondary</wk-button>`,
-          html`<wk-button variant="ghost">Ghost</wk-button>`,
-        ),
-      },
-      {
-        heading: "Sizes",
-        body: row(
-          html`<wk-button size="sm">Small</wk-button>`,
-          html`<wk-button size="md">Medium</wk-button>`,
-          html`<wk-button size="lg">Large</wk-button>`,
-        ),
-      },
-      {
-        heading: "Icons",
-        body: row(
-          html`<wk-button icon="check">With icon</wk-button>`,
-          html`<wk-button icon="external-link" icon-position="end"
-            >Icon end</wk-button
-          >`,
-          html`<wk-button icon="search" icon-only></wk-button>`,
-        ),
-      },
-      {
-        heading: "States",
-        body: row(
-          html`<wk-button disabled>Disabled</wk-button>`,
-          html`<wk-button ?animated=${false}>No animation</wk-button>`,
-        ),
-      },
-    ]),
+/** Docs landing — preview + Attributes controls (SC WebKit Overview pattern). */
+export const Overview: Story = {};
+
+export const Secondary: Story = {
+  args: { variant: "secondary", label: "Cancel" },
 };
 
-export const Playground: Story = {
-  name: "Playground (in depth)",
-  render: (args) => html`
-    <div style="padding: 1.5rem">
-      <wk-button
-        variant=${args.variant}
-        size=${args.size}
-        ?disabled=${args.disabled}
-        ?animated=${args.animated}
-        icon=${args.icon || undefined}
-        icon-position=${args.iconPosition}
-        ?icon-only=${args.iconOnly}
-        >${args.label}</wk-button
-      >
+export const WithIcon: Story = {
+  args: { icon: "check", label: "Confirm" },
+};
+
+export const IconRight: Story = {
+  args: { icon: "external-link", iconPosition: "end", label: "Open" },
+};
+
+export const IconOnly: Story = {
+  args: { icon: "search", iconOnly: true, label: "Search" },
+};
+
+export const Sizes: Story = {
+  render: () => html`
+    <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap">
+      <wk-button size="sm">Small</wk-button>
+      <wk-button size="md">Medium</wk-button>
+      <wk-button size="lg">Large</wk-button>
     </div>
   `,
+};
+
+export const Disabled: Story = {
+  args: { disabled: true },
 };

@@ -1,29 +1,22 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 import "../../src/components/composite/wk-workbench/index.js";
-import { docs } from "../_helpers.js";
+import { componentDocs } from "../_helpers.js";
 
-const usage = `
-import { bootstrapWebkit } from "@sh-webplatform/webkit";
-import { iconRegistry } from "@sh-webplatform/icons";
-import "@sh-webplatform/webkit";
-
-bootstrapWebkit({ theme: "default", icons: iconRegistry });
-<wk-workbench></wk-workbench>
-`.trim();
+const usage = `bootstrapWebkit({ theme: "default", icons: iconRegistry });
+<wk-workbench></wk-workbench>`;
 
 const meta: Meta = {
   title: "Composite/Workbench",
   component: "wk-workbench",
+  tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
     controls: { disable: true },
-    ...docs(`Composition demo of form + layout primitives. Use component Overviews for options and Playground for Controls.
-
-### Usage
-\`\`\`html
-${usage}
-\`\`\``),
+    ...componentDocs(
+      "Composition demo of form + layout primitives. Open individual component Overviews for Attributes and usage.",
+      usage,
+    ),
   },
   render: () => html`<wk-workbench></wk-workbench>`,
 };

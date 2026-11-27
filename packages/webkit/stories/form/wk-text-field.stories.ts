@@ -1,35 +1,33 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 import "../../src/components/form/wk-text-field/index.js";
-import { docs, overviewPage, stack } from "../_helpers.js";
+import { attr, componentDocs, disabledArg, sizeArg } from "../_helpers.js";
 
-const usage = `
-<wk-text-field label="Title" name="title" value="Sample"></wk-text-field>
-<wk-text-field label="Search" leading-icon="search" placeholder="Find…"></wk-text-field>
-<wk-text-field label="Email" size="sm" error></wk-text-field>
-`.trim();
+const usage = `<wk-text-field label="Title" name="title" value="Sample"></wk-text-field>
+<wk-text-field label="Search" leading-icon="search" placeholder="Find…"></wk-text-field>`;
 
 const meta: Meta = {
   title: "Form/Text Field",
   component: "wk-text-field",
-  parameters: {
-    ...docs(`Single-line labeled input. Emits \`wk-input\`.
-
-### Usage
-\`\`\`html
-${usage}
-\`\`\``),
-  },
+  tags: ["autodocs"],
+  parameters: componentDocs(
+    "Single-line labeled input. Emits `wk-input`. Optional leading/trailing icons.",
+    usage,
+  ),
   argTypes: {
-    label: { control: "text" },
-    name: { control: "text" },
-    value: { control: "text" },
-    placeholder: { control: "text" },
-    size: { control: "select", options: ["sm", "md", "lg"] },
-    leadingIcon: { control: "text" },
-    trailingIcon: { control: "text" },
-    disabled: { control: "boolean" },
-    error: { control: "boolean" },
+    label: attr("Field label.", { defaultValue: "" }),
+    name: attr("Native name attribute.", { defaultValue: "" }),
+    value: attr("Current value.", { defaultValue: "" }),
+    placeholder: attr("Placeholder text.", { defaultValue: "" }),
+    size: sizeArg,
+    leadingIcon: attr("Optional leading icon name.", { defaultValue: "" }),
+    trailingIcon: attr("Optional trailing icon name.", { defaultValue: "" }),
+    disabled: disabledArg,
+    error: attr("Error state styling.", {
+      control: "boolean",
+      defaultValue: "false",
+      type: "boolean",
+    }),
   },
   args: {
     label: "Title",
@@ -42,47 +40,8 @@ ${usage}
     disabled: false,
     error: false,
   },
-};
-
-export default meta;
-type Story = StoryObj;
-
-export const Overview: Story = {
-  parameters: { controls: { disable: true } },
-  render: () =>
-    overviewPage("wk-text-field", usage, [
-      {
-        heading: "Basics",
-        body: stack(
-          html`<wk-text-field label="Title" name="title" value="Sample"></wk-text-field>`,
-          html`<wk-text-field
-            label="Search"
-            leading-icon="search"
-            placeholder="Find…"
-          ></wk-text-field>`,
-          html`<wk-text-field
-            label="Amount"
-            trailing-icon="edit"
-            value="42"
-          ></wk-text-field>`,
-        ),
-      },
-      {
-        heading: "Sizes & states",
-        body: stack(
-          html`<wk-text-field label="Small" size="sm" value="sm"></wk-text-field>`,
-          html`<wk-text-field label="Large" size="lg" value="lg"></wk-text-field>`,
-          html`<wk-text-field label="Error" error value="Invalid"></wk-text-field>`,
-          html`<wk-text-field label="Disabled" disabled value="Locked"></wk-text-field>`,
-        ),
-      },
-    ]),
-};
-
-export const Playground: Story = {
-  name: "Playground (in depth)",
   render: (args) => html`
-    <div style="padding:1.5rem;max-width:28rem">
+    <div style="max-width:28rem">
       <wk-text-field
         label=${args.label}
         name=${args.name}
@@ -94,6 +53,29 @@ export const Playground: Story = {
         ?disabled=${args.disabled}
         ?error=${args.error}
       ></wk-text-field>
+    </div>
+  `,
+};
+
+export default meta;
+type Story = StoryObj;
+
+export const Overview: Story = {};
+
+export const WithIcons: Story = {
+  args: { leadingIcon: "search", placeholder: "Find…", value: "" },
+};
+
+export const Error: Story = {
+  args: { error: true, value: "Invalid" },
+};
+
+export const Sizes: Story = {
+  render: () => html`
+    <div style="display:grid;gap:0.75rem;max-width:28rem">
+      <wk-text-field label="Small" size="sm" value="sm"></wk-text-field>
+      <wk-text-field label="Medium" size="md" value="md"></wk-text-field>
+      <wk-text-field label="Large" size="lg" value="lg"></wk-text-field>
     </div>
   `,
 };

@@ -1,29 +1,27 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 import "../../src/components/form/wk-checkbox/index.js";
-import { docs, overviewPage, stack } from "../_helpers.js";
+import { attr, componentDocs, disabledArg } from "../_helpers.js";
 
-const usage = `
-<wk-checkbox label="Mark as urgent" name="urgent"></wk-checkbox>
-<wk-checkbox label="Accepted" name="tos" .checked=\${true}></wk-checkbox>
-`.trim();
+const usage = `<wk-checkbox label="Mark as urgent" name="urgent"></wk-checkbox>`;
 
 const meta: Meta = {
   title: "Form/Checkbox",
   component: "wk-checkbox",
-  parameters: {
-    ...docs(`Labeled checkbox. Emits \`wk-change\` with \`{ checked }\`.
-
-### Usage
-\`\`\`html
-${usage}
-\`\`\``),
-  },
+  tags: ["autodocs"],
+  parameters: componentDocs(
+    "Labeled checkbox. Emits `wk-change` with `{ checked }`.",
+    usage,
+  ),
   argTypes: {
-    label: { control: "text" },
-    name: { control: "text" },
-    checked: { control: "boolean" },
-    disabled: { control: "boolean" },
+    label: attr("Checkbox label.", { defaultValue: "" }),
+    name: attr("Native name attribute.", { defaultValue: "" }),
+    checked: attr("Checked state.", {
+      control: "boolean",
+      defaultValue: "false",
+      type: "boolean",
+    }),
+    disabled: disabledArg,
   },
   args: {
     label: "Mark as urgent",
@@ -31,44 +29,25 @@ ${usage}
     checked: false,
     disabled: false,
   },
+  render: (args) => html`
+    <wk-checkbox
+      label=${args.label}
+      name=${args.name}
+      .checked=${args.checked}
+      ?disabled=${args.disabled}
+    ></wk-checkbox>
+  `,
 };
 
 export default meta;
 type Story = StoryObj;
 
-export const Overview: Story = {
-  parameters: { controls: { disable: true } },
-  render: () =>
-    overviewPage("wk-checkbox", usage, [
-      {
-        heading: "States",
-        body: stack(
-          html`<wk-checkbox label="Unchecked" name="a"></wk-checkbox>`,
-          html`<wk-checkbox
-            label="Checked"
-            name="b"
-            .checked=${true}
-          ></wk-checkbox>`,
-          html`<wk-checkbox
-            label="Disabled"
-            name="c"
-            disabled
-          ></wk-checkbox>`,
-        ),
-      },
-    ]),
+export const Overview: Story = {};
+
+export const Checked: Story = {
+  args: { checked: true },
 };
 
-export const Playground: Story = {
-  name: "Playground (in depth)",
-  render: (args) => html`
-    <div style="padding:1.5rem">
-      <wk-checkbox
-        label=${args.label}
-        name=${args.name}
-        .checked=${args.checked}
-        ?disabled=${args.disabled}
-      ></wk-checkbox>
-    </div>
-  `,
+export const Disabled: Story = {
+  args: { disabled: true },
 };

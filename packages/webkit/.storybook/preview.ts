@@ -11,6 +11,7 @@ bootstrapWebkit({
 });
 
 const preview: Preview = {
+  tags: ["autodocs"],
   globalTypes: {
     theme: {
       description: "webkit theme",
@@ -53,6 +54,8 @@ const preview: Preview = {
     },
   ],
   parameters: {
+    // Match SC WebKit docs: land on Docs/Overview with Attributes table + Show code
+    viewMode: "docs",
     layout: "padded",
     controls: {
       expanded: true,
@@ -60,13 +63,14 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        order: ["Form", "Layout", "Composite"],
-        method: "configure",
-        includeNames: true,
+        order: ["Form", "Layout", "Composite", ["Overview", "*"]],
       },
     },
     docs: {
       toc: true,
+      canvas: {
+        sourceState: "shown",
+      },
     },
   },
 };

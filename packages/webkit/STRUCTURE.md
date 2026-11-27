@@ -23,7 +23,7 @@ Follows [open-wc](https://github.com/open-wc/open-wc) practices for Lit web comp
 | Tests | `@web/test-runner` + `@open-wc/testing` (real Chromium) |
 | Build | `@open-wc/building-rollup` (`createBasicConfig`) → ESM + CDN |
 | Lint | ESLint + `eslint-plugin-lit` / `eslint-plugin-wc` |
-| Workshop | Storybook — each component has **Overview** (all options + usage) and **Playground** (Controls) |
+| Workshop | Storybook Docs (SC WebKit-style): **Overview** = preview + Attributes + Show code; variant stories for in-depth |
 
 ## Naming
 

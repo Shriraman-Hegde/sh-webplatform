@@ -1,85 +1,109 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 import "../../src/components/layout/wk-accordion/index.js";
-import { docs, overviewPage } from "../_helpers.js";
+import { attr, componentDocs } from "../_helpers.js";
+
 const items = [
-  { id: "overview", title: "Overview", icon: "info" },
-  { id: "details", title: "Details", icon: "edit" },
-  { id: "history", title: "History" },
+  { id: "a", title: "Accordion title", icon: "info" },
+  { id: "b", title: "Details", icon: "edit" },
+  { id: "c", title: "History" },
 ];
 
-const usage = `
-<wk-accordion
-  .items=\${[{ id: "overview", title: "Overview", icon: "info" }]}
-  .openIds=\${["overview"]}
-  ?multiple=\${false}
+const usage = `<wk-accordion
+  .items=\${[{ id: "a", title: "Accordion title" }]}
+  .openIds=\${["a"]}
 >
-  <div slot="overview">Panel</div>
-</wk-accordion>
-`.trim();
+  <div slot="a">Expanded content</div>
+</wk-accordion>`;
 
 const meta: Meta = {
   title: "Layout/Accordion",
   component: "wk-accordion",
-  parameters: {
-    ...docs(`Expandable sections. Optional item \`icon\`. Emits \`wk-change\`.
-
-### Usage
-\`\`\`html
-${usage}
-\`\`\``),
+  tags: ["autodocs"],
+  parameters: componentDocs(
+    "Accordion shows a brief summary and expands to show additional content.",
+    usage,
+  ),
+  argTypes: {
+    multiple: attr("Allow multiple panels open at once.", {
+      control: "boolean",
+      defaultValue: "false",
+      type: "boolean",
+    }),
+    title: attr("Summary text for the first item (demo control).", {
+      defaultValue: "Accordion title",
+    }),
+    withIcon: attr("Show optional icon on the first item.", {
+      control: "boolean",
+      defaultValue: "true",
+      type: "boolean",
+    }),
   },
-  argTypes: { multiple: { control: "boolean" } },
-  args: { multiple: false },
+  args: {
+    multiple: false,
+    title: "Accordion title",
+    withIcon: true,
+  },
+  render: (args) => {
+    const demoItems = [
+      {
+        id: "a",
+        title: args.title as string,
+        icon: args.withIcon ? "info" : undefined,
+      },
+      { id: "b", title: "Details", icon: args.withIcon ? "edit" : undefined },
+      { id: "c", title: "History" },
+    ];
+    return html`
+      <div style="max-width:28rem">
+        <wk-accordion
+          .items=${demoItems}
+          .openIds=${[]}
+          ?multiple=${args.multiple}
+        >
+          <div slot="a">Expanded content for the summary.</div>
+          <div slot="b">Additional details.</div>
+          <div slot="c">History content.</div>
+        </wk-accordion>
+      </div>
+    `;
+  },
 };
 
 export default meta;
 type Story = StoryObj;
 
-export const Overview: Story = {
-  parameters: { controls: { disable: true } },
-  render: () =>
-    overviewPage("wk-accordion", usage, [
-      {
-        heading: "Single open",
-        body: html`
-          <wk-accordion .items=${items} .openIds=${["overview"]}>
-            <div slot="overview">High-level summary.</div>
-            <div slot="details">Additional fields.</div>
-            <div slot="history">Recent updates.</div>
-          </wk-accordion>
-        `,
-      },
-      {
-        heading: "Multiple",
-        body: html`
-          <wk-accordion
-            multiple
-            .items=${items}
-            .openIds=${["overview", "details"]}
-          >
-            <div slot="overview">Overview</div>
-            <div slot="details">Details</div>
-            <div slot="history">History</div>
-          </wk-accordion>
-        `,
-      },
-    ]),
-};
+export const Overview: Story = {};
 
-export const Playground: Story = {
-  name: "Playground (in depth)",
-  render: (args) => html`
-    <div style="padding:1.5rem;max-width:28rem">
-      <wk-accordion
-        .items=${items}
-        .openIds=${["overview"]}
-        ?multiple=${args.multiple}
-      >
-        <div slot="overview">Overview panel</div>
-        <div slot="details">Details panel</div>
-        <div slot="history">History panel</div>
+export const Expand: Story = {
+  render: () => html`
+    <div style="max-width:28rem">
+      <wk-accordion .items=${items} .openIds=${["a"]}>
+        <div slot="a">Expanded content</div>
+        <div slot="b">Details</div>
+        <div slot="c">History</div>
       </wk-accordion>
     </div>
   `,
+};
+
+export const Multiple: Story = {
+  args: { multiple: true },
+  render: () => html`
+    <div style="max-width:28rem">
+      <wk-accordion multiple .items=${items} .openIds=${["a", "b"]}>
+        <div slot="a">Overview</div>
+        <div slot="b">Details</div>
+        <div slot="c">History</div>
+      </wk-accordion>
+    </div>
+  `,
+};
+
+export const WithIcon: Story = {
+  args: { withIcon: true, title: "Accordion title" },
+};
+
+export const WithoutIcon: Story = {
+  args: { withIcon: false, title: "Accordion title" },
 };

@@ -1,29 +1,27 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 import "../../src/components/form/wk-switch/index.js";
-import { docs, overviewPage, stack } from "../_helpers.js";
+import { attr, componentDocs, disabledArg } from "../_helpers.js";
 
-const usage = `
-<wk-switch label="Email notifications" name="notify"></wk-switch>
-<wk-switch label="Enabled" name="on" .checked=\${true}></wk-switch>
-`.trim();
+const usage = `<wk-switch label="Email notifications" name="notify"></wk-switch>`;
 
 const meta: Meta = {
   title: "Form/Switch",
   component: "wk-switch",
-  parameters: {
-    ...docs(`On/off toggle. Emits \`wk-change\` with \`{ checked }\`.
-
-### Usage
-\`\`\`html
-${usage}
-\`\`\``),
-  },
+  tags: ["autodocs"],
+  parameters: componentDocs(
+    "On/off toggle. Emits `wk-change` with `{ checked }`.",
+    usage,
+  ),
   argTypes: {
-    label: { control: "text" },
-    name: { control: "text" },
-    checked: { control: "boolean" },
-    disabled: { control: "boolean" },
+    label: attr("Switch label.", { defaultValue: "" }),
+    name: attr("Native name attribute.", { defaultValue: "" }),
+    checked: attr("On/off state.", {
+      control: "boolean",
+      defaultValue: "false",
+      type: "boolean",
+    }),
+    disabled: disabledArg,
   },
   args: {
     label: "Email notifications",
@@ -31,36 +29,25 @@ ${usage}
     checked: true,
     disabled: false,
   },
+  render: (args) => html`
+    <wk-switch
+      label=${args.label}
+      name=${args.name}
+      .checked=${args.checked}
+      ?disabled=${args.disabled}
+    ></wk-switch>
+  `,
 };
 
 export default meta;
 type Story = StoryObj;
 
-export const Overview: Story = {
-  parameters: { controls: { disable: true } },
-  render: () =>
-    overviewPage("wk-switch", usage, [
-      {
-        heading: "States",
-        body: stack(
-          html`<wk-switch label="Off" name="a"></wk-switch>`,
-          html`<wk-switch label="On" name="b" .checked=${true}></wk-switch>`,
-          html`<wk-switch label="Disabled" name="c" disabled></wk-switch>`,
-        ),
-      },
-    ]),
+export const Overview: Story = {};
+
+export const Off: Story = {
+  args: { checked: false },
 };
 
-export const Playground: Story = {
-  name: "Playground (in depth)",
-  render: (args) => html`
-    <div style="padding:1.5rem">
-      <wk-switch
-        label=${args.label}
-        name=${args.name}
-        .checked=${args.checked}
-        ?disabled=${args.disabled}
-      ></wk-switch>
-    </div>
-  `,
+export const Disabled: Story = {
+  args: { disabled: true },
 };
