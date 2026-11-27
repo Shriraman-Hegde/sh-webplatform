@@ -11,7 +11,9 @@ const meta: Meta = {
   parameters: {
     layout: "fullscreen",
     controls: { disable: true },
-    ...componentDocs("Composition demo of form + layout primitives. Open individual component Overviews for Attributes and usage."),
+    ...componentDocs(
+      "Composition demo of form + layout primitives. Open individual component Overviews for Attributes.",
+    ),
   },
   render: () => html`<wk-workbench></wk-workbench>`,
 };
