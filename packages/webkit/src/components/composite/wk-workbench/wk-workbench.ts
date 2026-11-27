@@ -54,7 +54,7 @@ export class WkWorkbench extends WkElement {
     this.bannerTone = "empty";
     this.titleValue = "Sample request";
     this.notes = "";
-    this.dept = "stores";
+    this.dept = "alpha";
     this.priority = "normal";
     this.urgent = false;
     this.notify = true;
@@ -169,13 +169,13 @@ export class WkWorkbench extends WkElement {
                 }}
               ></wk-textarea>
               <wk-select
-                label="Department"
-                name="department"
+                label="Team"
+                name="team"
                 .value=${this.dept}
                 .options=${[
-                  { value: "stores", label: "Stores" },
-                  { value: "production", label: "Production" },
-                  { value: "onboarding", label: "Onboarding" },
+                  { value: "alpha", label: "Team Alpha" },
+                  { value: "beta", label: "Team Beta" },
+                  { value: "gamma", label: "Team Gamma" },
                 ]}
                 @wk-change=${(e: CustomEvent<{ value: string }>) => {
                   this.dept = e.detail.value;
@@ -248,9 +248,9 @@ export class WkWorkbench extends WkElement {
           </wk-card>
 
           <wk-card heading="Linked items">
-            <wk-alert tone="info" heading="Cross-reference">
+            <wk-alert tone="info" heading="Related items">
               Open related records with
-              <wk-link href="#COL-77">wk-link</wk-link>
+              <wk-link href="#item-a">wk-link</wk-link>
               or browse tabs below.
             </wk-alert>
             <wk-divider></wk-divider>
@@ -267,25 +267,25 @@ export class WkWorkbench extends WkElement {
               <div slot="links" class="row">
                 <div>
                   <wk-icon name="check" label="Ready"></wk-icon>
-                  <wk-link href="#COL-77">COL-77 Collateral</wk-link>
+                  <wk-link href="#item-a">ITEM-A Sample record</wk-link>
                 </div>
                 <div>
                   <wk-icon name="info" label="Info"></wk-icon>
-                  <wk-link href="#FAC-1001">FAC-1001 Facility</wk-link>
+                  <wk-link href="#item-b">ITEM-B Sample record</wk-link>
                 </div>
               </div>
               <div slot="table">
                 <wk-data-table
-                  caption="Demo references"
+                  caption="Sample records"
                   .columns=${[
                     { key: "id", label: "ID" },
                     { key: "type", label: "Type" },
                     { key: "owner", label: "Owner" },
                   ]}
                   .rows=${[
-                    { id: "COL-77", type: "Collateral", owner: "Risk" },
-                    { id: "FAC-1001", type: "Facility", owner: "Credit" },
-                    { id: "BOR-42", type: "Borrower", owner: "Onboarding" },
+                    { id: "ITEM-A", type: "Record", owner: "Team Alpha" },
+                    { id: "ITEM-B", type: "Record", owner: "Team Beta" },
+                    { id: "ITEM-C", type: "Record", owner: "Team Gamma" },
                   ]}
                 ></wk-data-table>
               </div>

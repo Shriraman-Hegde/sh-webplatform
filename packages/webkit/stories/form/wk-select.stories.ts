@@ -3,9 +3,9 @@ import { html } from "lit";
 import "../../src/components/form/wk-select/index.js";
 
 const options = [
-  { value: "stores", label: "Stores" },
-  { value: "production", label: "Production" },
-  { value: "onboarding", label: "Onboarding" },
+  { value: "alpha", label: "Team Alpha" },
+  { value: "beta", label: "Team Beta" },
+  { value: "gamma", label: "Team Gamma" },
 ];
 
 const meta: Meta = {
@@ -21,9 +21,9 @@ const meta: Meta = {
     disabled: { control: "boolean" },
   },
   args: {
-    label: "Department",
-    name: "department",
-    value: "stores",
+    label: "Team",
+    name: "team",
+    value: "alpha",
     disabled: false,
   },
   render: (args) => html`

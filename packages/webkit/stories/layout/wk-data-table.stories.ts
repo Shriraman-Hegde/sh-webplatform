@@ -9,9 +9,9 @@ const columns = [
 ];
 
 const rows = [
-  { id: "COL-77", type: "Collateral", owner: "Risk" },
-  { id: "FAC-1001", type: "Facility", owner: "Credit" },
-  { id: "BOR-42", type: "Borrower", owner: "Onboarding" },
+  { id: "ITEM-A", type: "Record", owner: "Team Alpha" },
+  { id: "ITEM-B", type: "Record", owner: "Team Beta" },
+  { id: "ITEM-C", type: "Record", owner: "Team Gamma" },
 ];
 
 const meta: Meta = {
@@ -21,7 +21,7 @@ const meta: Meta = {
     caption: { control: "text" },
   },
   args: {
-    caption: "Demo references",
+    caption: "Sample records",
   },
   render: (args) => html`
     <div style="padding: 1.5rem">

@@ -12,8 +12,8 @@ const meta: Meta = {
     disabled: { control: "boolean" },
   },
   args: {
-    label: "Open collateral",
-    href: "/collateral/COL-77",
+    label: "Open record",
+    href: "/records/item-a",
     target: "",
     disabled: false,
   },
