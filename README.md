@@ -6,7 +6,7 @@ Plan: [`docs/plans/2026-11-26-2144-feature-webkit-lit-storybook-cdn-plan.md`](do
 
 ## Scope (current)
 
-**In:** Lit web components, themes, Storybook, Rollup publish (ESM + CDN), sample consumer for install proof.
+**In:** Lit web components (host-owned kit: base element, tokens, registry, icon context), Storybook, Rollup publish (ESM + CDN), sample consumer for install proof.
 
 **Out for now:** microfrontends, entity-ref / discovery service, Helm charts, JSON form renderer, cross-app routing.
 

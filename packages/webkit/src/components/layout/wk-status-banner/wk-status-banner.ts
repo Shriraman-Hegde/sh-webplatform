@@ -1,6 +1,8 @@
-import { LitElement, css, html } from "lit";
+import { css, html } from "lit";
+import { WkElement } from "../../../base/index.js";
+import { defineElement } from "../../../registry/index.js";
 
-export class WkStatusBanner extends LitElement {
+export class WkStatusBanner extends WkElement {
   static properties = {
     tone: { type: String, reflect: true },
     message: { type: String },
@@ -15,7 +17,7 @@ export class WkStatusBanner extends LitElement {
     this.message = "";
   }
 
-  static styles = css`
+  static styles = [WkElement.styles, css`
     :host {
       display: block;
       font-family: var(--wk-font-sans);
@@ -35,7 +37,7 @@ export class WkStatusBanner extends LitElement {
     :host([tone="loading"]) .banner {
       border-style: dashed;
     }
-  `;
+  `];
 
   render() {
     const fallback =
@@ -48,7 +50,7 @@ export class WkStatusBanner extends LitElement {
   }
 }
 
-customElements.define("wk-status-banner", WkStatusBanner);
+defineElement("wk-status-banner", WkStatusBanner);
 
 declare global {
   interface HTMLElementTagNameMap {

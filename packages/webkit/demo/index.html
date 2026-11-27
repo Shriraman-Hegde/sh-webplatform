@@ -21,12 +21,19 @@
       }
     </style>
     <script type="module">
-      import { applyTheme } from "../src/theme/index.ts";
+      import { bootstrapWebkit } from "../src/bootstrap.ts";
       import "../src/components/composite/wk-workbench/index.ts";
 
-      applyTheme("default");
+      bootstrapWebkit({
+        theme: "default",
+        icons: {
+          get: (name) => ({ check: "✓", close: "×" })[name],
+        },
+      });
       const select = document.getElementById("theme");
-      select.addEventListener("change", () => applyTheme(select.value));
+      select.addEventListener("change", () =>
+        bootstrapWebkit({ theme: select.value }),
+      );
     </script>
   </head>
   <body>
@@ -38,7 +45,7 @@
           <option value="warm">warm</option>
         </select>
       </label>
-      <span>open-wc web-dev-server demo</span>
+      <span>webkit host boot (tokens + icons)</span>
     </div>
     <wk-workbench></wk-workbench>
   </body>

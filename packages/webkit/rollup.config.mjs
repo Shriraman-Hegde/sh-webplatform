@@ -18,7 +18,7 @@ export default [
       format: "es",
       sourcemap: true,
     },
-    external: [/^lit($|\/)/],
+    external: [/^lit($|\/)/, /^@lit\//],
     plugins,
     // Keep customElements.define / theme side effects when lit is external.
     treeshake: {

@@ -1,6 +1,8 @@
-import { LitElement, css, html } from "lit";
+import { css, html } from "lit";
+import { WkElement } from "../../../base/index.js";
+import { defineElement } from "../../../registry/index.js";
 
-export class WkButton extends LitElement {
+export class WkButton extends WkElement {
   static properties = {
     disabled: { type: Boolean, reflect: true },
     variant: { type: String, reflect: true },
@@ -15,7 +17,7 @@ export class WkButton extends LitElement {
     this.variant = "primary";
   }
 
-  static styles = css`
+  static styles = [WkElement.styles, css`
     :host {
       display: inline-block;
     }
@@ -44,7 +46,7 @@ export class WkButton extends LitElement {
       opacity: 0.55;
       cursor: not-allowed;
     }
-  `;
+  `];
 
   render() {
     return html`
@@ -55,7 +57,7 @@ export class WkButton extends LitElement {
   }
 }
 
-customElements.define("wk-button", WkButton);
+defineElement("wk-button", WkButton);
 
 declare global {
   interface HTMLElementTagNameMap {

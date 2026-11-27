@@ -32,7 +32,8 @@
     "build-storybook": "storybook build -o storybook-static"
   },
   "peerDependencies": {
-    "lit": "^3.2.0"
+    "lit": "^3.2.0",
+    "@lit/context": "^1.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
@@ -47,6 +48,7 @@
     "@storybook/blocks": "^8.4.7",
     "@storybook/web-components": "^8.4.7",
     "@storybook/web-components-vite": "^8.4.7",
+    "@types/mocha": "^10.0.10",
     "@types/node": "^22.10.1",
     "@typescript-eslint/eslint-plugin": "^8.74.0",
     "@typescript-eslint/parser": "^8.74.0",
@@ -68,5 +70,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@lit/context": "^1.1.6"
   }
 }

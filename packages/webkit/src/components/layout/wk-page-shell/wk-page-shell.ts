@@ -1,6 +1,8 @@
-import { LitElement, css, html } from "lit";
+import { css, html } from "lit";
+import { WkElement } from "../../../base/index.js";
+import { defineElement } from "../../../registry/index.js";
 
-export class WkPageShell extends LitElement {
+export class WkPageShell extends WkElement {
   static properties = {
     pageTitle: { type: String, attribute: "page-title" },
     subtitle: { type: String },
@@ -15,7 +17,7 @@ export class WkPageShell extends LitElement {
     this.subtitle = "";
   }
 
-  static styles = css`
+  static styles = [WkElement.styles, css`
     :host {
       display: block;
       min-height: 100%;
@@ -51,7 +53,7 @@ export class WkPageShell extends LitElement {
       display: grid;
       gap: var(--wk-space-6);
     }
-  `;
+  `];
 
   render() {
     return html`
@@ -67,7 +69,7 @@ export class WkPageShell extends LitElement {
   }
 }
 
-customElements.define("wk-page-shell", WkPageShell);
+defineElement("wk-page-shell", WkPageShell);
 
 declare global {
   interface HTMLElementTagNameMap {

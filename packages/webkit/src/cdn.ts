@@ -1,5 +1,5 @@
 import "lit";
 import "./index.js";
-import { applyTheme } from "./theme/index.js";
+import { bootstrapWebkit } from "./bootstrap.js";
 
-applyTheme("default");
+bootstrapWebkit({ theme: "default" });

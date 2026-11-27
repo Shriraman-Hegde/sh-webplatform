@@ -1,9 +1,11 @@
-import { LitElement, css, html } from "lit";
+import { css, html } from "lit";
+import { WkElement } from "../../../base/index.js";
+import { defineElement } from "../../../registry/index.js";
 
 export type WkTableColumn = { key: string; label: string };
 export type WkTableRow = Record<string, string>;
 
-export class WkDataTable extends LitElement {
+export class WkDataTable extends WkElement {
   static properties = {
     columns: { attribute: false },
     rows: { attribute: false },
@@ -21,7 +23,7 @@ export class WkDataTable extends LitElement {
     this.caption = "";
   }
 
-  static styles = css`
+  static styles = [WkElement.styles, css`
     :host {
       display: block;
       font-family: var(--wk-font-sans);
@@ -52,7 +54,7 @@ export class WkDataTable extends LitElement {
       padding: 0 0 var(--wk-space-3);
       font-weight: 700;
     }
-  `;
+  `];
 
   render() {
     return html`
@@ -77,7 +79,7 @@ export class WkDataTable extends LitElement {
   }
 }
 
-customElements.define("wk-data-table", WkDataTable);
+defineElement("wk-data-table", WkDataTable);
 
 declare global {
   interface HTMLElementTagNameMap {
