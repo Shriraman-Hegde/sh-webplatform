@@ -6,6 +6,7 @@ const meta: Meta = {
   title: "Composite/Workbench",
   component: "wk-workbench",
   parameters: {
+    layout: "fullscreen",
     controls: { disable: true },
     docs: {
       description: {

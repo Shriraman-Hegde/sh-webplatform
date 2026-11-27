@@ -30,7 +30,11 @@ const preview: Preview = {
     },
   ],
   parameters: {
-    layout: "fullscreen",
+    layout: "padded",
+    controls: {
+      expanded: true,
+      sort: "requiredFirst",
+    },
   },
 };
 
