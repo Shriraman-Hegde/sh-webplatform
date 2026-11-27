@@ -13,4 +13,8 @@ export * from "./layout/wk-badge/index.js";
 export * from "./layout/wk-divider/index.js";
 export * from "./layout/wk-spinner/index.js";
 export * from "./layout/wk-dialog/index.js";
+export * from "./layout/wk-icon/index.js";
+export * from "./layout/wk-alert/index.js";
+export * from "./layout/wk-link/index.js";
+export * from "./layout/wk-tabs/index.js";
 export * from "./composite/wk-workbench/index.js";

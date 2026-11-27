@@ -9,14 +9,19 @@ import "../../form/wk-select/index.js";
 import "../../form/wk-switch/index.js";
 import "../../form/wk-text-field/index.js";
 import "../../form/wk-textarea/index.js";
+import "../../layout/wk-alert/index.js";
 import "../../layout/wk-badge/index.js";
 import "../../layout/wk-card/index.js";
 import "../../layout/wk-data-table/index.js";
 import "../../layout/wk-dialog/index.js";
 import "../../layout/wk-divider/index.js";
+import "../../layout/wk-icon/index.js";
+import "../../layout/wk-link/index.js";
 import "../../layout/wk-page-shell/index.js";
 import "../../layout/wk-spinner/index.js";
 import "../../layout/wk-status-banner/index.js";
+import "../../layout/wk-tabs/index.js";
+
 
 export class WkWorkbench extends WkElement {
   static properties = {
@@ -29,6 +34,7 @@ export class WkWorkbench extends WkElement {
     urgent: { state: true },
     notify: { state: true },
     dialogOpen: { state: true },
+    activeTab: { state: true },
   };
 
   declare theme: WebkitTheme;
@@ -40,6 +46,7 @@ export class WkWorkbench extends WkElement {
   declare urgent: boolean;
   declare notify: boolean;
   declare dialogOpen: boolean;
+  declare activeTab: string;
 
   constructor() {
     super();
@@ -52,6 +59,7 @@ export class WkWorkbench extends WkElement {
     this.urgent = false;
     this.notify = true;
     this.dialogOpen = false;
+    this.activeTab = "links";
   }
 
   static styles = [
@@ -240,19 +248,48 @@ export class WkWorkbench extends WkElement {
           </wk-card>
 
           <wk-card heading="Linked items">
-            <wk-data-table
-              caption="Demo references"
-              .columns=${[
-                { key: "id", label: "ID" },
-                { key: "type", label: "Type" },
-                { key: "owner", label: "Owner" },
+            <wk-alert tone="info" heading="Cross-reference">
+              Open related records with
+              <wk-link href="#COL-77">wk-link</wk-link>
+              or browse tabs below.
+            </wk-alert>
+            <wk-divider></wk-divider>
+            <wk-tabs
+              .tabs=${[
+                { id: "links", label: "Links" },
+                { id: "table", label: "Table" },
               ]}
-              .rows=${[
-                { id: "COL-77", type: "Collateral", owner: "Risk" },
-                { id: "FAC-1001", type: "Facility", owner: "Credit" },
-                { id: "BOR-42", type: "Borrower", owner: "Onboarding" },
-              ]}
-            ></wk-data-table>
+              .active=${this.activeTab}
+              @wk-change=${(e: CustomEvent<{ id: string }>) => {
+                this.activeTab = e.detail.id;
+              }}
+            >
+              <div slot="links" class="row">
+                <div>
+                  <wk-icon name="check" label="Ready"></wk-icon>
+                  <wk-link href="#COL-77">COL-77 Collateral</wk-link>
+                </div>
+                <div>
+                  <wk-icon name="info" label="Info"></wk-icon>
+                  <wk-link href="#FAC-1001">FAC-1001 Facility</wk-link>
+                </div>
+              </div>
+              <div slot="table">
+                <wk-data-table
+                  caption="Demo references"
+                  .columns=${[
+                    { key: "id", label: "ID" },
+                    { key: "type", label: "Type" },
+                    { key: "owner", label: "Owner" },
+                  ]}
+                  .rows=${[
+                    { id: "COL-77", type: "Collateral", owner: "Risk" },
+                    { id: "FAC-1001", type: "Facility", owner: "Credit" },
+                    { id: "BOR-42", type: "Borrower", owner: "Onboarding" },
+                  ]}
+                ></wk-data-table>
+              </div>
+            </wk-tabs>
           </wk-card>
         </div>
 
