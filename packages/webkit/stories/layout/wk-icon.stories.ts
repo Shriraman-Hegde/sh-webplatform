@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
-import { generatedIconNames } from "@sh-webplatform/icons";
+import { webkitIconNames } from "../../src/boot-icons.js";
 import "../../src/components/layout/wk-icon/index.js";
 import { attr, componentDocs, sizeArg } from "../_helpers.js";
 
@@ -13,7 +13,7 @@ const meta: Meta = {
   argTypes: {
     name: attr("Icon name from the registry.", {
       control: "select",
-      options: [...generatedIconNames],
+      options: [...webkitIconNames],
       defaultValue: "check",
     }),
     label: attr("Accessible label (role=img when set).", { defaultValue: "" }),
@@ -34,7 +34,7 @@ export const Gallery: Story = {
   parameters: { controls: { disable: true } },
   render: () => html`
     <div style="display:flex;flex-wrap:wrap;gap:1rem">
-      ${generatedIconNames.map(
+      ${webkitIconNames.map(
         (name) => html`
           <div style="display:grid;gap:0.35rem;place-items:center;width:4.5rem">
             <wk-icon name=${name} size="lg"></wk-icon>

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
-import { generatedIconNames } from "@sh-webplatform/icons";
+import { webkitIconNames } from "../../src/boot-icons.js";
 import "../../src/components/form/wk-button/index.js";
 import { attr, componentDocs, disabledArg, sizeArg } from "../_helpers.js";
 
@@ -27,7 +27,7 @@ const meta: Meta = {
     }),
     icon: attr("Optional icon name from the icon library.", {
       control: "select",
-      options: ["", ...generatedIconNames],
+      options: ["", ...webkitIconNames],
       defaultValue: "",
     }),
     iconPosition: attr("Icon placement when icon is set.", {

@@ -52,4 +52,15 @@ button[aria-expanded="true"] .chevron {
   padding: 0 var(--wk-space-4) var(--wk-space-4);
   color: var(--wk-muted);
   font-size: 0.95rem;
+  animation: wk-reveal var(--wk-ease);
+}
+@keyframes wk-reveal {
+  from {
+    opacity: calc(1 - var(--wk-motion, 1));
+    transform: translateY(calc(-4px * var(--wk-motion, 1)));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }

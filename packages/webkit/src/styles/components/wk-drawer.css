@@ -1,0 +1,81 @@
+:host {
+  display: contents;
+}
+dialog {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  height: 100%;
+  max-height: 100%;
+  width: min(24rem, 100vw);
+  background: transparent;
+  color: var(--wk-ink);
+}
+dialog.end {
+  margin-left: auto;
+}
+dialog.start {
+  margin-right: auto;
+}
+dialog::backdrop {
+  background: color-mix(in srgb, var(--wk-ink) 45%, transparent);
+}
+.panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--wk-surface);
+  box-shadow: var(--wk-shadow-md);
+  transition: transform var(--wk-ease);
+}
+dialog.end .panel {
+  transform: translateX(0);
+}
+dialog.start .panel {
+  transform: translateX(0);
+}
+@starting-style {
+  dialog.end[open] .panel {
+    transform: translateX(calc(100% * var(--wk-motion, 1)));
+  }
+  dialog.start[open] .panel {
+    transform: translateX(calc(-100% * var(--wk-motion, 1)));
+  }
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--wk-space-3);
+  padding: var(--wk-space-4) var(--wk-space-6);
+  border-bottom: 1px solid var(--wk-border);
+}
+h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.body {
+  padding: var(--wk-space-6);
+  overflow: auto;
+  flex: 1;
+}
+footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--wk-space-2);
+  padding: var(--wk-space-4) var(--wk-space-6);
+  border-top: 1px solid var(--wk-border);
+}
+button {
+  font: inherit;
+  border: 0;
+  background: transparent;
+  color: var(--wk-muted);
+  cursor: pointer;
+  border-radius: var(--wk-radius);
+  padding: 0.25rem 0.4rem;
+}
+button:focus-visible {
+  outline: none;
+  box-shadow: var(--wk-focus);
+}

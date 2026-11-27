@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" data-theme="default" data-mode="day" data-motion="on">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>webkit app controls</title>
+    <link rel="stylesheet" href="../src/themes/themes.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 1.5rem;
+        display: grid;
+        gap: 1.5rem;
+        font-family: var(--wk-font-sans, system-ui, sans-serif);
+        background: var(--wk-bg);
+        color: var(--wk-ink);
+      }
+      .row {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+    </style>
+    <script type="module">
+      import { bootstrapWebkit } from "../src/bootstrap.ts";
+      import { defaultIconLibrary } from "../src/boot-icons.ts";
+      import "../src/components/layout/wk-pagination/index.ts";
+      import "../src/components/layout/wk-menu/index.ts";
+      import "../src/components/layout/wk-avatar/index.ts";
+      import "../src/components/layout/wk-empty/index.ts";
+      import "../src/components/layout/wk-toast/index.ts";
+      import "../src/components/layout/wk-drawer/index.ts";
+      import "../src/components/form/wk-button/index.ts";
+
+      bootstrapWebkit({
+        theme: "default",
+        mode: "day",
+        motion: "on",
+        icons: defaultIconLibrary,
+      });
+      document.querySelector("#open-drawer").addEventListener("click", () => {
+        document.querySelector("wk-drawer").open = true;
+      });
+    </script>
+  </head>
+  <body>
+    <div class="row">
+      <wk-avatar label="Ada Lovelace"></wk-avatar>
+      <wk-avatar label="Grace Hopper" size="lg"></wk-avatar>
+      <wk-menu label="Actions">
+        <button type="button" value="edit">Edit</button>
+        <button type="button" value="copy">Copy</button>
+      </wk-menu>
+      <wk-button id="open-drawer" variant="secondary">Open drawer</wk-button>
+    </div>
+    <wk-pagination page="3" pages="8"></wk-pagination>
+    <wk-empty heading="No records" icon="calendar">
+      <p>Nothing matches this filter.</p>
+    </wk-empty>
+    <wk-toast open tone="success" duration="0">Saved the record</wk-toast>
+    <wk-drawer heading="Record" placement="end">
+      Details stay in the side panel.
+    </wk-drawer>
+  </body>
+</html>

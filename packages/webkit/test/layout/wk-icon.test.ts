@@ -1,6 +1,7 @@
 import { expect, fixture, html } from "@open-wc/testing";
 import { iconRegistry } from "@sh-webplatform/icons";
 import { bootstrapWebkit } from "../../src/bootstrap.js";
+import { defaultIconLibrary } from "../../src/boot-icons.js";
 import "../../src/components/layout/wk-icon/index.js";
 import type { WkIcon } from "../../src/components/layout/wk-icon/index.js";
 
@@ -9,6 +10,14 @@ describe("wk-icon", () => {
     bootstrapWebkit({ icons: iconRegistry });
     const el = await fixture<WkIcon>(
       html`<wk-icon name="check" label="Done"></wk-icon>`,
+    );
+    expect(el.shadowRoot?.querySelector("svg")).to.exist;
+  });
+
+  it("renders a kit app glyph such as calendar", async () => {
+    bootstrapWebkit({ icons: defaultIconLibrary });
+    const el = await fixture<WkIcon>(
+      html`<wk-icon name="calendar" label="Calendar"></wk-icon>`,
     );
     expect(el.shadowRoot?.querySelector("svg")).to.exist;
   });
