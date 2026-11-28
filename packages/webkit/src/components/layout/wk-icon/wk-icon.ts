@@ -37,6 +37,11 @@ export class WkIcon extends WkElement {
     cssText(wkStyles),
   ];
 
+  protected willUpdate(): void {
+    if (this.label) this.removeAttribute("aria-hidden");
+    else this.setAttribute("aria-hidden", "true");
+  }
+
   protected updated(): void {
     const svg = this.renderRoot.querySelector("svg");
     if (!(svg instanceof SVGElement)) return;
@@ -51,12 +56,11 @@ export class WkIcon extends WkElement {
 
   render() {
     const glyph = this.icons.get(this.name) ?? this.name;
-    const label = this.label || this.name;
     return this.label
-      ? html`<span class="glyph" role="img" aria-label=${this.label} title=${label}
+      ? html`<span class="glyph" role="img" aria-label=${this.label} title=${this.label}
           >${glyph}</span
         >`
-      : html`<span class="glyph" aria-hidden="true" title=${label}>${glyph}</span>`;
+      : html`<span class="glyph">${glyph}</span>`;
   }
 }
 

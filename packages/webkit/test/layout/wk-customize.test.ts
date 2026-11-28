@@ -1,4 +1,6 @@
 import { expect, fixture, html } from "@open-wc/testing";
+import { iconRegistry } from "@sh-webplatform/icons";
+import { bootstrapWebkit } from "../../src/bootstrap.js";
 import "../../src/components/form/wk-button/index.js";
 import "../../src/components/form/wk-text-field/index.js";
 import "../../src/components/layout/wk-card/index.js";
@@ -91,6 +93,7 @@ describe("customization and new controls", () => {
   });
 
   it("emits wk-remove from a chip", async () => {
+    bootstrapWebkit({ icons: iconRegistry });
     const el = await fixture<WkChip>(html`<wk-chip removable>Draft</wk-chip>`);
     const heard = once(el, "wk-remove");
     el.shadowRoot?.querySelector("button")?.click();
