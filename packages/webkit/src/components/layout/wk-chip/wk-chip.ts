@@ -3,6 +3,7 @@ import { cssText } from "../../../styles/css.js";
 import wkStyles from "../../../styles/components/wk-chip.css";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
+import "../wk-icon/index.js";
 
 export class WkChip extends WkElement {
   static properties = {
@@ -33,7 +34,7 @@ export class WkChip extends WkElement {
         <slot></slot>
         ${this.removable
           ? html`<button type="button" part="remove" aria-label="Remove" @click=${this.onRemove}>
-              ×
+              <wk-icon name="close" size="sm"></wk-icon>
             </button>`
           : null}
       </span>

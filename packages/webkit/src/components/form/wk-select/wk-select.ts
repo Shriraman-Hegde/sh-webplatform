@@ -31,7 +31,7 @@ export class WkSelect extends WkElement {
     placement: { type: String, reflect: true },
     /** Paint the menu on the top layer so overflow does not clip it. */
     hoist: { type: Boolean, reflect: true },
-    open: { type: Boolean, reflect: true, state: true },
+    open: { type: Boolean, reflect: true },
     activeIndex: { state: true },
   };
 

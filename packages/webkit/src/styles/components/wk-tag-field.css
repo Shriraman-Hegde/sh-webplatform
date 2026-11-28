@@ -21,7 +21,7 @@ label { display: grid; gap: var(--wk-space-2); font-size: var(--wk-text-sm); fon
   background: color-mix(in srgb, var(--wk-accent) 12%, var(--wk-surface));
   color: var(--wk-accent);
 }
-button { border: 0; background: transparent; color: inherit; cursor: pointer; font: inherit; }
+button { display: inline-flex; align-items: center; justify-content: center; border: 0; background: transparent; color: inherit; cursor: pointer; font: inherit; }
 input { flex: 1; min-width: 6rem; border: 0; background: transparent; color: var(--wk-ink); font: inherit; }
 input:focus { outline: none; }
 input:disabled { opacity: 0.55; }

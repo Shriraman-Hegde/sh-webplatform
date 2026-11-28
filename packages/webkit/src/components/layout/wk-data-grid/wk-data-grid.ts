@@ -3,6 +3,7 @@ import { cssText } from "../../../styles/css.js";
 import wkStyles from "../../../styles/components/wk-data-grid.css";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
+import "../wk-icon/index.js";
 
 export type WkGridColumn = {
   key: string;
@@ -242,7 +243,7 @@ export class WkDataGrid extends WkElement {
                     ?disabled=${index === 0}
                     @click=${() => this.move(index, -1)}
                   >
-                    Up
+                    <wk-icon name="chevron-up" size="sm"></wk-icon>
                   </button>
                   <button
                     type="button"
@@ -250,7 +251,7 @@ export class WkDataGrid extends WkElement {
                     ?disabled=${index === this.order.length - 1}
                     @click=${() => this.move(index, 1)}
                   >
-                    Down
+                    <wk-icon name="chevron-down" size="sm"></wk-icon>
                   </button>
                 </div>
               `;

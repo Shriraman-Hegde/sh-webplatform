@@ -2,11 +2,21 @@
 ul { list-style: none; margin: 0; padding-left: var(--wk-space-4); }
 ul[role="tree"] { padding-left: 0; }
 button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wk-space-1);
   font: inherit;
   color: var(--wk-ink);
   background: transparent;
   border: 0;
   cursor: pointer;
   padding: var(--wk-space-1) var(--wk-space-2);
+}
+.mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  color: var(--wk-muted);
 }
 button:focus-visible { outline: none; box-shadow: var(--wk-focus); border-radius: var(--wk-radius); }

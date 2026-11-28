@@ -13,5 +13,17 @@ label {
 }
 :host([data-active]) label { border-color: var(--wk-accent); background: color-mix(in srgb, var(--wk-accent) 8%, var(--wk-surface)); }
 :host([disabled]) label { opacity: 0.55; cursor: not-allowed; }
-input { font: inherit; max-width: 100%; }
+label { position: relative; }
+.browse { font-weight: 600; color: var(--wk-accent); }
+input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 ul { margin: var(--wk-space-2) 0 0; padding-left: 1.2rem; color: var(--wk-muted); }

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 import "../../src/components/layout/wk-command-palette/index.js";
+import "../../src/components/form/wk-button/index.js";
 import { attr, componentDocs } from "../_helpers.js";
 
 const meta: Meta = {
@@ -19,7 +20,7 @@ const meta: Meta = {
     query: attr("Filter text"),
     commands: attr("Property: { value, label, group? }[]", { control: false }),
   },
-  render: () => html`<div><button type="button" @click=${(event: Event) => { const palette = (event.currentTarget as HTMLButtonElement).nextElementSibling as HTMLElement & { open: boolean }; palette.open = true; }}>Open commands</button><wk-command-palette .commands=${[{ value: "new", label: "New record", group: "File" }, { value: "search", label: "Search", group: "View" }]}></wk-command-palette></div>`,
+  render: () => html`<div><wk-button type="button" @click=${(event: Event) => { const palette = (event.currentTarget as HTMLElement).nextElementSibling as HTMLElement & { open: boolean }; palette.open = true; }}>Open commands</wk-button><wk-command-palette .commands=${[{ value: "new", label: "New record", group: "File" }, { value: "search", label: "Search", group: "View" }]}></wk-command-palette></div>`,
 };
 
 export default meta;

@@ -4,6 +4,7 @@ import wkStyles from "../../../styles/components/wk-combobox.css";
 import notes from "../../../styles/components/wk-field-notes.css";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
+import "../../layout/wk-icon/index.js";
 import { describedBy, fieldChromeProperties, fieldNotes, initFieldChrome } from "../field-notes.js";
 
 export type WkComboOption = { value: string; label: string };
@@ -183,6 +184,7 @@ export class WkCombobox extends WkElement {
       <div class="field">
       <label>
         <span>${this.label}</span>
+        <span class="control">
         <input
           part="control"
           role="combobox"
@@ -204,6 +206,8 @@ export class WkCombobox extends WkElement {
           }}
           @keydown=${this.onKey}
         />
+        <wk-icon class="chevron" name="chevron-down" size="sm"></wk-icon>
+        </span>
       </label>
       <ul
         id=${this.#listId}

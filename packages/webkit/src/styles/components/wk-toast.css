@@ -45,6 +45,9 @@ p {
   flex: 1;
 }
 button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font: inherit;
   border: 0;
   background: transparent;

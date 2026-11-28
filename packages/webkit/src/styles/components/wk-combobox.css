@@ -1,15 +1,24 @@
 :host { display: block; }
 .field { position: relative; }
 label { display: grid; gap: var(--wk-space-2); font-size: var(--wk-text-sm); font-weight: 600; }
+.control { position: relative; display: block; }
 input[part="control"] {
   width: 100%;
   font: var(--wk-control-font, var(--wk-text-md)) / 1.2 var(--wk-font-sans);
   min-height: var(--wk-control-h);
-  padding: 0.45rem var(--wk-control-pad-x, 0.75rem);
+  padding: 0.45rem 2.35rem 0.45rem var(--wk-control-pad-x, 0.75rem);
   border-radius: var(--wk-radius);
   border: 1px solid var(--wk-border);
   background: var(--wk-surface);
   color: var(--wk-ink);
+}
+.chevron {
+  position: absolute;
+  inset-inline-end: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--wk-muted);
+  pointer-events: none;
 }
 input:focus-visible { outline: none; box-shadow: var(--wk-focus); }
 ul {
