@@ -1,0 +1,24 @@
+:host { display: block; }
+section {
+  display: grid;
+  gap: var(--wk-space-3);
+  padding: var(--wk-space-4);
+  border: 1px solid var(--wk-border);
+  border-radius: var(--wk-radius);
+  background: var(--wk-surface);
+  color: var(--wk-ink);
+}
+h3 { margin: 0; }
+p { margin: var(--wk-space-2) 0 0; color: var(--wk-muted); }
+.controls { display: flex; align-items: center; justify-content: space-between; }
+button {
+  font: inherit;
+  min-width: 2rem;
+  min-height: 2rem;
+  border: 1px solid var(--wk-border);
+  border-radius: var(--wk-radius-sm);
+  background: var(--wk-surface);
+  color: inherit;
+  cursor: pointer;
+}
+button:focus-visible { outline: none; box-shadow: var(--wk-focus); }

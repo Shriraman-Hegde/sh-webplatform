@@ -1,0 +1,16 @@
+:host { display: block; }
+fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: var(--wk-space-2); }
+legend { font-size: var(--wk-text-sm); font-weight: 600; padding: 0; }
+.boxes { display: flex; gap: var(--wk-space-2); }
+input {
+  width: 2.4rem;
+  min-height: var(--wk-control-h);
+  text-align: center;
+  font: 600 var(--wk-control-font, var(--wk-text-md)) / 1.2 var(--wk-font-sans);
+  border-radius: var(--wk-radius);
+  border: 1px solid var(--wk-border);
+  background: var(--wk-surface);
+  color: var(--wk-ink);
+}
+input:focus-visible { outline: none; box-shadow: var(--wk-focus); }
+input:disabled { opacity: 0.55; }

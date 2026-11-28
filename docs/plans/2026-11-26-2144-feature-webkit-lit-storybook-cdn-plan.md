@@ -7,6 +7,8 @@ product_contract_source: ce-brainstorm
 execution: code
 ---
 
+> Status, 2026-11-28: the first Workbench set shipped. The kit, the `wk` CLI, and the webkit MCP server have grown since this plan. The current element list is `packages/webkit/STRUCTURE.md`. Tag, attribute, and event text is `packages/webkit/src/catalog.ts`. Entity-ref, discovery, Helm, and JSON forms stay out of scope. The decisions below are the record of the first publish.
+
 ## Goal Capsule
 
 **Objective:** A small core can publish a versioned Lit component library that department apps install from npm or load from a CDN, with theme switching proven the same way on a published workshop site and a sample consumer.

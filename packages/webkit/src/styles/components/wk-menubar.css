@@ -1,0 +1,27 @@
+:host { display: block; }
+[role="menubar"] { display: flex; gap: var(--wk-space-1); }
+.menu { position: relative; }
+button {
+  font: 600 var(--wk-text-sm) / 1.2 var(--wk-font-sans);
+  color: var(--wk-ink);
+  background: transparent;
+  border: 0;
+  border-radius: var(--wk-radius-sm);
+  padding: var(--wk-space-2) var(--wk-space-3);
+  cursor: pointer;
+}
+button[aria-expanded="true"], button:hover { background: color-mix(in srgb, var(--wk-ink) 6%, transparent); }
+.panel {
+  position: absolute;
+  z-index: 3;
+  min-width: 10rem;
+  display: grid;
+  padding: var(--wk-space-1);
+  background: var(--wk-surface);
+  border: 1px solid var(--wk-border);
+  border-radius: var(--wk-radius);
+  box-shadow: var(--wk-shadow-md);
+}
+.panel[hidden] { display: none; }
+.panel button { text-align: left; width: 100%; }
+button:focus-visible { outline: none; box-shadow: var(--wk-focus); }

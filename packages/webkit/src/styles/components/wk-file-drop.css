@@ -1,0 +1,17 @@
+:host { display: block; }
+label {
+  display: grid;
+  gap: var(--wk-space-2);
+  justify-items: center;
+  padding: var(--wk-space-6);
+  border: 1px dashed var(--wk-border);
+  border-radius: var(--wk-radius);
+  background: var(--wk-surface);
+  color: var(--wk-ink);
+  font-weight: 600;
+  cursor: pointer;
+}
+:host([data-active]) label { border-color: var(--wk-accent); background: color-mix(in srgb, var(--wk-accent) 8%, var(--wk-surface)); }
+:host([disabled]) label { opacity: 0.55; cursor: not-allowed; }
+input { font: inherit; max-width: 100%; }
+ul { margin: var(--wk-space-2) 0 0; padding-left: 1.2rem; color: var(--wk-muted); }

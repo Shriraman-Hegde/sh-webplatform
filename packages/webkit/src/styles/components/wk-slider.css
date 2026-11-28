@@ -1,0 +1,5 @@
+:host { display: block; }
+label { display: grid; grid-template-columns: 1fr auto; gap: var(--wk-space-2); align-items: center; font-size: var(--wk-text-sm); font-weight: 600; }
+input { grid-column: 1 / -1; width: 100%; accent-color: var(--wk-accent); }
+.value { font-variant-numeric: tabular-nums; color: var(--wk-muted); font-weight: 600; }
+input:focus-visible { outline: none; box-shadow: var(--wk-focus); border-radius: var(--wk-radius); }

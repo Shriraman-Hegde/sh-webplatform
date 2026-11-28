@@ -1,0 +1,25 @@
+:host { display: block; }
+ol { display: flex; flex-wrap: wrap; gap: var(--wk-space-2); list-style: none; margin: 0; padding: 0; }
+button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wk-space-2);
+  font: 600 var(--wk-text-sm) / 1.2 var(--wk-font-sans);
+  color: var(--wk-ink);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: var(--wk-space-1);
+}
+.index {
+  display: inline-grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: var(--wk-radius-pill);
+  border: 1px solid var(--wk-border);
+  font-size: var(--wk-text-xs);
+}
+li[data-state="current"] .index, li[data-state="done"] .index { background: var(--wk-accent); color: var(--wk-accent-ink); border-color: transparent; }
+li[data-state="upcoming"] { color: var(--wk-muted); }
+button:focus-visible { outline: none; box-shadow: var(--wk-focus); border-radius: var(--wk-radius); }

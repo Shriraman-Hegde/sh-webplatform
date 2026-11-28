@@ -21,4 +21,22 @@ describe("wk-icon", () => {
     );
     expect(el.shadowRoot?.querySelector("svg")).to.exist;
   });
+
+  it("fills the glyph when fill is set", async () => {
+    bootstrapWebkit({ icons: defaultIconLibrary });
+    const el = await fixture<WkIcon>(
+      html`<wk-icon name="calendar" fill="rgb(12, 80, 120)"></wk-icon>`,
+    );
+    const svg = el.shadowRoot?.querySelector("svg") as SVGElement;
+    expect(getComputedStyle(svg).fill).to.equal("rgb(12, 80, 120)");
+  });
+
+  it("sets the glyph border when stroke is set", async () => {
+    bootstrapWebkit({ icons: defaultIconLibrary });
+    const el = await fixture<WkIcon>(
+      html`<wk-icon name="calendar" stroke="rgb(180, 40, 40)"></wk-icon>`,
+    );
+    const svg = el.shadowRoot?.querySelector("svg") as SVGElement;
+    expect(getComputedStyle(svg).stroke).to.equal("rgb(180, 40, 40)");
+  });
 });

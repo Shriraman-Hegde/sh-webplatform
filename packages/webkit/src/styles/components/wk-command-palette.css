@@ -1,0 +1,26 @@
+:host { display: contents; }
+dialog {
+  width: min(28rem, calc(100vw - 2rem));
+  border: 1px solid var(--wk-border);
+  border-radius: var(--wk-radius);
+  padding: var(--wk-space-3);
+  background: var(--wk-surface);
+  color: var(--wk-ink);
+  box-shadow: var(--wk-shadow-md);
+}
+dialog::backdrop { background: color-mix(in srgb, var(--wk-ink) 45%, transparent); }
+input {
+  width: 100%;
+  box-sizing: border-box;
+  font: var(--wk-control-font, var(--wk-text-md)) / 1.2 var(--wk-font-sans);
+  min-height: var(--wk-control-h);
+  padding: 0.45rem 0.75rem;
+  border-radius: var(--wk-radius);
+  border: 1px solid var(--wk-border);
+  background: var(--wk-surface);
+  color: var(--wk-ink);
+}
+ul { list-style: none; margin: var(--wk-space-2) 0 0; padding: 0; display: grid; }
+button { width: 100%; text-align: left; font: inherit; border: 0; background: transparent; color: inherit; border-radius: var(--wk-radius-sm); padding: var(--wk-space-2); cursor: pointer; }
+button:hover, button[data-active] { background: color-mix(in srgb, var(--wk-accent) 8%, var(--wk-surface)); }
+input:focus-visible, button:focus-visible { outline: none; box-shadow: var(--wk-focus); }

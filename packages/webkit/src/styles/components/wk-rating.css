@@ -1,0 +1,14 @@
+:host { display: inline-flex; }
+div { display: inline-flex; gap: 0.1rem; }
+button {
+  font-size: 1.25rem;
+  line-height: 1;
+  border: 0;
+  background: transparent;
+  color: var(--wk-border);
+  cursor: pointer;
+  padding: 0.1rem;
+}
+button[data-on="true"] { color: var(--wk-warning, #b45309); }
+button:focus-visible { outline: none; box-shadow: var(--wk-focus); border-radius: var(--wk-radius-sm); }
+button:disabled { cursor: default; }

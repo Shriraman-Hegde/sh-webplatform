@@ -1,0 +1,12 @@
+:host { display: inline; }
+:host([block]) { display: block; }
+code, pre {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  background: color-mix(in srgb, var(--wk-ink) 6%, var(--wk-surface));
+  color: var(--wk-ink);
+  border-radius: var(--wk-radius-sm);
+}
+code { padding: 0.1rem 0.35rem; }
+pre { margin: 0; padding: var(--wk-space-3); overflow: auto; }
+pre code { padding: 0; background: transparent; }

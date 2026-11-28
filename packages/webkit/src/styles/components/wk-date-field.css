@@ -1,0 +1,50 @@
+:host { display: block; }
+label { display: grid; gap: var(--wk-space-2); font-size: var(--wk-text-sm); font-weight: 600; }
+.field { position: relative; }
+input {
+  font: var(--wk-control-font, var(--wk-text-md)) / 1.2 var(--wk-font-sans);
+  width: 100%;
+  min-width: 0;
+  min-height: var(--wk-control-h);
+  padding: 0.45rem var(--wk-control-pad-x, 0.75rem);
+  border-radius: var(--wk-radius);
+  border: 1px solid var(--wk-border);
+  background: var(--wk-surface);
+  color: var(--wk-ink);
+}
+:host([icon-position="start"]) input { padding-inline-start: 2.35rem; }
+:host(:not([icon-position="start"])) input { padding-inline-end: 2.35rem; }
+.picker {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--wk-muted);
+  cursor: pointer;
+}
+:host([icon-position="start"]) .picker { inset-inline-start: 0; }
+:host(:not([icon-position="start"])) .picker { inset-inline-end: 0; }
+input:focus-visible, .picker:focus-visible { outline: none; box-shadow: var(--wk-focus); }
+input:disabled, .picker:disabled { opacity: 0.55; cursor: not-allowed; }
+.panel {
+  position: fixed;
+  margin: 0;
+  inset: auto;
+  padding: var(--wk-space-2);
+  border: 1px solid var(--wk-border);
+  border-radius: var(--wk-radius);
+  background: var(--wk-surface);
+  box-shadow: var(--wk-shadow-md);
+}
+.panel wk-calendar::part(calendar) {
+  border: 0;
+  padding: 0;
+  background: transparent;
+}

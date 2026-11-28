@@ -1,0 +1,10 @@
+:host { display: inline-flex; }
+kbd {
+  font: 600 var(--wk-text-xs) / 1.2 var(--wk-font-sans);
+  padding: 0.1rem 0.4rem;
+  border: 1px solid var(--wk-border);
+  border-bottom-width: 2px;
+  border-radius: var(--wk-radius-sm);
+  background: var(--wk-surface);
+  color: var(--wk-ink);
+}

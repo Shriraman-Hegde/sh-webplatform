@@ -19,7 +19,9 @@ const meta: Meta = {
   title: "Layout/Data Table",
   component: "wk-data-table",
   tags: ["autodocs"],
-  parameters: componentDocs("Simple data table from columns + rows."),
+  parameters: componentDocs(
+    "Static table. columns and rows are properties. It does not sort, filter, or hide columns. Use wk-data-grid for that.",
+  ),
   argTypes: {
     caption: attr("Table caption.", { defaultValue: "" }),
   },
