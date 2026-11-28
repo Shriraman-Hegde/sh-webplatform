@@ -1,0 +1,16 @@
+:host { display: block; }
+div[part="banner"], .banner, :host > div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--wk-space-3);
+  align-items: center;
+  padding: var(--wk-space-3) var(--wk-space-4);
+  background: color-mix(in srgb, var(--wk-accent) 12%, var(--wk-surface));
+  color: var(--wk-ink);
+}
+:host([tone="success"]) div { background: color-mix(in srgb, var(--wk-success) 14%, var(--wk-surface)); }
+:host([tone="warning"]) div { background: color-mix(in srgb, var(--wk-warning) 16%, var(--wk-surface)); }
+:host([tone="danger"]) div { background: color-mix(in srgb, var(--wk-danger) 14%, var(--wk-surface)); }
+strong { display: block; }
+button { border: 0; background: transparent; color: inherit; font: inherit; cursor: pointer; }
+button:focus-visible { outline: none; box-shadow: var(--wk-focus); }

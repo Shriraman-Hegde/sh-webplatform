@@ -1,0 +1,32 @@
+:host { display: inline-block; }
+div[part="calendar"], :host > div {
+  display: grid;
+  gap: var(--wk-space-2);
+  padding: var(--wk-space-3);
+  border: 1px solid var(--wk-border);
+  border-radius: var(--wk-radius);
+  background: var(--wk-surface);
+  color: var(--wk-ink);
+  min-width: 16rem;
+}
+.bar { display: flex; align-items: center; justify-content: space-between; gap: var(--wk-space-2); }
+.nav { display: inline-flex; align-items: center; }
+.nav button { min-width: 1.75rem; padding: 0; }
+.title { display: inline-flex; align-items: center; gap: 0.15rem; min-width: 0; }
+.title button { font-weight: 700; min-height: 1.75rem; padding: 0 0.35rem; }
+.grid, .choices { display: grid; gap: 0.15rem; }
+.grid { grid-template-columns: repeat(7, 1fr); }
+.choices { grid-template-columns: repeat(3, 1fr); }
+.dow { text-align: center; font-size: var(--wk-text-xs); color: var(--wk-muted); font-weight: 700; }
+button {
+  font: inherit;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  border-radius: var(--wk-radius-sm);
+  min-height: 2rem;
+  cursor: pointer;
+}
+button[aria-selected="true"] { background: var(--wk-accent); color: var(--wk-accent-ink, #fff); }
+button:hover { background: color-mix(in srgb, var(--wk-accent) 12%, var(--wk-surface)); }
+button:focus-visible { outline: none; box-shadow: var(--wk-focus); }

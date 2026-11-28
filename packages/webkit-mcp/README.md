@@ -4,6 +4,8 @@ Lookup server for the kit. An agent building an app can ask which `wk-*` element
 
 Tools: `list-components`, `get-component`, `list-icons`, `get-theme`.
 
+`get-component` takes a tag such as `wk-data-grid` or `wk-date-field` and returns the summary, attributes, events, and HTML example. `list-components` returns every tag. Both read `packages/webkit/src/catalog.ts`. `list-icons` includes the app glyphs in `packages/webkit/src/icons/app-icons.ts`. `get-theme` returns looks, modes, motion, and the `bootstrapWebkit` setup.
+
 ## Getting Started
 
 From the repo root:
@@ -13,13 +15,7 @@ pnpm install
 pnpm --filter webkit-mcp dev
 ```
 
-Open [http://localhost:3000/mcp/inspector](http://localhost:3000/mcp/inspector) to try a tool.
-
-You can start building by editing the entry file. Add tools, resources, and prompts — the server auto-reloads as you edit.
-
-Open [http://localhost:3000/mcp](http://localhost:3000/mcp) in a browser to see the landing page. Edit `landing.tsx` to change it (Tailwind classes work with no extra setup), or delete it to use the built-in page.
-
-Run `npm run typecheck` to refresh MCP view types and check the project with its local TypeScript compiler.
+Open [http://localhost:3000/mcp/inspector](http://localhost:3000/mcp/inspector) to call a tool. The server reloads when `index.ts` changes.
 
 ## Learn More
 

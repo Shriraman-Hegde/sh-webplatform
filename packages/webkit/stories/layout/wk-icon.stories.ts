@@ -18,10 +18,18 @@ const meta: Meta = {
     }),
     label: attr("Accessible label (role=img when set).", { defaultValue: "" }),
     size: sizeArg,
+    fill: attr("Interior color. Leave empty for an outline.", { defaultValue: "" }),
+    stroke: attr("Border color of the glyph. Leave empty to follow color.", { defaultValue: "" }),
   },
-  args: { name: "check", label: "Success", size: "md" },
+  args: { name: "check", label: "Success", size: "md", fill: "", stroke: "" },
   render: (args) => html`
-    <wk-icon name=${args.name} label=${args.label} size=${args.size}></wk-icon>
+    <wk-icon
+      name=${args.name}
+      label=${args.label}
+      size=${args.size}
+      fill=${args.fill}
+      stroke=${args.stroke}
+    ></wk-icon>
   `,
 };
 

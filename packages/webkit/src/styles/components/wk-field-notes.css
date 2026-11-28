@@ -1,0 +1,24 @@
+.hint,
+.message {
+  margin: 0;
+  font-weight: 400;
+  font-size: var(--wk-text-xs);
+  color: var(--wk-muted);
+  grid-column: 1 / -1;
+}
+
+:host([error]) .message {
+  color: var(--wk-danger);
+}
+
+:host([error]) input,
+:host([error]) .box,
+:host([error]) .row,
+:host([error]) fieldset,
+:host([error]) label[part="drop"] {
+  border-color: var(--wk-danger);
+}
+
+:host([disabled]) {
+  cursor: not-allowed;
+}

@@ -1,0 +1,10 @@
+:host { display: block; }
+div {
+  overflow: auto;
+  scrollbar-color: var(--wk-border) transparent;
+  scrollbar-width: thin;
+  border: 1px solid var(--wk-border);
+  border-radius: var(--wk-radius);
+  background: var(--wk-surface);
+  padding: var(--wk-space-3);
+}

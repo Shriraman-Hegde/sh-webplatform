@@ -1,14 +1,19 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 import "../../src/components/layout/wk-breadcrumbs/index.js";
-import { componentDocs } from "../_helpers.js";
+import { attr, componentDocs } from "../_helpers.js";
 
 
 const meta: Meta = {
   title: "Layout/Breadcrumbs",
   component: "wk-breadcrumbs",
   tags: ["autodocs"],
-  parameters: componentDocs("Nav trail. Last item is current page. Optional `icon` per item."),
+  parameters: componentDocs(
+    "Trail of links. items is a property.",
+  ),
+  argTypes: {
+    items: attr("Property: { label, href?, icon? }[]", { control: false }),
+  },
   render: () => html`
     <wk-breadcrumbs
       .items=${[

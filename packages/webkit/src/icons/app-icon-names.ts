@@ -1,6 +1,8 @@
 /** App glyph names. `app-icons.ts` provides a template for each one. */
 export const appIconNames = [
   "calendar",
+  "chevrons-left",
+  "chevrons-right",
   "filter",
   "download",
   "upload",
@@ -13,6 +15,7 @@ export const appIconNames = [
   "folder",
   "lock",
   "refresh",
+  "search",
   "clock",
   "phone",
 ] as const;

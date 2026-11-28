@@ -1,0 +1,8 @@
+:host { display: block; }
+div { display: grid; gap: var(--wk-space-1); padding: var(--wk-space-4); border: 1px solid var(--wk-border); border-radius: var(--wk-radius); background: var(--wk-surface); }
+.label { color: var(--wk-muted); font-size: var(--wk-text-sm); font-weight: 700; }
+strong { font-size: 1.6rem; letter-spacing: -0.02em; }
+.change { font-size: var(--wk-text-sm); font-weight: 700; }
+:host([trend="up"]) .change { color: var(--wk-success); }
+:host([trend="down"]) .change { color: var(--wk-danger); }
+:host([trend="flat"]) .change { color: var(--wk-muted); }

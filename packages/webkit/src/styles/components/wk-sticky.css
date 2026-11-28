@@ -1,0 +1,8 @@
+:host { display: block; }
+div {
+  position: sticky;
+  z-index: 2;
+  background: var(--wk-surface);
+  border-bottom: 1px solid var(--wk-border);
+  padding: var(--wk-space-3) var(--wk-space-4);
+}

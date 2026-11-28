@@ -1,0 +1,19 @@
+:host { display: block; }
+nav { display: grid; gap: var(--wk-space-1); }
+button {
+  display: flex;
+  align-items: center;
+  gap: var(--wk-space-2);
+  width: 100%;
+  text-align: left;
+  font: 600 var(--wk-text-sm) / 1.2 var(--wk-font-sans);
+  color: var(--wk-ink);
+  background: transparent;
+  border: 0;
+  border-radius: var(--wk-radius);
+  padding: var(--wk-space-2) var(--wk-space-3);
+  cursor: pointer;
+}
+button[aria-current="page"] { background: color-mix(in srgb, var(--wk-accent) 12%, var(--wk-surface)); color: var(--wk-accent); }
+button:hover { background: color-mix(in srgb, var(--wk-ink) 5%, transparent); }
+button:focus-visible { outline: none; box-shadow: var(--wk-focus); }

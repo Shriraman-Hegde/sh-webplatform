@@ -13,23 +13,41 @@ export class WkIcon extends WkElement {
     name: { type: String, reflect: true },
     label: { type: String },
     size: { type: String, reflect: true },
+    fill: { type: String },
+    stroke: { type: String },
   };
 
   declare name: string;
   declare label: string;
   declare size: "sm" | "md" | "lg";
+  declare fill: string;
+  declare stroke: string;
 
   constructor() {
     super();
     this.name = "";
     this.label = "";
     this.size = "md";
+    this.fill = "";
+    this.stroke = "";
   }
 
   static styles = [
     WkElement.styles,
     cssText(wkStyles),
   ];
+
+  protected updated(): void {
+    const svg = this.renderRoot.querySelector("svg");
+    if (!(svg instanceof SVGElement)) return;
+    this.paint(svg, "fill", this.fill);
+    this.paint(svg, "stroke", this.stroke);
+  }
+
+  private paint(svg: SVGElement, property: "fill" | "stroke", value: string): void {
+    if (value) svg.style[property] = value;
+    else svg.style.removeProperty(property);
+  }
 
   render() {
     const glyph = this.icons.get(this.name) ?? this.name;

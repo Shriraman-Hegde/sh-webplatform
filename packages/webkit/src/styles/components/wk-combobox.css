@@ -1,0 +1,58 @@
+:host { display: block; }
+.field { position: relative; }
+label { display: grid; gap: var(--wk-space-2); font-size: var(--wk-text-sm); font-weight: 600; }
+input[part="control"] {
+  width: 100%;
+  font: var(--wk-control-font, var(--wk-text-md)) / 1.2 var(--wk-font-sans);
+  min-height: var(--wk-control-h);
+  padding: 0.45rem var(--wk-control-pad-x, 0.75rem);
+  border-radius: var(--wk-radius);
+  border: 1px solid var(--wk-border);
+  background: var(--wk-surface);
+  color: var(--wk-ink);
+}
+input:focus-visible { outline: none; box-shadow: var(--wk-focus); }
+ul {
+  list-style: none;
+  margin: 0;
+  padding: var(--wk-space-1);
+  border: 1px solid var(--wk-border);
+  border-radius: var(--wk-radius);
+  background: var(--wk-surface);
+  color: var(--wk-ink);
+  box-shadow: var(--wk-shadow-md);
+  max-height: 16rem;
+  overflow: auto;
+  z-index: 20;
+}
+ul[popover] {
+  position: fixed;
+  inset: auto;
+}
+ul:not([popover]) {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+:host([placement="top"]) ul:not([popover]) {
+  bottom: calc(100% + var(--wk-space-1));
+}
+:host([placement="bottom"]) ul:not([popover]),
+:host(:not([placement])) ul:not([popover]) {
+  top: calc(100% + var(--wk-space-1));
+}
+ul[hidden] { display: none; }
+li[data-active] button { background: color-mix(in srgb, var(--wk-accent) 12%, var(--wk-surface)); }
+button {
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  border-radius: var(--wk-radius-sm);
+  padding: var(--wk-space-2) var(--wk-space-3);
+  cursor: pointer;
+}
+button:hover, li[aria-selected="true"] button { background: color-mix(in srgb, var(--wk-accent) 8%, var(--wk-surface)); }
+.empty { padding: var(--wk-space-2) var(--wk-space-3); color: var(--wk-muted); font-weight: 400; }

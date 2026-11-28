@@ -1,0 +1,14 @@
+:host { display: block; }
+header {
+  display: flex;
+  align-items: center;
+  gap: var(--wk-space-3);
+  min-height: 3.5rem;
+  padding: 0 var(--wk-space-4);
+  background: var(--wk-surface);
+  border-bottom: 1px solid var(--wk-border);
+  color: var(--wk-ink);
+}
+h1 { margin: 0; font-size: var(--wk-text-lg); font-weight: 700; }
+.center { flex: 1; }
+.start, .end, .center { display: flex; align-items: center; gap: var(--wk-space-2); }

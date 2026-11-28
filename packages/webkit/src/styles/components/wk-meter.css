@@ -1,0 +1,6 @@
+:host { display: block; }
+div { display: grid; gap: var(--wk-space-2); font-size: var(--wk-text-sm); font-weight: 600; }
+[role="meter"] { height: 0.55rem; border-radius: var(--wk-radius-pill); background: color-mix(in srgb, var(--wk-ink) 10%, var(--wk-surface)); overflow: hidden; }
+[role="meter"] span { display: block; height: 100%; background: var(--wk-accent); }
+[data-tone="low"] span { background: var(--wk-danger); }
+[data-tone="high"] span { background: var(--wk-success); }

@@ -24,6 +24,7 @@ export function cssTextPlugin() {
     load(id) {
       if (!id.startsWith(prefix)) return null;
       const file = `${id.slice(prefix.length)}.css`;
+      this.addWatchFile(file);
       const css = fs.readFileSync(file, "utf8");
       return `export default ${JSON.stringify(css)};`;
     },

@@ -1,0 +1,16 @@
+:host { display: inline-flex; }
+div { display: inline-flex; border: 1px solid var(--wk-border); border-radius: var(--wk-radius); overflow: hidden; }
+button {
+  font: 600 var(--wk-text-sm) / 1.2 var(--wk-font-sans);
+  min-height: var(--wk-control-h);
+  padding: 0 var(--wk-control-pad-x);
+  border: 0;
+  border-right: 1px solid var(--wk-border);
+  background: var(--wk-surface);
+  color: var(--wk-ink);
+  cursor: pointer;
+}
+button:last-child { border-right: 0; }
+button[aria-checked="true"] { background: var(--wk-accent); color: var(--wk-accent-ink); }
+button:focus-visible { outline: none; box-shadow: var(--wk-focus); }
+button:disabled { opacity: 0.55; cursor: not-allowed; }

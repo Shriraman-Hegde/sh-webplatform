@@ -18,6 +18,8 @@
   width: 100%;
   height: 100%;
   display: block;
+  fill: var(--wk-icon-fill, none);
+  stroke: var(--wk-icon-stroke, currentColor);
 }
 :host([size="sm"]) .glyph {
   width: 1rem;

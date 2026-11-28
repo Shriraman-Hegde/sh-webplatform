@@ -8,7 +8,7 @@ Package: `@sh-webplatform/webkit`
 | --- | --- | --- |
 | ESM (npm) | `dist/webkit.esm.js` | `lit` external (peerDependency) |
 | CDN IIFE | `dist/webkit.cdn.min.js` | `lit` bundled |
-| Themes | `dist/themes.css` | Looks `default` / `warm` / `slate` / `forest` on `data-theme`; surfaces `day` / `night` on `data-mode` |
+| Themes | `dist/themes.css` | Looks `default` / `warm` / `slate` / `forest` on `data-theme`; surfaces `day` / `night` on `data-mode`; motion `system` / `on` / `off` on `data-motion` |
 
 Version identity is the npm version. CDN example:
 
@@ -31,3 +31,7 @@ pnpm --filter @sh-webplatform/webkit pack
 
 Install the tarball into `sample-consumer` (or another app) and run its build.
 See `packages/sample-consumer/README.md` and `cdn-proof.html`.
+
+## Docs that ship with the source
+
+The published package does not include the markdown. The component text is `packages/webkit/src/catalog.ts`, which Storybook, `wk`, and the MCP server read. Layout and the field contract are in `packages/webkit/STRUCTURE.md`.

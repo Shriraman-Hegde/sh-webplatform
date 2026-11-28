@@ -1,0 +1,5 @@
+:host { display: block; }
+p { margin: 0; font-size: var(--wk-text-sm); color: var(--wk-muted); }
+:host([tone="danger"]) p { color: var(--wk-danger); }
+:host([tone="success"]) p { color: var(--wk-success); }
+:host([tone="warning"]) p { color: var(--wk-warning); }

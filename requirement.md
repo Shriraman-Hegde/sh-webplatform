@@ -1,3 +1,11 @@
+# Current build
+
+The active work is the Lit kit in `packages/webkit`, published through Storybook, Rollup, and the CDN. Entity-ref, the discovery service, Helm, JSON form rendering, and microfrontends are not in this build. Zustand stays at the app, not inside the kit.
+
+Lookup for tags, attributes, events, icons, and theme setup is `packages/webkit/src/catalog.ts`, the `wk` CLI, and `webkit-mcp`. The element list is `packages/webkit/STRUCTURE.md`.
+
+The notes below are the original brainstorm. They are not the build spec.
+
 planning to create a UI platform on lit.js using storybook for developing common components that can be shared across multiple application for building UI. For state management will be using zustand, babel config, rollup, minify, cdn , 
 /brainstorming
  

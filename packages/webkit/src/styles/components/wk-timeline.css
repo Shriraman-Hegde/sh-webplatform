@@ -1,0 +1,15 @@
+:host { display: block; }
+ol { list-style: none; margin: 0; padding: 0 0 0 var(--wk-space-4); display: grid; gap: var(--wk-space-4); border-left: 2px solid var(--wk-border); }
+li { position: relative; }
+li::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * var(--wk-space-4) - 5px);
+  top: 0.35rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--wk-accent);
+}
+time { display: block; color: var(--wk-muted); font-size: var(--wk-text-xs); }
+p { margin: var(--wk-space-1) 0 0; color: var(--wk-ink); }
