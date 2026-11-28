@@ -3,6 +3,7 @@ import { cssText } from "../../../styles/css.js";
 import wkStyles from "../../../styles/components/wk-banner.css";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
+import "../wk-icon/index.js";
 
 export class WkBanner extends WkElement {
   static properties = {
@@ -40,7 +41,7 @@ export class WkBanner extends WkElement {
           ${this.heading ? html`<strong>${this.heading}</strong>` : null}
           <slot></slot>
         </div>
-        ${this.dismissible ? html`<button type="button" aria-label="Dismiss" @click=${this.dismiss}>×</button>` : null}
+        ${this.dismissible ? html`<button type="button" aria-label="Dismiss" @click=${this.dismiss}><wk-icon name="close" size="sm"></wk-icon></button>` : null}
       </div>
     `;
   }

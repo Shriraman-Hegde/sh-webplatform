@@ -398,7 +398,7 @@ export const componentCatalog: ComponentDoc[] = [
   },
   {
     tag: "wk-password-field",
-    summary: "Password field with a reveal toggle. part=control and part=reveal.",
+    summary: "Password field. The reveal toggle sits inside the field. part=control and part=reveal.",
     example: `<wk-password-field label="Password" name="password"></wk-password-field>`,
     attributes: [
       { name: "label", description: "Field label" },
@@ -432,7 +432,7 @@ export const componentCatalog: ComponentDoc[] = [
   },
   {
     tag: "wk-combobox",
-    summary: "Filterable list. Arrow keys move, Enter chooses, Escape closes. placement is bottom or top. hoist paints the list on the top layer.",
+    summary: "Filterable list with a chevron inside the field. Arrow keys move, Enter chooses, Escape closes. placement is bottom or top. hoist paints the list on the top layer.",
     example: `<wk-combobox label="Team" name="team" placement="bottom" hoist></wk-combobox>`,
     attributes: [
       { name: "label", description: "Field label" },
@@ -537,7 +537,7 @@ export const componentCatalog: ComponentDoc[] = [
   },
   {
     tag: "wk-color-field",
-    summary: "Color value with a picker and a text field.",
+    summary: "Color value. The swatch sits inside the text field. part=swatch and part=control.",
     example: `<wk-color-field label="Accent" name="accent" value="#0b6e99"></wk-color-field>`,
     attributes: [
       { name: "label", description: "Field label" },
@@ -657,7 +657,7 @@ export const componentCatalog: ComponentDoc[] = [
   },
   {
     tag: "wk-tree",
-    summary: "Nested tree. nodes is { id, label, children? }[]. expanded is the open ids.",
+    summary: "Nested tree. Branches use chevron icons. nodes is { id, label, children? }[]. expanded is the open ids.",
     example: `<wk-tree label="Folders"></wk-tree>`,
     attributes: [
       { name: "nodes", description: "Property: { id, label, children? }[]" },
@@ -812,7 +812,7 @@ export const componentCatalog: ComponentDoc[] = [
   },
   {
     tag: "wk-carousel",
-    summary: "One slide at a time. items is { id, title, text? }[].",
+    summary: "One slide at a time. Previous and next use chevron icons. items is { id, title, text? }[].",
     example: `<wk-carousel label="Highlights"></wk-carousel>`,
     attributes: [
       { name: "label", description: "Accessible name" },

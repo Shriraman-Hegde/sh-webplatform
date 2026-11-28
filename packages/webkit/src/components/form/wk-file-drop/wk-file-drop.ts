@@ -84,6 +84,7 @@ export class WkFileDrop extends WkElement {
         }}
       >
         <span>${this.label}</span>
+        <span class="browse">Browse</span>
         <input
           part="control"
           type="file"

@@ -40,7 +40,7 @@ export class WkColorField extends WkElement {
     return html`
       <label>
         <span>${this.label}</span>
-        <div class="row">
+        <div class="field">
           <input part="swatch" type="color" .value=${this.value} ?disabled=${this.disabled} aria-label=${`${this.label} picker`} @input=${(event: Event) => this.commit((event.target as HTMLInputElement).value)} />
           <input part="control" type="text" name=${this.name} .value=${this.value} ?disabled=${this.disabled} aria-invalid=${this.error ? "true" : "false"} aria-describedby=${describedBy(this)} @change=${(event: Event) => this.commit((event.target as HTMLInputElement).value)} />
         </div>

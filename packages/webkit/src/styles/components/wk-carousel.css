@@ -12,13 +12,16 @@ h3 { margin: 0; }
 p { margin: var(--wk-space-2) 0 0; color: var(--wk-muted); }
 .controls { display: flex; align-items: center; justify-content: space-between; }
 button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font: inherit;
   min-width: 2rem;
   min-height: 2rem;
   border: 1px solid var(--wk-border);
   border-radius: var(--wk-radius-sm);
   background: var(--wk-surface);
-  color: inherit;
+  color: var(--wk-ink);
   cursor: pointer;
 }
 button:focus-visible { outline: none; box-shadow: var(--wk-focus); }

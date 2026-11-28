@@ -3,6 +3,7 @@ import { cssText } from "../../../styles/css.js";
 import wkStyles from "../../../styles/components/wk-tree.css";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
+import "../wk-icon/index.js";
 
 export type WkTreeNode = { id: string; label: string; children?: WkTreeNode[] };
 
@@ -38,7 +39,14 @@ export class WkTree extends WkElement {
     const hasChildren = Boolean(node.children?.length);
     return html`
       <li role="treeitem" aria-expanded=${hasChildren ? (open ? "true" : "false") : nothing}>
-        <button type="button" @click=${() => hasChildren && this.toggleNode(node.id)}>${hasChildren ? (open ? "▾" : "▸") : "•"} ${node.label}</button>
+        <button type="button" @click=${() => hasChildren && this.toggleNode(node.id)}>
+          <span class="mark" aria-hidden="true">
+            ${hasChildren
+              ? html`<wk-icon name=${open ? "chevron-down" : "chevron-right"} size="sm"></wk-icon>`
+              : null}
+          </span>
+          <span>${node.label}</span>
+        </button>
         ${hasChildren && open ? html`<ul role="group">${node.children!.map((child) => this.branch(child))}</ul>` : null}
       </li>
     `;

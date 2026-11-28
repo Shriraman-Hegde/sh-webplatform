@@ -4,6 +4,7 @@ import wkStyles from "../../../styles/components/wk-tag-field.css";
 import notes from "../../../styles/components/wk-field-notes.css";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
+import "../../layout/wk-icon/index.js";
 import { describedBy, fieldChromeProperties, fieldNotes, initFieldChrome } from "../field-notes.js";
 
 export class WkTagField extends WkElement {
@@ -69,7 +70,7 @@ export class WkTagField extends WkElement {
             (tag) => html`
               <span class="tag">
                 ${tag}
-                <button type="button" aria-label=${`Remove ${tag}`} ?disabled=${this.disabled} @click=${() => this.removeTag(tag)}>×</button>
+                <button type="button" aria-label=${`Remove ${tag}`} ?disabled=${this.disabled} @click=${() => this.removeTag(tag)}><wk-icon name="close" size="sm"></wk-icon></button>
               </span>
             `,
           )}

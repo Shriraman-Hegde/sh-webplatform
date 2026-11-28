@@ -28,6 +28,21 @@ export function cssTextPlugin() {
       const css = fs.readFileSync(file, "utf8");
       return `export default ${JSON.stringify(css)};`;
     },
+    handleHotUpdate({ file, server }) {
+      if (!isStyleModule(file)) return;
+      const mod = server.moduleGraph.getModuleById(prefix + file.slice(0, -4));
+      if (!mod) return;
+      const seen = new Set();
+      const queue = [mod];
+      while (queue.length) {
+        const current = queue.pop();
+        if (!current || seen.has(current)) continue;
+        seen.add(current);
+        server.moduleGraph.invalidateModule(current);
+        for (const importer of current.importers) queue.push(importer);
+      }
+      return [...seen];
+    },
   };
 }
 

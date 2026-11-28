@@ -20,6 +20,9 @@
   color: var(--wk-accent);
 }
 button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font: inherit;
   line-height: 1;
   border: 0;

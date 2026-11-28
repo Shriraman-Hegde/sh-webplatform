@@ -61,7 +61,7 @@ export class WkToast extends WkElement {
         <wk-icon name=${toneIcon[this.tone] ?? "info"} size="sm"></wk-icon>
         <p><slot></slot></p>
         <button type="button" aria-label="Dismiss" @click=${this.close}>
-          ×
+          <wk-icon name="close" size="sm"></wk-icon>
         </button>
       </div>
     `;

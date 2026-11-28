@@ -3,6 +3,7 @@ import { cssText } from "../../../styles/css.js";
 import wkStyles from "../../../styles/components/wk-carousel.css";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
+import "../wk-icon/index.js";
 
 export type WkCarouselItem = { id: string; title: string; text?: string };
 
@@ -48,9 +49,13 @@ export class WkCarousel extends WkElement {
             : html`<p>No slides</p>`}
         </div>
         <div class="controls">
-          <button type="button" aria-label="Previous slide" @click=${() => this.go(-1)}>‹</button>
+          <button type="button" aria-label="Previous slide" @click=${() => this.go(-1)}>
+            <wk-icon name="chevron-left" size="sm"></wk-icon>
+          </button>
           <span>${this.items.length ? this.index + 1 : 0} / ${this.items.length}</span>
-          <button type="button" aria-label="Next slide" @click=${() => this.go(1)}>›</button>
+          <button type="button" aria-label="Next slide" @click=${() => this.go(1)}>
+            <wk-icon name="chevron-right" size="sm"></wk-icon>
+          </button>
         </div>
       </section>
     `;

@@ -3,6 +3,7 @@ import { cssText } from "../../../styles/css.js";
 import wkStyles from "../../../styles/components/wk-dialog.css";
 import { WkElement } from "../../../base/index.js";
 import { defineElement } from "../../../registry/index.js";
+import "../wk-icon/index.js";
 
 export class WkDialog extends WkElement {
   static properties = {
@@ -71,7 +72,7 @@ export class WkDialog extends WkElement {
         <header>
           <h2>${this.heading}</h2>
           <button class="close" type="button" aria-label="Close" @click=${this.close}>
-            ×
+            <wk-icon name="close" size="sm"></wk-icon>
           </button>
         </header>
         <div class="body" part="body"><slot></slot></div>

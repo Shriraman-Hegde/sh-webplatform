@@ -50,7 +50,7 @@ export class WkPasswordField extends WkElement {
     return html`
       <label>
         <span>${this.label}</span>
-        <div class="row">
+        <div class="field">
           <input
             part="control"
             type=${this.revealed ? "text" : "password"}
@@ -63,6 +63,7 @@ export class WkPasswordField extends WkElement {
           />
           <button
             type="button"
+            class="reveal"
             part="reveal"
             aria-label=${this.revealed ? "Hide password" : "Show password"}
             ?disabled=${this.disabled}

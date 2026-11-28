@@ -12,5 +12,5 @@ div[part="banner"], .banner, :host > div {
 :host([tone="warning"]) div { background: color-mix(in srgb, var(--wk-warning) 16%, var(--wk-surface)); }
 :host([tone="danger"]) div { background: color-mix(in srgb, var(--wk-danger) 14%, var(--wk-surface)); }
 strong { display: block; }
-button { border: 0; background: transparent; color: inherit; font: inherit; cursor: pointer; }
+button { display: inline-flex; align-items: center; justify-content: center; border: 0; background: transparent; color: inherit; font: inherit; cursor: pointer; }
 button:focus-visible { outline: none; box-shadow: var(--wk-focus); }

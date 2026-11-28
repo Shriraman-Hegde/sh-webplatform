@@ -1,6 +1,7 @@
 :host { display: block; }
 label { display: grid; gap: var(--wk-space-2); font-size: var(--wk-text-sm); font-weight: 600; }
 input {
+  width: 100%;
   font: var(--wk-control-font, var(--wk-text-md)) / 1.2 var(--wk-font-sans);
   min-height: var(--wk-control-h);
   padding: 0.45rem var(--wk-control-pad-x, 0.75rem);
